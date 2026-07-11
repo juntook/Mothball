@@ -21,6 +21,7 @@ func printUsage() {
       projects <root>  Discover projects under a root and attribute resources
       runtime [root]   List running services (listeners + project processes)
       stop <pid>       Gracefully stop a service (SIGTERM, 5s grace, no auto-kill)
+      docker [root]    List container resources with compose attribution
       version          Print version
       help             Show this help
     """)
@@ -167,6 +168,28 @@ case "stop":
     print("sending SIGTERM to \(snap.name) (\(pid))…")
     let result = await ServiceStopper().stop(service)
     print("result: \(result)")
+case "docker":
+    let env = DockerEnvironment()
+    let diag = env.diagnose()
+    print("binary:   \(diag.binaryPath ?? "not found")")
+    print("sockets:  \(diag.socketCandidatesFound.joined(separator: ", "))")
+    print("context:  \(diag.currentContextEndpoint ?? "-")")
+    print("reachable:\(diag.daemonReachable)  podman:\(diag.podmanDetected)")
+    guard let binary = diag.binaryPath, diag.daemonReachable else {
+        print("daemon not reachable — the app shows an empty-state card here")
+        exit(0)
+    }
+    var projects: [Project] = []
+    if arguments.count == 2 {
+        projects = ProjectDiscovery().discover(codeRoots: [arguments[1]])
+    }
+    let scanner = ContainerResourceScanner(client: DockerClient(binary: binary))
+    let result = try scanner.scan(projects: projects)
+    for r in result.resources {
+        let size = r.sizeBytes.map { formatBytes($0) } ?? "-"
+        let project = r.attribution?.projectPath ?? "-"
+        print("\(String(describing: r.kind).padding(toLength: 18, withPad: " ", startingAt: 0)) \(r.safety.rawValue.padding(toLength: 12, withPad: " ", startingAt: 0)) \(size.padding(toLength: 10, withPad: " ", startingAt: 0)) \(r.name.padding(toLength: 34, withPad: " ", startingAt: 0)) \(project)")
+    }
 case "size":
     guard arguments.count == 2 else { printUsage(); exit(2) }
     let start = Date()

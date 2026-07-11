@@ -87,6 +87,20 @@ Verified on this machine: real `node` dev server on :3000 attributed to `回声`
 Needs human verification:
 - Runtime table + force-quit dialog visually (en/zh-Hans).
 
-## M5 — Container resources — not started
+## M5 — Container resources — DONE (2026-07-11)
+
+Shipped:
+- `DockerEnvironment`: fixed binary candidates (Homebrew/`/usr/local`/OrbStack/Docker.app — PATH never consulted), socket probing (Docker Desktop/OrbStack/Colima/`/var/run`), `DOCKER_HOST`, current-context endpoint, daemon liveness probe, Podman detection. Everything recorded in a diagnostics struct.
+- `DockerClient`: shell-out with `--format json` (JSONL parsing), human-size parser (SI units), compose label extraction, dangling detection, volume dangling cross-reference, `system df`, bind-mount sources via `container inspect`. Actions: stop / rm / rmi / volume rm / builder prune — none pass force flags; volumes only ever removed singly.
+- `ContainerResourceScanner`: SPEC §5.5 matrix — running/stopped containers (regenerable), dangling images (regenerable, one-click batch), tagged-unreferenced images (user_data, per-item confirm; images backing *any* container incl. stopped ones are never offered), volumes (protected display, strong single confirm, no batch), build cache (prune). Attribution: compose working_dir (evidence 3) → bind-mount source (evidence 5); volumes correlate through compose sibling containers.
+- Runtime view now splits: process table on top, container resources below; daemon-down and no-binary empty-state cards (not errors); Podman notice row; all Docker operations audited.
+- `mothball docker [root]` CLI.
+- 13 new tests over canned CLI output recorded from a real engine. 93 total, green.
+
+Verified on this machine (Colima): compose containers attributed correctly (`echo-pg` → `回声`, `aigw-*` → `ai-gateway`); dangling images, volumes and 13.4 GB build cache listed.
+
+Needs human verification:
+- SPEC acceptance names Docker Desktop AND OrbStack environments — this machine runs Colima (a third supported endpoint). Re-run `mothball docker` under Docker Desktop and OrbStack.
+- Volume strong-confirm and tagged-image confirm dialogs visually.
 
 ## M6 — Onboarding + release infrastructure — not started

@@ -1514,6 +1514,431 @@
           }
         }
       }
+    },
+    "docker.noBinary.title": {
+      "comment": "Empty state when no docker binary exists",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker CLI not found"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未找到 Docker CLI"
+          }
+        }
+      }
+    },
+    "docker.noBinary.message": {
+      "comment": "Empty state description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Install Docker Desktop, OrbStack or Colima to manage container resources. Mothball looks in the standard install locations."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安装 Docker Desktop、OrbStack 或 Colima 后即可管理容器资源。Mothball 会在标准安装位置查找。"
+          }
+        }
+      }
+    },
+    "docker.daemonDown.title": {
+      "comment": "Empty state when the daemon is unreachable",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker engine is not running"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker 引擎未运行"
+          }
+        }
+      }
+    },
+    "docker.daemonDown.message": {
+      "comment": "Empty state description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start Docker Desktop, OrbStack or Colima and refresh. This is informational — nothing is wrong."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "启动 Docker Desktop、OrbStack 或 Colima 后点击刷新。这只是提示,并非错误。"
+          }
+        }
+      }
+    },
+    "docker.podman.notice": {
+      "comment": "Informational row when podman exists",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podman detected — managing Podman resources is not supported yet."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检测到 Podman——暂不支持管理 Podman 资源。"
+          }
+        }
+      }
+    },
+    "docker.section.running": {
+      "comment": "Section header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Running containers"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行中的容器"
+          }
+        }
+      }
+    },
+    "docker.section.stopped": {
+      "comment": "Section header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stopped containers"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已停止的容器"
+          }
+        }
+      }
+    },
+    "docker.section.dangling": {
+      "comment": "Section header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dangling images"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "悬空镜像"
+          }
+        }
+      }
+    },
+    "docker.section.taggedUnused": {
+      "comment": "Section header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tagged images with no containers"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无容器引用的镜像"
+          }
+        }
+      }
+    },
+    "docker.taggedUnused.footer": {
+      "comment": "Section footer",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Re-pulling or rebuilding these costs time and bandwidth, so each removal asks for confirmation."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新拉取或构建这些镜像需要时间和带宽,因此每次删除都会单独确认。"
+          }
+        }
+      }
+    },
+    "docker.section.volumes": {
+      "comment": "Section header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volumes"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "卷"
+          }
+        }
+      }
+    },
+    "docker.volumes.footer": {
+      "comment": "Section footer",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volume contents can hold irreplaceable data (databases!). Volumes are shown for awareness, never join batch cleanup, and deleting one requires a strong confirmation."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "卷内可能存有不可替代的数据(比如数据库)。卷仅作展示,绝不进入批量清理;单独删除需强确认。"
+          }
+        }
+      }
+    },
+    "docker.section.buildCache": {
+      "comment": "Section header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build cache"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "构建缓存"
+          }
+        }
+      }
+    },
+    "docker.action.stop": {
+      "comment": "Row action",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止"
+          }
+        }
+      }
+    },
+    "docker.action.remove": {
+      "comment": "Row action",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除"
+          }
+        }
+      }
+    },
+    "docker.action.removeVolume": {
+      "comment": "Row action for volumes (leads to strong confirm)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除…"
+          }
+        }
+      }
+    },
+    "docker.action.removeAllDangling %lld": {
+      "comment": "Batch action for dangling images",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove all (%lld)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部删除(%lld)"
+          }
+        }
+      }
+    },
+    "docker.action.prune": {
+      "comment": "Build cache prune action",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prune"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理"
+          }
+        }
+      }
+    },
+    "docker.volume.confirm.title": {
+      "comment": "Volume strong-confirm title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete this volume permanently?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "永久删除此卷?"
+          }
+        }
+      }
+    },
+    "docker.volume.confirm.button %@": {
+      "comment": "Volume strong-confirm destructive button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete volume \"%@\""
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除卷「%@」"
+          }
+        }
+      }
+    },
+    "docker.volume.confirm.message %@": {
+      "comment": "Volume strong-confirm message",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything stored in \"%@\" will be lost permanently. This cannot be undone — volumes do not go to the Trash. Make sure nothing you need lives inside."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」中存储的全部数据将永久丢失,且无法撤销——卷不会进入废纸篓。请确认其中没有你需要的数据。"
+          }
+        }
+      }
+    },
+    "docker.image.confirm.title": {
+      "comment": "Tagged image confirm title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove this image?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除此镜像?"
+          }
+        }
+      }
+    },
+    "docker.image.confirm.button": {
+      "comment": "Tagged image confirm button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove Image"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除镜像"
+          }
+        }
+      }
+    },
+    "docker.image.confirm.message %@": {
+      "comment": "Tagged image confirm message",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Getting \"%@\" back means pulling or rebuilding it."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "找回「%@」需要重新拉取或构建。"
+          }
+        }
+      }
+    },
+    "docker.error.title": {
+      "comment": "Error alert title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker operation failed"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker 操作失败"
+          }
+        }
+      }
     }
   }
 }

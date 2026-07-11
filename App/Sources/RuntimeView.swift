@@ -7,29 +7,36 @@ import SwiftUI
 struct RuntimeView: View {
     @Environment(ScanModel.self) private var scan
     @Environment(RuntimeModel.self) private var runtime
+    @Environment(ContainerModel.self) private var containers
 
     var body: some View {
         @Bindable var runtime = runtime
-        return Group {
-            if runtime.services.isEmpty && !runtime.isRefreshing {
-                ContentUnavailableView {
-                    Label {
-                        Text("runtime.empty.title", bundle: .module)
-                    } icon: {
-                        Image(systemName: "waveform.path.ecg")
+        return VSplitView {
+            Group {
+                if runtime.services.isEmpty && !runtime.isRefreshing {
+                    ContentUnavailableView {
+                        Label {
+                            Text("runtime.empty.title", bundle: .module)
+                        } icon: {
+                            Image(systemName: "waveform.path.ecg")
+                        }
+                    } description: {
+                        Text("runtime.empty.description", bundle: .module)
                     }
-                } description: {
-                    Text("runtime.empty.description", bundle: .module)
+                } else {
+                    serviceTable
                 }
-            } else {
-                serviceTable
             }
+            .frame(minHeight: 160)
+            ContainerSection()
+                .frame(minHeight: 160)
         }
         .navigationTitle(Text("sidebar.runtime", bundle: .module))
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {
                     runtime.refresh(projects: scan.projects)
+                    containers.refresh(projects: scan.projects)
                 } label: {
                     if runtime.isRefreshing {
                         ProgressView().controlSize(.small)
@@ -46,6 +53,7 @@ struct RuntimeView: View {
         }
         .task {
             runtime.refresh(projects: scan.projects)
+            containers.refresh(projects: scan.projects)
         }
         .confirmationDialog(
             Text("runtime.forceKill.title", bundle: .module),

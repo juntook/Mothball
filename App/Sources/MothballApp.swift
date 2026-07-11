@@ -6,6 +6,7 @@ struct MothballApp: App {
     @State private var scanModel = ScanModel()
     @State private var cleanupModel = CleanupModel()
     @State private var runtimeModel = RuntimeModel()
+    @State private var containerModel = ContainerModel()
     @Environment(\.openWindow) private var openWindow
 
     var body: some Scene {
@@ -14,6 +15,7 @@ struct MothballApp: App {
                 .environment(scanModel)
                 .environment(cleanupModel)
                 .environment(runtimeModel)
+                .environment(containerModel)
         }
         .commands {
             CommandMenu(Text("menu.developer", bundle: .module)) {
