@@ -30,6 +30,7 @@ enum SidebarSection: String, CaseIterable, Identifiable {
 
 struct RootView: View {
     @Environment(ScanModel.self) private var model
+    @Environment(CleanupModel.self) private var cleanup
     @State private var selection: SidebarSection? = .tools
 
     var body: some View {
@@ -71,6 +72,15 @@ struct RootView: View {
         .task {
             model.loadRulesIfNeeded()
         }
+        .onChange(of: model.hasScanned) { _, scanned in
+            if scanned { cleanup.defaultSelect(items: model.items) }
+        }
+        .sheet(isPresented: Binding(
+            get: { cleanup.phase != .idle },
+            set: { if !$0 { cleanup.dismiss() } }
+        )) {
+            CleanupSheet()
+        }
     }
 
     @ViewBuilder
@@ -78,7 +88,9 @@ struct RootView: View {
         switch selection ?? .tools {
         case .tools:
             ToolsView()
-        case .projects, .runtime, .settings:
+        case .settings:
+            SettingsView()
+        case .projects, .runtime:
             PlaceholderView(section: selection ?? .projects)
         }
     }

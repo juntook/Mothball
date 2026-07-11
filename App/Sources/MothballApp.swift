@@ -4,12 +4,14 @@ import SwiftUI
 @main
 struct MothballApp: App {
     @State private var scanModel = ScanModel()
+    @State private var cleanupModel = CleanupModel()
     @Environment(\.openWindow) private var openWindow
 
     var body: some Scene {
         WindowGroup("Mothball") {
             RootView()
                 .environment(scanModel)
+                .environment(cleanupModel)
         }
         .commands {
             CommandMenu(Text("menu.developer", bundle: .module)) {
@@ -27,6 +29,7 @@ struct MothballApp: App {
                 DoctorView()
             }
             .environment(scanModel)
+            .environment(cleanupModel)
             .frame(minWidth: 600, minHeight: 400)
         }
     }

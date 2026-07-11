@@ -43,7 +43,19 @@ Needs human verification:
 - Doctor-driven promotion of seed rules from `draft` to `verified` (SPEC marks this a manual acceptance step).
 - Tools view visual check with system language zh-Hans.
 
-## M2 — Cleanup executor + safety gate — not started
+## M2 — Cleanup executor + safety gate — DONE (2026-07-11)
+
+Shipped (gate tests written first, per CLAUDE.md):
+- `DeletionGate` — all six SPEC §5.6 rules, below the UI: immutable confirmed paths only; realpath-prefix containment (parent chain resolved, leaf symlink never followed); hard-rejects `/`, home itself, `..`, short paths, `/System`, system `/Library`; protected → no path to deletion; user_data → trash only; direct delete only behind the setting.
+- `CleanupExecutor` — per-item gate check + injectable `FileRemover`; user_data trash failure aborts the run and skips the rest (abort-and-ask, never a direct-delete fallback); regenerable failures don't stop the run.
+- `AuditLog` — JSONL at `~/Library/Logs/Mothball/operations.jsonl` (timestamp, rule, target, path, bytes, method, result), always English.
+- `IgnoreList` — persisted at Application Support; ignored rows collapse and can't be selected.
+- UI: tier-appropriate selection (regenerable pre-checked, user_data opt-in, protected shows a lock, no checkbox); preview sheet with per-item user_data confirmation; progress; results page with reclaimed total, per-item outcomes, and the fixed APFS-snapshot note; direct-delete setting with per-session first-use re-confirmation; Settings pane (toggle, audit-log reveal, ignored paths).
+- 23 new tests: 15 gate rejection/acceptance branches, executor abort semantics, audit JSONL, ignore list round-trip. 54 total, all green.
+- Real `FileManager.trashItem` round-trip verified on-machine (file landed in `~/.Trash`, restorable).
+
+Needs human verification:
+- Full sheet flow visually (en + zh-Hans), including the user_data highlight and confirm interaction.
 
 ## M3 — Project discovery + attribution — not started
 

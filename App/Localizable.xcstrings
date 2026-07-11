@@ -358,6 +358,567 @@
           }
         }
       }
+    },
+    "cleanup.button %lld": {
+      "comment": "Toolbar button opening the cleanup preview; argument is the selected item count",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clean (%lld)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理(%lld)"
+          }
+        }
+      }
+    },
+    "cleanup.running": {
+      "comment": "Progress label during execution",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cleaning up…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在清理…"
+          }
+        }
+      }
+    },
+    "cleanup.cancel": {
+      "comment": "Preview sheet cancel button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
+        }
+      }
+    },
+    "cleanup.confirm": {
+      "comment": "Preview sheet confirm button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clean Up"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开始清理"
+          }
+        }
+      }
+    },
+    "cleanup.done": {
+      "comment": "Results sheet close button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完成"
+          }
+        }
+      }
+    },
+    "cleanup.section.userData": {
+      "comment": "Preview section header for user_data items",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "User data — confirm each item"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用户数据——需逐项确认"
+          }
+        }
+      }
+    },
+    "cleanup.section.regenerable": {
+      "comment": "Preview section header for regenerable items",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regenerable"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可再生"
+          }
+        }
+      }
+    },
+    "cleanup.userData.footer": {
+      "comment": "Preview footer explaining user_data confirmation",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These are your own records and cannot be recovered after deletion. They are moved to the Trash only. Check each item to confirm."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这些是你自己的记录,删除后无法找回;只会移入废纸篓。请逐项勾选确认。"
+          }
+        }
+      }
+    },
+    "cleanup.preview.total %lld %@": {
+      "comment": "Preview footer: item count and total size",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld items · %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 项 · %@"
+          }
+        }
+      }
+    },
+    "cleanup.method.trash": {
+      "comment": "Preview note when the method is trash",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Items will be moved to the Trash and can be restored from there."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "条目将移入废纸篓,可从废纸篓恢复。"
+          }
+        }
+      }
+    },
+    "cleanup.method.delete": {
+      "comment": "Preview note when direct delete is on",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Direct delete is enabled: regenerable items are removed permanently. User data still goes to the Trash."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已开启直接删除:可再生条目将被永久删除;用户数据仍会进入废纸篓。"
+          }
+        }
+      }
+    },
+    "cleanup.directDelete.confirm.title": {
+      "comment": "First direct delete per session confirmation title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete permanently?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "永久删除?"
+          }
+        }
+      }
+    },
+    "cleanup.directDelete.confirm.button": {
+      "comment": "Confirmation button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete Permanently"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "永久删除"
+          }
+        }
+      }
+    },
+    "cleanup.directDelete.confirm.message": {
+      "comment": "Confirmation message",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Direct delete removes regenerable items without moving them to the Trash. This is asked once per session."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直接删除不经过废纸篓移除可再生条目。每次会话仅询问一次。"
+          }
+        }
+      }
+    },
+    "cleanup.result.reclaimed %@": {
+      "comment": "Results header with the total freed size",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclaimed %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已释放 %@"
+          }
+        }
+      }
+    },
+    "cleanup.result.trashFailure": {
+      "comment": "Banner when a user_data trash failure aborted the run",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moving user data to the Trash failed (for example across volumes), so the run stopped. Nothing was deleted directly. Review the remaining items and try again."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用户数据移入废纸篓失败(例如跨卷),清理已中止;没有任何内容被直接删除。请检查剩余条目后重试。"
+          }
+        }
+      }
+    },
+    "cleanup.result.apfsNote": {
+      "comment": "Fixed APFS snapshot explanation on the results page (SPEC §5.6)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS local snapshots may keep deleted data for a while — the free space shown in Finder updates after snapshots expire, usually within 24 hours."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 本地快照可能暂时保留已删除数据,Finder 显示的可用空间会在快照过期后(通常 24 小时内)更新。"
+          }
+        }
+      }
+    },
+    "cleanup.outcome.trashed": {
+      "comment": "Per-item result",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moved to Trash"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已移入废纸篓"
+          }
+        }
+      }
+    },
+    "cleanup.outcome.deleted": {
+      "comment": "Per-item result",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deleted"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已删除"
+          }
+        }
+      }
+    },
+    "cleanup.outcome.rejected": {
+      "comment": "Per-item result",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocked by the safety gate"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "被安全闸门拦截"
+          }
+        }
+      }
+    },
+    "cleanup.outcome.skipped": {
+      "comment": "Per-item result",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skipped after the run stopped"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理中止后跳过"
+          }
+        }
+      }
+    },
+    "row.protected.help": {
+      "comment": "Tooltip on the lock icon of protected rows",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protected: shown for awareness only. Mothball never deletes this."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "受保护:仅展示占用,Mothball 绝不删除。"
+          }
+        }
+      }
+    },
+    "row.ignore": {
+      "comment": "Context menu: add to ignore list",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignore"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "忽略"
+          }
+        }
+      }
+    },
+    "row.unignore": {
+      "comment": "Context menu: remove from ignore list",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop Ignoring"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消忽略"
+          }
+        }
+      }
+    },
+    "row.ignored": {
+      "comment": "Inline marker for ignored rows",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignored"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已忽略"
+          }
+        }
+      }
+    },
+    "row.revealInFinder": {
+      "comment": "Context menu",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reveal in Finder"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在访达中显示"
+          }
+        }
+      }
+    },
+    "settings.section.cleanup": {
+      "comment": "Settings section",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cleanup"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理"
+          }
+        }
+      }
+    },
+    "settings.directDelete": {
+      "comment": "Settings toggle",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete regenerable items directly"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直接删除可再生条目"
+          }
+        }
+      }
+    },
+    "settings.directDelete.detail": {
+      "comment": "Settings toggle detail",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skip the Trash for caches and build artifacts. The first direct delete in each session asks again."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缓存与构建产物不经过废纸篓。每次会话的首次直接删除会再次确认。"
+          }
+        }
+      }
+    },
+    "settings.directDelete.userDataNote": {
+      "comment": "Settings footer",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "User data (session history, todos) always goes to the Trash regardless of this setting."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无论此设置如何,用户数据(会话历史、任务清单)始终进入废纸篓。"
+          }
+        }
+      }
+    },
+    "settings.section.audit": {
+      "comment": "Settings section",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Audit log"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "审计日志"
+          }
+        }
+      }
+    },
+    "settings.openAuditLog": {
+      "comment": "Settings button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show operations.jsonl in Finder"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在访达中显示 operations.jsonl"
+          }
+        }
+      }
+    },
+    "settings.section.ignored": {
+      "comment": "Settings section",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignored paths"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已忽略的路径"
+          }
+        }
+      }
     }
   }
 }
