@@ -18,6 +18,7 @@ func printUsage() {
       doctor           Report per-target existence/readability/size
       detect           Show which tools are present on this machine
       size <path>      Measure allocated size of a path (perf debugging)
+      projects <root>  Discover projects under a root and attribute resources
       version          Print version
       help             Show this help
     """)
@@ -107,6 +108,38 @@ case "doctor":
     await runDoctor()
 case "detect":
     runDetect()
+case "projects":
+    guard arguments.count == 2 else { printUsage(); exit(2) }
+    let rules = loadRules()
+    let projects = ProjectDiscovery().discover(codeRoots: [arguments[1]]).map { project in
+        var p = project
+        p.lastActive = ProjectActivity().lastActive(projectPath: project.path)
+        return p
+    }
+    print("\(projects.count) projects discovered:")
+    for p in projects {
+        let active = p.lastActive.map { ISO8601DateFormatter().string(from: $0) } ?? "unknown"
+        print("  \(p.name)  \(p.path)  last-active=\(active)")
+    }
+    print("\nattributed resources:")
+    let scanner = DiskScanner()
+    var attributed: [String: [String]] = [:]
+    var orphans: [String] = []
+    for await event in scanner.scanAll(rules: rules, projects: projects) {
+        if case .discovered(let item) = event {
+            if let a = item.attribution {
+                attributed[a.projectPath, default: []].append("\(item.path)  [\(a.evidence)]")
+            } else {
+                orphans.append(item.path)
+            }
+        }
+    }
+    for (project, paths) in attributed.sorted(by: { $0.key < $1.key }) {
+        print("  \(project)")
+        for path in paths { print("    - \(path)") }
+    }
+    print("  (unattributed)")
+    for path in orphans { print("    - \(path)") }
 case "size":
     guard arguments.count == 2 else { printUsage(); exit(2) }
     let start = Date()

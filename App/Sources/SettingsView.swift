@@ -4,10 +4,44 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(CleanupModel.self) private var cleanup
+    @Environment(ScanModel.self) private var scan
     @State private var directDelete = false
+    @State private var codeRoots: [String] = []
 
     var body: some View {
         Form {
+            Section {
+                ForEach(codeRoots, id: \.self) { root in
+                    HStack {
+                        Text(verbatim: root)
+                            .lineLimit(1)
+                            .truncationMode(.middle)
+                        Spacer()
+                        Button {
+                            codeRoots.removeAll { $0 == root }
+                            scan.codeRoots = codeRoots
+                        } label: {
+                            Image(systemName: "minus.circle")
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                Button {
+                    addCodeRoot()
+                } label: {
+                    Label {
+                        Text("settings.codeRoots.add", bundle: .module)
+                    } icon: {
+                        Image(systemName: "plus")
+                    }
+                }
+            } header: {
+                Text("settings.section.codeRoots", bundle: .module)
+            } footer: {
+                Text("settings.codeRoots.detail", bundle: .module)
+                    .font(.caption)
+            }
+
             Section {
                 Toggle(isOn: $directDelete) {
                     VStack(alignment: .leading, spacing: 2) {
@@ -61,6 +95,23 @@ struct SettingsView: View {
         }
         .formStyle(.grouped)
         .navigationTitle(Text("sidebar.settings", bundle: .module))
-        .onAppear { directDelete = cleanup.directDeleteEnabled }
+        .onAppear {
+            directDelete = cleanup.directDeleteEnabled
+            codeRoots = scan.codeRoots
+        }
+    }
+
+    private func addCodeRoot() {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.allowsMultipleSelection = true
+        panel.directoryURL = FileManager.default.homeDirectoryForCurrentUser
+        if panel.runModal() == .OK {
+            for url in panel.urls where !codeRoots.contains(url.path) {
+                codeRoots.append(url.path)
+            }
+            scan.codeRoots = codeRoots
+        }
     }
 }

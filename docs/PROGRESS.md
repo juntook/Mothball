@@ -57,7 +57,20 @@ Shipped (gate tests written first, per CLAUDE.md):
 Needs human verification:
 - Full sheet flow visually (en + zh-Hans), including the user_data highlight and confirm interaction.
 
-## M3 — Project discovery + attribution — not started
+## M3 — Project discovery + attribution — DONE (2026-07-11)
+
+Shipped:
+- `ProjectDiscovery`: BFS under configured code roots, depth ≤ 6, skips hidden/`node_modules`/`Library`/`.Trash`; 12 marker files; project roots never descended (outermost wins); exclusions supported. `ProjectActivity`: last git commit (fixed-path git candidates, no PATH) falling back to root mtime.
+- `AttributionEngine`: evidence 1 (path containment, nearest root wins), 2 (process cwd — consumed in M4), 3 (compose labels — M5), 4 (dashed-absolute encoded buckets), 5 (bind mounts — M5). Case-insensitive (APFS default), realpath-normalized. Lossy dashed encoding decoded by comparing against known roots' encodings — dashes in project names ("my-app", "shop-admin") disambiguate correctly.
+- `DiskScanner.discoverProjectItems`: projectGlobs matched per root, gated by guardFiles (stray `node_modules` without `package.json` excluded). `explodeEncodedTargets`: per-bucket items with inherited safety; unmatched buckets → unattributed. `scanAll` combines everything.
+- Projects view (default home): cards with name/path/relative last-active/footprint/item count; detail grouped by kind with per-item attribution evidence; "Unattributed / Global" bucket last. Code-roots management in Settings (folder picker).
+- `mothball projects <root>` CLI for on-machine verification.
+- 16 new tests incl. the SPEC-mandated constructed tree (nested git, guardless node_modules, hidden/Library distractors, depth limit, Chinese + space paths). 70 total, green.
+
+Verified on this machine: 13 projects discovered (incl. `回声`, `petne中文推广/assets/app-extract`); `~/.claude/projects` buckets attributed to the right projects including dot-containing paths (`ai.nvwork.com` → `-Users-…-ai-nvwork-com-upstream`) and child-session buckets (`…-Sourcebotics-site` → Sourcebotics).
+
+Needs human verification:
+- Projects view + detail visually (en/zh-Hans).
 
 ## M4 — Runtime detection — not started
 

@@ -919,6 +919,346 @@
           }
         }
       }
+    },
+    "projects.noRoots.title": {
+      "comment": "Projects view empty state title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No code roots configured"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未配置代码根目录"
+          }
+        }
+      }
+    },
+    "projects.noRoots.description": {
+      "comment": "Projects view empty state description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your code directories in Settings so Mothball can discover projects and attribute resources to them."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在「设置」中添加代码目录,Mothball 才能发现项目并把资源归属到项目。"
+          }
+        }
+      }
+    },
+    "projects.unattributed": {
+      "comment": "The catch-all group for resources not attributed to any project",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unattributed / Global"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未归属 / 全局"
+          }
+        }
+      }
+    },
+    "projects.unattributed.detail": {
+      "comment": "Subtitle of the unattributed group",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tool data that does not belong to any discovered project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不属于任何已发现项目的工具数据"
+          }
+        }
+      }
+    },
+    "projects.itemCount %lld": {
+      "comment": "Item count on a project card",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld items"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 项"
+          }
+        }
+      }
+    },
+    "settings.section.codeRoots": {
+      "comment": "Settings section",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code roots"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "代码根目录"
+          }
+        }
+      }
+    },
+    "settings.codeRoots.add": {
+      "comment": "Settings button opening a folder picker",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add directory…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加目录…"
+          }
+        }
+      }
+    },
+    "settings.codeRoots.detail": {
+      "comment": "Settings footer",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projects are discovered inside these directories (up to 6 levels deep). Rescan after changing."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在这些目录内发现项目(最深 6 层)。修改后请重新扫描。"
+          }
+        }
+      }
+    },
+    "kind.cache": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caches"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缓存"
+          }
+        }
+      }
+    },
+    "kind.log": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Logs"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日志"
+          }
+        }
+      }
+    },
+    "kind.history": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "History"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "历史"
+          }
+        }
+      }
+    },
+    "kind.config": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Configuration"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "配置"
+          }
+        }
+      }
+    },
+    "kind.credential": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Credentials"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "凭证"
+          }
+        }
+      }
+    },
+    "kind.artifact": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build artifacts"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "构建产物"
+          }
+        }
+      }
+    },
+    "kind.state": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "State"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "状态"
+          }
+        }
+      }
+    },
+    "evidence.pathInsideProject": {
+      "comment": "Attribution evidence label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Located inside the project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "位于项目目录内"
+          }
+        }
+      }
+    },
+    "evidence.processCwd": {
+      "comment": "Attribution evidence label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Process working directory in the project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "进程工作目录位于项目内"
+          }
+        }
+      }
+    },
+    "evidence.composeLabel": {
+      "comment": "Attribution evidence label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attributed via Docker Compose labels"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通过 Compose 标签归属"
+          }
+        }
+      }
+    },
+    "evidence.encodedPath": {
+      "comment": "Attribution evidence label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Directory name encodes the project path"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目录名编码了项目路径"
+          }
+        }
+      }
+    },
+    "evidence.bindMount": {
+      "comment": "Attribution evidence label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bind mount source in the project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "绑定挂载源位于项目内"
+          }
+        }
+      }
     }
   }
 }

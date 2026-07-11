@@ -31,7 +31,7 @@ enum SidebarSection: String, CaseIterable, Identifiable {
 struct RootView: View {
     @Environment(ScanModel.self) private var model
     @Environment(CleanupModel.self) private var cleanup
-    @State private var selection: SidebarSection? = .tools
+    @State private var selection: SidebarSection? = .projects
 
     var body: some View {
         NavigationSplitView {
@@ -85,13 +85,17 @@ struct RootView: View {
 
     @ViewBuilder
     private var detailView: some View {
-        switch selection ?? .tools {
+        switch selection ?? .projects {
         case .tools:
             ToolsView()
+        case .projects:
+            NavigationStack {
+                ProjectsView()
+            }
         case .settings:
             SettingsView()
-        case .projects, .runtime:
-            PlaceholderView(section: selection ?? .projects)
+        case .runtime:
+            PlaceholderView(section: .runtime)
         }
     }
 }
