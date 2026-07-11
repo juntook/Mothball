@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "node-modules",
+  "name": "Node.js project dependencies",
+  "vendor": "generic",
+  "category": "runtime",
+  "platforms": ["macos"],
+  "status": "verified",
+  "verifiedOn": "2026-07-11",
+  "detection": { "anyBinaries": ["node"] },
+  "targets": [
+    {
+      "id": "node-modules",
+      "scope": "project",
+      "projectGlobs": ["node_modules"],
+      "guardFiles": ["package.json"],
+      "kind": "artifact",
+      "safety": "regenerable",
+      "description": "Installed dependencies for a project",
+      "regenerateHint": "Rebuilt by npm/pnpm/yarn install"
+    }
+  ]
+}

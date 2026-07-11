@@ -1,47 +1,362 @@
 {
-  "sourceLanguage" : "en",
-  "version" : "1.0",
-  "strings" : {
-    "sidebar.projects" : {
-      "comment" : "Sidebar item: project-centric view",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Projects" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "项目" } }
+  "sourceLanguage": "en",
+  "version": "1.0",
+  "strings": {
+    "sidebar.projects": {
+      "comment": "Sidebar item: project-centric view",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projects"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目"
+          }
+        }
       }
     },
-    "sidebar.tools" : {
-      "comment" : "Sidebar item: per-tool global targets view",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tools" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "工具" } }
+    "sidebar.tools": {
+      "comment": "Sidebar item: per-tool global targets view",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tools"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "工具"
+          }
+        }
       }
     },
-    "sidebar.runtime" : {
-      "comment" : "Sidebar item: running processes and containers view",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Runtime" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "运行时" } }
+    "sidebar.runtime": {
+      "comment": "Sidebar item: running processes and containers view",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Runtime"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行时"
+          }
+        }
       }
     },
-    "sidebar.settings" : {
-      "comment" : "Sidebar item: app settings",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settings" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "设置" } }
+    "sidebar.settings": {
+      "comment": "Sidebar item: app settings",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设置"
+          }
+        }
       }
     },
-    "placeholder.tagline" : {
-      "comment" : "Empty-state tagline shown in the M0 shell before scanning exists",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reclaim the disk space your dev tools leave behind." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "把开发工具留下的磁盘空间收回来。" } }
+    "placeholder.tagline": {
+      "comment": "Empty-state tagline shown in the M0 shell before scanning exists",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclaim the disk space your dev tools leave behind."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "把开发工具留下的磁盘空间收回来。"
+          }
+        }
       }
     },
-    "placeholder.section.pending" : {
-      "comment" : "Empty-state note that this section arrives in a later milestone",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "This view is under construction." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "此视图正在建设中。" } }
+    "placeholder.section.pending": {
+      "comment": "Empty-state note that this section arrives in a later milestone",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This view is under construction."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此视图正在建设中。"
+          }
+        }
+      }
+    },
+    "toolbar.scan": {
+      "comment": "Toolbar button starting a manual scan",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扫描"
+          }
+        }
+      }
+    },
+    "toolbar.scanning": {
+      "comment": "Toolbar state while a scan runs",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scanning…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在扫描…"
+          }
+        }
+      }
+    },
+    "tools.total": {
+      "comment": "Footer row label: sum of all tool footprints",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "合计"
+          }
+        }
+      }
+    },
+    "tools.empty.title": {
+      "comment": "Empty state title in Tools view",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No scan results"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无扫描结果"
+          }
+        }
+      }
+    },
+    "tools.empty.description": {
+      "comment": "Empty state description in Tools view",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click Scan in the toolbar to measure what your dev tools are using."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "点击工具栏中的「扫描」,查看各开发工具的磁盘占用。"
+          }
+        }
+      }
+    },
+    "tools.error.title": {
+      "comment": "Error state title in Tools view",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rules failed to load"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "规则加载失败"
+          }
+        }
+      }
+    },
+    "badge.unverified": {
+      "comment": "Badge on rules whose paths come from public docs, not verified on-machine",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unverified"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未验证"
+          }
+        }
+      }
+    },
+    "badge.unverified.help": {
+      "comment": "Tooltip for the unverified badge",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This rule's paths come from public documentation and have not been verified on a real machine yet. Verify via the Doctor panel."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "该规则的路径来自公开资料,尚未在真机核实。可通过 Doctor 面板核实。"
+          }
+        }
+      }
+    },
+    "menu.developer": {
+      "comment": "Menu bar title for developer utilities",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Developer"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开发者"
+          }
+        }
+      }
+    },
+    "doctor.title": {
+      "comment": "Developer panel verifying rule targets on this machine",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doctor"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doctor"
+          }
+        }
+      }
+    },
+    "doctor.run": {
+      "comment": "Doctor toolbar button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Re-examine"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新检测"
+          }
+        }
+      }
+    },
+    "doctor.projectScope %@": {
+      "comment": "Doctor row for project-scope targets",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project glob: %@ — evaluated per discovered project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目内匹配:%@——按已发现项目逐一判定"
+          }
+        }
+      }
+    },
+    "doctor.status.ok": {
+      "comment": "Doctor path status tooltip",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exists and readable"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "存在且可读"
+          }
+        }
+      }
+    },
+    "doctor.status.missing": {
+      "comment": "Doctor path status tooltip",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not present on this machine"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本机不存在"
+          }
+        }
+      }
+    },
+    "doctor.status.unreadable": {
+      "comment": "Doctor path status tooltip",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exists but not readable (permissions)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "存在但不可读(权限)"
+          }
+        }
       }
     }
   }

@@ -29,19 +29,58 @@ enum SidebarSection: String, CaseIterable, Identifiable {
 }
 
 struct RootView: View {
-    @State private var selection: SidebarSection? = .projects
+    @Environment(ScanModel.self) private var model
+    @State private var selection: SidebarSection? = .tools
 
     var body: some View {
         NavigationSplitView {
             List(SidebarSection.allCases, selection: $selection) { section in
-                Label(section.titleKey, systemImage: section.systemImage)
-                    .tag(section)
+                Label {
+                    Text(section.titleKey, bundle: .module)
+                } icon: {
+                    Image(systemName: section.systemImage)
+                }
+                .tag(section)
             }
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
         } detail: {
-            PlaceholderView(section: selection ?? .projects)
+            detailView
         }
         .frame(minWidth: 800, minHeight: 500)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    model.scan()
+                } label: {
+                    if model.isScanning {
+                        HStack(spacing: 6) {
+                            ProgressView().controlSize(.small)
+                            Text("toolbar.scanning", bundle: .module)
+                        }
+                    } else {
+                        Label {
+                            Text("toolbar.scan", bundle: .module)
+                        } icon: {
+                            Image(systemName: "arrow.clockwise")
+                        }
+                    }
+                }
+                .disabled(model.isScanning)
+            }
+        }
+        .task {
+            model.loadRulesIfNeeded()
+        }
+    }
+
+    @ViewBuilder
+    private var detailView: some View {
+        switch selection ?? .tools {
+        case .tools:
+            ToolsView()
+        case .projects, .runtime, .settings:
+            PlaceholderView(section: selection ?? .projects)
+        }
     }
 }
 

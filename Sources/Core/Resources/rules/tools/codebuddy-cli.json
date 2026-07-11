@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "codebuddy-cli",
+  "name": "CodeBuddy Code",
+  "vendor": "Tencent Cloud",
+  "category": "ai-cli",
+  "homepage": "https://www.codebuddy.ai",
+  "platforms": ["macos"],
+  "status": "draft",
+  "notes": "Docs confirm ~/.codebuddy/settings.json and ~/.codebuddy/skills. Session/history/cache subdirectory names are NOT publicly documented — inventory ~/.codebuddy on a machine with real usage, then split 'home-dir' into proper cache/history targets and flip to verified.",
+  "detection": {
+    "anyPaths": ["~/.codebuddy"],
+    "anyBinaries": ["codebuddy"]
+  },
+  "targets": [
+    {
+      "id": "settings",
+      "scope": "global",
+      "paths": ["~/.codebuddy/settings.json"],
+      "kind": "config",
+      "safety": "protected",
+      "description": "User-level settings"
+    },
+    {
+      "id": "skills",
+      "scope": "global",
+      "paths": ["~/.codebuddy/skills"],
+      "kind": "config",
+      "safety": "protected",
+      "description": "User-authored global skills — user assets, display only"
+    },
+    {
+      "id": "home-dir",
+      "scope": "global",
+      "paths": ["~/.codebuddy"],
+      "kind": "state",
+      "safety": "protected",
+      "description": "Entire user dir shown for size awareness until cache/history subpaths are verified and split out"
+    }
+  ]
+}

@@ -15,6 +15,8 @@ jobs:
         run: ./scripts/validate-rules.sh
       - name: Localization catalogs in sync
         run: python3 scripts/gen-localizations.py --check
+      - name: Bundled rules in sync
+        run: ./scripts/sync-rules.sh --check
 
   build-test:
     name: Build & test (arm64)

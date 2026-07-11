@@ -1,47 +1,492 @@
 {
-  "sourceLanguage" : "en",
-  "version" : "1.0",
-  "strings" : {
-    "safety.regenerable.name" : {
-      "comment" : "Safety tier label: safe-to-delete, regenerates automatically",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Regenerable" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "可再生" } }
+  "sourceLanguage": "en",
+  "version": "1.0",
+  "strings": {
+    "safety.regenerable.name": {
+      "comment": "Safety tier label: safe-to-delete, regenerates automatically",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regenerable"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可再生"
+          }
+        }
       }
     },
-    "safety.regenerable.explanation" : {
-      "comment" : "Safety tier explanation shown in previews and tooltips",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deleting is safe; the tool recreates this automatically." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "删除是安全的,工具会自动重建。" } }
+    "safety.regenerable.explanation": {
+      "comment": "Safety tier explanation shown in previews and tooltips",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deleting is safe; the tool recreates this automatically."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除是安全的,工具会自动重建。"
+          }
+        }
       }
     },
-    "safety.user_data.name" : {
-      "comment" : "Safety tier label: user data, unrecoverable once deleted",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "User data" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "用户数据" } }
+    "safety.user_data.name": {
+      "comment": "Safety tier label: user data, unrecoverable once deleted",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "User data"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用户数据"
+          }
+        }
       }
     },
-    "safety.user_data.explanation" : {
-      "comment" : "Safety tier explanation shown in previews and tooltips",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your own records — not recoverable after deletion. Moved to Trash only, never deleted directly." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你自己的记录,删除后无法找回。只会移入废纸篓,绝不直接删除。" } }
+    "safety.user_data.explanation": {
+      "comment": "Safety tier explanation shown in previews and tooltips",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your own records — not recoverable after deletion. Moved to Trash only, never deleted directly."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你自己的记录,删除后无法找回。只会移入废纸篓,绝不直接删除。"
+          }
+        }
       }
     },
-    "safety.protected.name" : {
-      "comment" : "Safety tier label: protected, display only",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Protected" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "受保护" } }
+    "safety.protected.name": {
+      "comment": "Safety tier label: protected, display only",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protected"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "受保护"
+          }
+        }
       }
     },
-    "safety.protected.explanation" : {
-      "comment" : "Safety tier explanation shown in previews and tooltips",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Credentials and configuration. Shown for awareness only — Mothball never deletes these." } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "凭证与配置文件,仅用于展示占用,Mothball 绝不删除。" } }
+    "safety.protected.explanation": {
+      "comment": "Safety tier explanation shown in previews and tooltips",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Credentials and configuration. Shown for awareness only — Mothball never deletes these."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "凭证与配置文件,仅用于展示占用,Mothball 绝不删除。"
+          }
+        }
+      }
+    },
+    "rule.claude-code.cli-cache.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CLI 运行时缓存与 MCP 服务器日志,按项目分桶"
+          }
+        }
+      }
+    },
+    "rule.claude-code.cli-cache.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下次运行时自动重建"
+          }
+        }
+      }
+    },
+    "rule.claude-code.statsig.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "遥测/功能开关缓存"
+          }
+        }
+      }
+    },
+    "rule.claude-code.statsig.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动重建"
+          }
+        }
+      }
+    },
+    "rule.claude-code.shell-snapshots.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shell 环境快照"
+          }
+        }
+      }
+    },
+    "rule.claude-code.shell-snapshots.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动重建"
+          }
+        }
+      }
+    },
+    "rule.claude-code.session-history.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完整会话记录(JSONL),每个项目一个文件夹"
+          }
+        }
+      }
+    },
+    "rule.claude-code.session-history.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不可恢复——这是你的会话记录"
+          }
+        }
+      }
+    },
+    "rule.claude-code.todos.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "会话中持久化的任务清单"
+          }
+        }
+      }
+    },
+    "rule.claude-code.todos.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不可恢复"
+          }
+        }
+      }
+    },
+    "rule.claude-code.config.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用户设置、全局记忆、初始化状态"
+          }
+        }
+      }
+    },
+    "rule.codex.sessions.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "会话滚动记录(JSONL,按日期分桶)"
+          }
+        }
+      }
+    },
+    "rule.codex.sessions.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不可恢复——这是你的会话记录"
+          }
+        }
+      }
+    },
+    "rule.codex.logs.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CLI/TUI 日志"
+          }
+        }
+      }
+    },
+    "rule.codex.logs.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下次运行时重建"
+          }
+        }
+      }
+    },
+    "rule.codex.history.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提示词历史"
+          }
+        }
+      }
+    },
+    "rule.codex.history.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不可恢复"
+          }
+        }
+      }
+    },
+    "rule.codex.auth.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录凭证——清理永不触碰"
+          }
+        }
+      }
+    },
+    "rule.codex.config.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用户配置"
+          }
+        }
+      }
+    },
+    "rule.codebuddy-cli.settings.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用户级设置"
+          }
+        }
+      }
+    },
+    "rule.codebuddy-cli.skills.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用户编写的全局技能——用户资产,仅展示"
+          }
+        }
+      }
+    },
+    "rule.codebuddy-cli.home-dir.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在缓存/历史子路径核实并拆分之前,整个用户目录仅作占用展示"
+          }
+        }
+      }
+    },
+    "rule.workbuddy.app-caches.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "应用缓存(路径模式待 bundle id 核实)"
+          }
+        }
+      }
+    },
+    "rule.workbuddy.app-caches.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "应用自动重建"
+          }
+        }
+      }
+    },
+    "rule.workbuddy.app-logs.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "应用日志(路径模式待核实)"
+          }
+        }
+      }
+    },
+    "rule.workbuddy.app-logs.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动重建"
+          }
+        }
+      }
+    },
+    "rule.workbuddy.app-support.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "应用数据,可能含会话历史——布局核实并拆分前仅展示"
+          }
+        }
+      }
+    },
+    "rule.npm.cacache.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "内容寻址的包缓存"
+          }
+        }
+      }
+    },
+    "rule.npm.cacache.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下次 install 时重新填充"
+          }
+        }
+      }
+    },
+    "rule.npm.npx-cache.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "npx 包缓存"
+          }
+        }
+      }
+    },
+    "rule.npm.npx-cache.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下次运行 npx 时重新填充"
+          }
+        }
+      }
+    },
+    "rule.npm.logs.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "npm 调试日志"
+          }
+        }
+      }
+    },
+    "rule.npm.logs.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按需重建"
+          }
+        }
+      }
+    },
+    "rule.node-modules.node-modules.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目已安装的依赖"
+          }
+        }
+      }
+    },
+    "rule.node-modules.node-modules.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "由 npm/pnpm/yarn install 重建"
+          }
+        }
       }
     }
   }

@@ -22,7 +22,10 @@ let package = Package(
             path: "Sources/Core",
             exclude: ["Localizable.xcstrings"],
             resources: [
-                .process("Resources"),
+                .process("Resources/en.lproj"),
+                .process("Resources/zh-Hans.lproj"),
+                // .copy preserves the rules/ directory layout inside the bundle.
+                .copy("Resources/rules"),
             ],
             swiftSettings: [
                 .swiftLanguageMode(.v6),
