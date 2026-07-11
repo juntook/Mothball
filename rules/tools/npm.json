@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "npm",
+  "name": "npm",
+  "vendor": "npm / Node.js",
+  "category": "package-manager",
+  "homepage": "https://www.npmjs.com",
+  "platforms": ["macos"],
+  "status": "draft",
+  "detection": {
+    "anyPaths": ["~/.npm"],
+    "anyBinaries": ["npm"]
+  },
+  "targets": [
+    {
+      "id": "cacache",
+      "scope": "global",
+      "paths": ["~/.npm/_cacache"],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Content-addressable package cache",
+      "regenerateHint": "Repopulated on next install"
+    },
+    {
+      "id": "npx-cache",
+      "scope": "global",
+      "paths": ["~/.npm/_npx"],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "npx package cache",
+      "regenerateHint": "Repopulated on next npx run"
+    },
+    {
+      "id": "logs",
+      "scope": "global",
+      "paths": ["~/.npm/_logs"],
+      "kind": "log",
+      "safety": "regenerable",
+      "description": "npm debug logs",
+      "regenerateHint": "Recreated as needed"
+    }
+  ]
+}

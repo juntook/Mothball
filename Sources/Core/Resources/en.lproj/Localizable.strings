@@ -1,0 +1,6 @@
+"safety.protected.explanation" = "Credentials and configuration. Shown for awareness only — Mothball never deletes these.";
+"safety.protected.name" = "Protected";
+"safety.regenerable.explanation" = "Deleting is safe; the tool recreates this automatically.";
+"safety.regenerable.name" = "Regenerable";
+"safety.user_data.explanation" = "Your own records — not recoverable after deletion. Moved to Trash only, never deleted directly.";
+"safety.user_data.name" = "User data";

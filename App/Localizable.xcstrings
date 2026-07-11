@@ -1,0 +1,48 @@
+{
+  "sourceLanguage" : "en",
+  "version" : "1.0",
+  "strings" : {
+    "sidebar.projects" : {
+      "comment" : "Sidebar item: project-centric view",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Projects" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "项目" } }
+      }
+    },
+    "sidebar.tools" : {
+      "comment" : "Sidebar item: per-tool global targets view",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tools" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "工具" } }
+      }
+    },
+    "sidebar.runtime" : {
+      "comment" : "Sidebar item: running processes and containers view",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Runtime" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "运行时" } }
+      }
+    },
+    "sidebar.settings" : {
+      "comment" : "Sidebar item: app settings",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settings" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "设置" } }
+      }
+    },
+    "placeholder.tagline" : {
+      "comment" : "Empty-state tagline shown in the M0 shell before scanning exists",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reclaim the disk space your dev tools leave behind." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "把开发工具留下的磁盘空间收回来。" } }
+      }
+    },
+    "placeholder.section.pending" : {
+      "comment" : "Empty-state note that this section arrives in a later milestone",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This view is under construction." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "此视图正在建设中。" } }
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+"safety.protected.explanation" = "凭证与配置文件,仅用于展示占用,Mothball 绝不删除。";
+"safety.protected.name" = "受保护";
+"safety.regenerable.explanation" = "删除是安全的,工具会自动重建。";
+"safety.regenerable.name" = "可再生";
+"safety.user_data.explanation" = "你自己的记录,删除后无法找回。只会移入废纸篓,绝不直接删除。";
+"safety.user_data.name" = "用户数据";

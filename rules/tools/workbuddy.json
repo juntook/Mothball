@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "workbuddy",
+  "name": "WorkBuddy",
+  "vendor": "Tencent Cloud",
+  "category": "ai-app",
+  "homepage": "https://www.workbuddy.ai",
+  "platforms": ["macos"],
+  "status": "draft",
+  "notes": "Desktop agent app (public beta since 2026-03). Bundle id and cache layout unverified — inspect /Applications/WorkBuddy.app/Contents/Info.plist for the real bundle id, then replace the Caches glob with the exact path and split Application Support into cache vs. user-data targets.",
+  "detection": {
+    "anyApps": ["/Applications/WorkBuddy.app"]
+  },
+  "targets": [
+    {
+      "id": "app-caches",
+      "scope": "global",
+      "paths": ["~/Library/Caches/*WorkBuddy*", "~/Library/Caches/*workbuddy*"],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "App caches (path pattern pending bundle-id verification)",
+      "regenerateHint": "Recreated automatically by the app"
+    },
+    {
+      "id": "app-logs",
+      "scope": "global",
+      "paths": ["~/Library/Logs/*WorkBuddy*"],
+      "kind": "log",
+      "safety": "regenerable",
+      "description": "App logs (path pattern pending verification)",
+      "regenerateHint": "Recreated automatically"
+    },
+    {
+      "id": "app-support",
+      "scope": "global",
+      "paths": ["~/Library/Application Support/WorkBuddy"],
+      "kind": "state",
+      "safety": "protected",
+      "description": "App data incl. possible session history — display only until layout is verified and split"
+    }
+  ]
+}

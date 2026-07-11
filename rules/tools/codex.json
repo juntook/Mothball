@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "codex",
+  "name": "Codex CLI",
+  "vendor": "OpenAI",
+  "category": "ai-cli",
+  "homepage": "https://github.com/openai/codex",
+  "platforms": ["macos"],
+  "status": "draft",
+  "notes": "Verify exact filenames under ~/.codex (sessions/, log/, history.jsonl) on-machine; layout changes across releases.",
+  "detection": {
+    "anyPaths": ["~/.codex"],
+    "anyBinaries": ["codex"]
+  },
+  "targets": [
+    {
+      "id": "sessions",
+      "scope": "global",
+      "paths": ["~/.codex/sessions"],
+      "kind": "history",
+      "safety": "user_data",
+      "description": "Session rollout records (JSONL, bucketed by date)",
+      "regenerateHint": "NOT recoverable — these are your session records"
+    },
+    {
+      "id": "logs",
+      "scope": "global",
+      "paths": ["~/.codex/log"],
+      "kind": "log",
+      "safety": "regenerable",
+      "description": "CLI/TUI logs",
+      "regenerateHint": "Recreated on next run"
+    },
+    {
+      "id": "history",
+      "scope": "global",
+      "paths": ["~/.codex/history.jsonl"],
+      "kind": "history",
+      "safety": "user_data",
+      "description": "Prompt history",
+      "regenerateHint": "NOT recoverable"
+    },
+    {
+      "id": "auth",
+      "scope": "global",
+      "paths": ["~/.codex/auth.json"],
+      "kind": "credential",
+      "safety": "protected",
+      "description": "Login credentials — never touched by cleanup"
+    },
+    {
+      "id": "config",
+      "scope": "global",
+      "paths": ["~/.codex/config.toml"],
+      "kind": "config",
+      "safety": "protected",
+      "description": "User configuration"
+    }
+  ]
+}

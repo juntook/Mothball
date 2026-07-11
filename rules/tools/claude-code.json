@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "id": "claude-code",
+  "name": "Claude Code",
+  "vendor": "Anthropic",
+  "category": "ai-cli",
+  "homepage": "https://github.com/anthropics/claude-code",
+  "platforms": ["macos"],
+  "status": "draft",
+  "notes": "Layout moves fast; verify each target via Doctor before flipping to verified. Also check version install dirs (~/.claude/local or ~/.local/share/claude) which can be large — add as a target once confirmed.",
+  "detection": {
+    "anyPaths": ["~/.claude"],
+    "anyBinaries": ["claude"]
+  },
+  "targets": [
+    {
+      "id": "cli-cache",
+      "scope": "global",
+      "paths": ["~/Library/Caches/claude-cli-nodejs"],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "CLI runtime cache and MCP server logs, bucketed per project",
+      "regenerateHint": "Recreated automatically on next run",
+      "attribution": { "encoding": "dashed-absolute" }
+    },
+    {
+      "id": "statsig",
+      "scope": "global",
+      "paths": ["~/.claude/statsig"],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Telemetry/feature-flag cache",
+      "regenerateHint": "Recreated automatically"
+    },
+    {
+      "id": "shell-snapshots",
+      "scope": "global",
+      "paths": ["~/.claude/shell-snapshots"],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Shell environment snapshots",
+      "regenerateHint": "Recreated automatically"
+    },
+    {
+      "id": "session-history",
+      "scope": "global",
+      "paths": ["~/.claude/projects"],
+      "kind": "history",
+      "safety": "user_data",
+      "description": "Full conversation transcripts (JSONL), one folder per project",
+      "regenerateHint": "NOT recoverable — these are your session records",
+      "attribution": { "encoding": "dashed-absolute" }
+    },
+    {
+      "id": "todos",
+      "scope": "global",
+      "paths": ["~/.claude/todos"],
+      "kind": "state",
+      "safety": "user_data",
+      "description": "Persisted task lists from sessions",
+      "regenerateHint": "NOT recoverable"
+    },
+    {
+      "id": "config",
+      "scope": "global",
+      "paths": ["~/.claude/settings.json", "~/.claude/CLAUDE.md", "~/.claude.json"],
+      "kind": "config",
+      "safety": "protected",
+      "description": "User settings, global memory, onboarding state"
+    }
+  ]
+}
