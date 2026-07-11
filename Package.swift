@@ -1,6 +1,12 @@
 // swift-tools-version: 6.0
 // SPDX-License-Identifier: Apache-2.0
+import Foundation
 import PackageDescription
+
+// Sparkle normally arrives as a remote binary artifact. On machines where
+// SwiftPM's downloader can't reach GitHub, run scripts/fetch-sparkle.sh and
+// build with MOTHBALL_LOCAL_SPARKLE=1 to use the vendored copy instead.
+let useLocalSparkle = ProcessInfo.processInfo.environment["MOTHBALL_LOCAL_SPARKLE"] == "1"
 
 let package = Package(
     name: "Mothball",
@@ -15,7 +21,10 @@ let package = Package(
         // Test-only. Explicit dependency so `swift test` works on machines with
         // Command Line Tools but no full Xcode (whose SDK lacks Testing/XCTest).
         .package(url: "https://github.com/swiftlang/swift-testing.git", from: "0.12.0"),
-    ],
+    ] + (useLocalSparkle ? [] : [
+        // Approved third-party dependency (SPEC §3): app updates.
+        .package(url: "https://github.com/sparkle-project/Sparkle", from: "2.6.0"),
+    ]),
     targets: [
         .target(
             name: "Core",
@@ -41,7 +50,10 @@ let package = Package(
         ),
         .executableTarget(
             name: "MothballApp",
-            dependencies: ["Core"],
+            dependencies: [
+                "Core",
+                useLocalSparkle ? "Sparkle" : .product(name: "Sparkle", package: "Sparkle"),
+            ],
             path: "App",
             exclude: ["Info.plist", "Localizable.xcstrings"],
             sources: ["Sources"],
@@ -52,6 +64,9 @@ let package = Package(
                 .swiftLanguageMode(.v6),
             ]
         ),
+    ] + (useLocalSparkle ? [
+        .binaryTarget(name: "Sparkle", path: "Vendor/Sparkle.xcframework"),
+    ] : []) + [
         .testTarget(
             name: "CoreTests",
             dependencies: [

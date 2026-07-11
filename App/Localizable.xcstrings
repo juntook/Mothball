@@ -1939,6 +1939,312 @@
           }
         }
       }
+    },
+    "menu.checkForUpdates": {
+      "comment": "App menu item (Sparkle)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check for Updates…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查更新…"
+          }
+        }
+      }
+    },
+    "onboarding.back": {
+      "comment": "Onboarding navigation",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上一步"
+          }
+        }
+      }
+    },
+    "onboarding.skip": {
+      "comment": "Onboarding: skip code roots (global scan only)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skip"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "跳过"
+          }
+        }
+      }
+    },
+    "onboarding.continue": {
+      "comment": "Onboarding navigation",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "继续"
+          }
+        }
+      }
+    },
+    "onboarding.finish": {
+      "comment": "Onboarding final button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start First Scan"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开始首次扫描"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.tagline": {
+      "comment": "Onboarding welcome tagline",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclaim the disk space your dev tools leave behind — organized by project."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "把开发工具留下的磁盘空间收回来——按项目聚合。"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.privacy": {
+      "comment": "Onboarding privacy statement",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open source (Apache-2.0). Everything runs locally on your Mac; nothing is ever uploaded. Mothball never asks for administrator privileges."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开源(Apache-2.0)。一切都在你的 Mac 上本地运行,不上传任何数据;永不请求管理员权限。"
+          }
+        }
+      }
+    },
+    "onboarding.roots.title": {
+      "comment": "Onboarding roots step title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where does your code live?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你的代码放在哪里?"
+          }
+        }
+      }
+    },
+    "onboarding.roots.detail": {
+      "comment": "Onboarding roots step description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mothball discovers projects inside these directories and groups resources by project. You can skip this and only scan tool-level data."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mothball 会在这些目录中发现项目,并按项目聚合资源。也可以跳过,只扫描工具级数据。"
+          }
+        }
+      }
+    },
+    "onboarding.fda.title": {
+      "comment": "Onboarding FDA step title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full Disk Access"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完全磁盘访问"
+          }
+        }
+      }
+    },
+    "onboarding.fda.why": {
+      "comment": "Onboarding FDA explanation",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Some tool data lives in locations macOS protects (TCC). With Full Disk Access, scans see everything; without it, results may be incomplete — Mothball will show a persistent notice so nothing looks silently wrong."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "部分工具数据位于 macOS 保护的位置(TCC)。授予完全磁盘访问后扫描才能看到全部;不授予也能用,但结果可能不完整——Mothball 会持续显示提示,不会让数据凭空变少。"
+          }
+        }
+      }
+    },
+    "onboarding.fda.open": {
+      "comment": "Button opening the FDA pane",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open System Settings"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开系统设置"
+          }
+        }
+      }
+    },
+    "onboarding.fda.granted": {
+      "comment": "FDA status line",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full Disk Access is granted."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已授予完全磁盘访问。"
+          }
+        }
+      }
+    },
+    "onboarding.fda.denied": {
+      "comment": "FDA status line",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not granted yet. Add Mothball in System Settings, then come back."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未授予。请在系统设置中添加 Mothball,然后返回。"
+          }
+        }
+      }
+    },
+    "onboarding.fda.indeterminate": {
+      "comment": "FDA status line",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not determine status on this machine."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法在本机判断授权状态。"
+          }
+        }
+      }
+    },
+    "onboarding.fda.optional": {
+      "comment": "FDA footnote",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You can grant or revoke this at any time in System Settings → Privacy & Security → Full Disk Access."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "随时可在「系统设置 → 隐私与安全性 → 完全磁盘访问」中授予或撤销。"
+          }
+        }
+      }
+    },
+    "fda.banner": {
+      "comment": "Persistent degraded-mode banner (SPEC §5.8)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Results may be incomplete: Full Disk Access has not been granted."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "结果可能不完整:未授予完全磁盘访问。"
+          }
+        }
+      }
+    },
+    "fda.banner.action": {
+      "comment": "Banner action opening System Settings",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grant…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "去授权…"
+          }
+        }
+      }
     }
   }
 }

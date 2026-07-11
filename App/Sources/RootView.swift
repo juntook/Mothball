@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
+import Core
 import SwiftUI
 
 enum SidebarSection: String, CaseIterable, Identifiable {
@@ -32,6 +33,8 @@ struct RootView: View {
     @Environment(ScanModel.self) private var model
     @Environment(CleanupModel.self) private var cleanup
     @State private var selection: SidebarSection? = .projects
+    @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "onboardingComplete")
+    @State private var fdaStatus = FullDiskAccess.check()
 
     var body: some View {
         NavigationSplitView {
@@ -45,7 +48,10 @@ struct RootView: View {
             }
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
         } detail: {
-            detailView
+            VStack(spacing: 0) {
+                FDABanner(status: fdaStatus)
+                detailView
+            }
         }
         .frame(minWidth: 800, minHeight: 500)
         .toolbar {
@@ -71,6 +77,12 @@ struct RootView: View {
         }
         .task {
             model.loadRulesIfNeeded()
+        }
+        .sheet(isPresented: $showOnboarding) {
+            OnboardingView(isPresented: $showOnboarding)
+        }
+        .onChange(of: model.isScanning) { _, _ in
+            fdaStatus = FullDiskAccess.check()
         }
         .onChange(of: model.hasScanned) { _, scanned in
             if scanned { cleanup.defaultSelect(items: model.items) }

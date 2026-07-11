@@ -48,3 +48,10 @@ swift build           # builds Core, cli, MothballApp (SwiftPM)
 swift test            # Core unit tests
 scripts/validate-rules.sh   # rule schema + semantic checks (also run in CI)
 ```
+
+If SwiftPM hangs downloading the Sparkle binary artifact (restricted networks):
+
+```sh
+scripts/fetch-sparkle.sh
+MOTHBALL_LOCAL_SPARKLE=1 swift build
+```

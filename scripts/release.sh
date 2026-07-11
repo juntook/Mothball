@@ -1,0 +1,71 @@
+#!/bin/bash
+# SPDX-License-Identifier: Apache-2.0
+# Builds Mothball.app from the SwiftPM release binary, signs it, and produces
+# a dmg ready for notarization (scripts/notarize.sh).
+#
+# Requirements: full Xcode (for codesign toolchain), a "Developer ID
+# Application" certificate in the login keychain.
+#
+# Environment:
+#   CODESIGN_IDENTITY   e.g. "Developer ID Application: Your Name (TEAMID)"
+#                       (unset → ad-hoc signing for local testing)
+#   SPARKLE_ED_KEY      Sparkle EdDSA public key for Info.plist (optional here;
+#                       generate once with Sparkle's generate_keys)
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" App/Info.plist)
+APP=dist/Mothball.app
+DMG="dist/Mothball-$VERSION.dmg"
+
+echo "==> Building release binary"
+swift build -c release --arch arm64
+
+echo "==> Assembling $APP"
+rm -rf dist && mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$APP/Contents/Frameworks"
+
+cp .build/arm64-apple-macosx/release/MothballApp "$APP/Contents/MacOS/MothballApp"
+cp App/Info.plist "$APP/Contents/Info.plist"
+
+# Sparkle feed configuration (only meaningful in the bundled app).
+/usr/libexec/PlistBuddy -c "Add :SUFeedURL string https://github.com/juntook/Mothball/releases/latest/download/appcast.xml" "$APP/Contents/Info.plist" || true
+if [[ -n "${SPARKLE_ED_KEY:-}" ]]; then
+    /usr/libexec/PlistBuddy -c "Add :SUPublicEDKey string $SPARKLE_ED_KEY" "$APP/Contents/Info.plist" || true
+fi
+
+# Resource bundles produced by SwiftPM (localizations, rule library).
+for bundle in .build/arm64-apple-macosx/release/Mothball_*.bundle; do
+    cp -R "$bundle" "$APP/Contents/Resources/"
+done
+
+# Sparkle framework must ship inside the app.
+SPARKLE_FRAMEWORK=$(find .build -name "Sparkle.framework" -not -path "*/checkouts/*" | head -1)
+if [[ -n "$SPARKLE_FRAMEWORK" ]]; then
+    cp -R "$SPARKLE_FRAMEWORK" "$APP/Contents/Frameworks/"
+    install_name_tool -add_rpath "@executable_path/../Frameworks" "$APP/Contents/MacOS/MothballApp" 2>/dev/null || true
+fi
+
+echo "==> Signing"
+IDENTITY="${CODESIGN_IDENTITY:--}"
+if [[ "$IDENTITY" == "-" ]]; then
+    echo "    (ad-hoc — set CODESIGN_IDENTITY for a distributable build)"
+fi
+if [[ -d "$APP/Contents/Frameworks/Sparkle.framework" ]]; then
+    # Sign nested Sparkle helpers first (inside-out).
+    codesign --force --options runtime --timestamp --sign "$IDENTITY" \
+        "$APP/Contents/Frameworks/Sparkle.framework/Versions/B/Autoupdate" 2>/dev/null || true
+    codesign --force --options runtime --timestamp --sign "$IDENTITY" \
+        "$APP/Contents/Frameworks/Sparkle.framework/Versions/B/Updater.app" 2>/dev/null || true
+    codesign --force --options runtime --timestamp --sign "$IDENTITY" \
+        "$APP/Contents/Frameworks/Sparkle.framework"
+fi
+codesign --force --options runtime --timestamp --sign "$IDENTITY" --deep "$APP"
+
+echo "==> Verifying signature"
+codesign --verify --strict --verbose=2 "$APP"
+
+echo "==> Creating $DMG"
+hdiutil create -volname "Mothball" -srcfolder "$APP" -ov -format UDZO "$DMG"
+
+echo "==> Done: $DMG"
+echo "    Next: scripts/notarize.sh $DMG"

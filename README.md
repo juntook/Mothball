@@ -15,6 +15,16 @@ Every disk tool out there takes a *resource-type* view (only Docker, only `node_
 
 Pre-release, under active development. See [docs/PROGRESS.md](docs/PROGRESS.md).
 
+## Install
+
+Once releases are published:
+
+```sh
+brew install --cask juntook/tap/mothball
+```
+
+Or download the notarized dmg from [Releases](https://github.com/juntook/Mothball/releases). Updates arrive in-app via Sparkle. Not on the Mac App Store — the core features (scanning arbitrary tool directories, process management) are incompatible with App Sandbox.
+
 ## Build
 
 ```sh
@@ -47,6 +57,16 @@ Mothball 是一个 macOS 原生小工具,把散落在你电脑各处的开发资
 - **安全优先**:三级安全分级——缓存可一键清理;会话历史只进废纸篓且逐项确认;凭证与配置只读展示,代码里根本不存在删除它们的路径。
 - **本地开源**:Apache-2.0,数据不出本机,无账号体系,永不请求 sudo。
 - **社区规则库**:每个工具把什么存在哪里、删了是否安全,都写在声明式 JSON 规则库(`rules/`)里,欢迎共同维护。
+
+## 安装
+
+发布后可通过 Homebrew 安装:
+
+```sh
+brew install --cask juntook/tap/mothball
+```
+
+或从 [Releases](https://github.com/juntook/Mothball/releases) 下载经过公证的 dmg。应用内通过 Sparkle 自动更新。不上 Mac App Store——核心功能(扫描任意工具目录、进程管理)与 App Sandbox 不兼容。
 
 ## 构建
 

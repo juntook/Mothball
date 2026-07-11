@@ -103,4 +103,21 @@ Needs human verification:
 - SPEC acceptance names Docker Desktop AND OrbStack environments — this machine runs Colima (a third supported endpoint). Re-run `mothball docker` under Docker Desktop and OrbStack.
 - Volume strong-confirm and tagged-image confirm dialogs visually.
 
-## M6 — Onboarding + release infrastructure — not started
+## M6 — Onboarding + release infrastructure — DONE (2026-07-11)
+
+Shipped:
+- Onboarding (first launch): welcome (value + open-source/local/no-sudo statement) → code-roots picker (skippable) → Full Disk Access step with live status polling and a deep link to the settings pane → finish auto-starts the first scan.
+- `FullDiskAccess` probe (Core): opendir on TCC-protected paths (`~/Library/Safari` et al.) → granted/denied/indeterminate; no private API. Persistent degraded-mode banner (`FDABanner`) above all views while denied (SPEC §5.8 — no silent-incomplete state).
+- Sparkle 2 integrated ("Check for Updates…" in the app menu). Gracefully disabled in bare SwiftPM dev runs; active only inside a bundle with `SUFeedURL` (release.sh injects it).
+- `scripts/release.sh`: SwiftPM release build → .app assembly (Info.plist, resource bundles, Sparkle.framework) → codesign (Developer ID via `CODESIGN_IDENTITY`, ad-hoc fallback) → dmg.
+- `scripts/notarize.sh`: notarytool submit + staple + Gatekeeper assessment (keychain profile based).
+- `scripts/homebrew/mothball.rb`: cask draft for the self-hosted tap (`juntook/homebrew-tap`); official homebrew/cask deferred until notability thresholds are met.
+- README bilingual install section (brew + dmg + Sparkle + why-not-MAS).
+- Build-environment workaround: this machine's sandbox stalls SwiftPM's binary-artifact downloader, so `scripts/fetch-sparkle.sh` + `MOTHBALL_LOCAL_SPARKLE=1` builds against a vendored (gitignored, checksum-verified) xcframework. CI and normal checkouts use the standard remote artifact.
+- 3 FDA tests; 96 total, green.
+
+Needs human verification (requires Xcode + Developer ID certificates — intentionally left for you):
+- Run `scripts/release.sh` with `CODESIGN_IDENTITY` set, then `scripts/notarize.sh` — produce a notarized, Gatekeeper-passing dmg.
+- Generate Sparkle EdDSA keys (`generate_keys`), set `SPARKLE_ED_KEY`, publish appcast.
+- Create the `juntook/homebrew-tap` repo, copy the cask, fill the real sha256, test `brew install --cask juntook/tap/mothball` on a clean machine.
+- Onboarding + FDA flow visually (en/zh-Hans), degraded banner with FDA revoked.

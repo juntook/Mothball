@@ -7,6 +7,7 @@ struct MothballApp: App {
     @State private var cleanupModel = CleanupModel()
     @State private var runtimeModel = RuntimeModel()
     @State private var containerModel = ContainerModel()
+    @State private var updaterModel = UpdaterModel()
     @Environment(\.openWindow) private var openWindow
 
     var body: some Scene {
@@ -18,6 +19,14 @@ struct MothballApp: App {
                 .environment(containerModel)
         }
         .commands {
+            CommandGroup(after: .appInfo) {
+                Button {
+                    updaterModel.checkForUpdates()
+                } label: {
+                    Text("menu.checkForUpdates", bundle: .module)
+                }
+                .disabled(!updaterModel.canCheckForUpdates)
+            }
             CommandMenu(Text("menu.developer", bundle: .module)) {
                 Button {
                     openWindow(id: "doctor")
