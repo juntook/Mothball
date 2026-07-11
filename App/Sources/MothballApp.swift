@@ -5,6 +5,7 @@ import SwiftUI
 struct MothballApp: App {
     @State private var scanModel = ScanModel()
     @State private var cleanupModel = CleanupModel()
+    @State private var runtimeModel = RuntimeModel()
     @Environment(\.openWindow) private var openWindow
 
     var body: some Scene {
@@ -12,6 +13,7 @@ struct MothballApp: App {
             RootView()
                 .environment(scanModel)
                 .environment(cleanupModel)
+                .environment(runtimeModel)
         }
         .commands {
             CommandMenu(Text("menu.developer", bundle: .module)) {

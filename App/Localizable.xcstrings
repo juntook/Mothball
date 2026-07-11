@@ -1259,6 +1259,261 @@
           }
         }
       }
+    },
+    "runtime.empty.title": {
+      "comment": "Runtime view empty state",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No running services found"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未发现运行中的服务"
+          }
+        }
+      }
+    },
+    "runtime.empty.description": {
+      "comment": "Runtime view empty state description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processes appear here when they listen on a TCP port or run inside one of your projects."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当进程监听 TCP 端口或运行在你的项目目录中时,会显示在这里。"
+          }
+        }
+      }
+    },
+    "runtime.refresh": {
+      "comment": "Runtime view refresh button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refresh"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刷新"
+          }
+        }
+      }
+    },
+    "runtime.column.port": {
+      "comment": "Table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Port"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "端口"
+          }
+        }
+      }
+    },
+    "runtime.column.name": {
+      "comment": "Table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Process"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "进程"
+          }
+        }
+      }
+    },
+    "runtime.column.project": {
+      "comment": "Table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project / Directory"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 / 目录"
+          }
+        }
+      }
+    },
+    "runtime.column.memory": {
+      "comment": "Table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memory"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "内存"
+          }
+        }
+      }
+    },
+    "runtime.column.uptime": {
+      "comment": "Table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Started"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "启动于"
+          }
+        }
+      }
+    },
+    "runtime.column.actions": {
+      "comment": "Table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actions"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "操作"
+          }
+        }
+      }
+    },
+    "runtime.stop": {
+      "comment": "Per-row stop button (SIGTERM)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止"
+          }
+        }
+      }
+    },
+    "runtime.forceKill.title": {
+      "comment": "Dialog title when SIGTERM grace period expires",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Process did not stop"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "进程未停止"
+          }
+        }
+      }
+    },
+    "runtime.forceKill.button": {
+      "comment": "Force kill button (SIGKILL)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Force Quit"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "强制结束"
+          }
+        }
+      }
+    },
+    "runtime.forceKill.message %@ %lld": {
+      "comment": "Force kill dialog message",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ (PID %2$lld) is still running 5 seconds after the stop request. Force quitting may lose unsaved work in that process."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@(PID %2$lld)在停止请求 5 秒后仍在运行。强制结束可能丢失该进程未保存的数据。"
+          }
+        }
+      }
+    },
+    "runtime.stale.title": {
+      "comment": "Alert when PID reuse detected",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "List out of date"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "列表已过期"
+          }
+        }
+      }
+    },
+    "runtime.stale.message": {
+      "comment": "PID reuse alert message",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That process ID now belongs to a different process, so nothing was signaled. The list has been refreshed."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "该进程 ID 已被其他进程复用,因此未发送任何信号。列表已刷新。"
+          }
+        }
+      }
     }
   }
 }

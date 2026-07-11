@@ -95,7 +95,7 @@ struct RootView: View {
         case .settings:
             SettingsView()
         case .runtime:
-            PlaceholderView(section: .runtime)
+            RuntimeView()
         }
     }
 }

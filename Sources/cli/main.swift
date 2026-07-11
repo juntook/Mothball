@@ -19,6 +19,8 @@ func printUsage() {
       detect           Show which tools are present on this machine
       size <path>      Measure allocated size of a path (perf debugging)
       projects <root>  Discover projects under a root and attribute resources
+      runtime [root]   List running services (listeners + project processes)
+      stop <pid>       Gracefully stop a service (SIGTERM, 5s grace, no auto-kill)
       version          Print version
       help             Show this help
     """)
@@ -140,6 +142,31 @@ case "projects":
     }
     print("  (unattributed)")
     for path in orphans { print("    - \(path)") }
+case "runtime":
+    var projects: [Project] = []
+    if arguments.count == 2 {
+        projects = ProjectDiscovery().discover(codeRoots: [arguments[1]])
+    }
+    let services = RuntimeScanner().discover(projects: projects)
+    print("PORT(S)      PID     MEM        UPTIME    NAME             PROJECT / CWD")
+    for s in services {
+        let ports = s.listeningPorts.isEmpty ? "-" : s.listeningPorts.map(String.init).joined(separator: ",")
+        let mem = formatBytes(Int64(s.residentMemoryBytes))
+        let uptime = Duration.seconds(Date().timeIntervalSince(s.startDate)).formatted(.units(allowed: [.days, .hours, .minutes], width: .narrow, maximumUnitCount: 2))
+        let place = s.attribution?.projectPath ?? s.workingDirectory ?? "-"
+        print("\(ports.padding(toLength: 12, withPad: " ", startingAt: 0)) \(String(s.pid).padding(toLength: 7, withPad: " ", startingAt: 0)) \(mem.padding(toLength: 10, withPad: " ", startingAt: 0)) \(uptime.padding(toLength: 9, withPad: " ", startingAt: 0)) \(s.name.padding(toLength: 16, withPad: " ", startingAt: 0)) \(place)")
+    }
+case "stop":
+    guard arguments.count == 2, let pid = Int32(arguments[1]) else { printUsage(); exit(2) }
+    let provider = LibprocProcessProvider()
+    guard let snap = provider.snapshot(pid: pid) else {
+        print("no such process: \(pid)")
+        exit(1)
+    }
+    let service = RunningService(pid: pid, name: snap.name, startDate: snap.startDate)
+    print("sending SIGTERM to \(snap.name) (\(pid))…")
+    let result = await ServiceStopper().stop(service)
+    print("result: \(result)")
 case "size":
     guard arguments.count == 2 else { printUsage(); exit(2) }
     let start = Date()
