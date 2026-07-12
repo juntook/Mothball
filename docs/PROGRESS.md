@@ -121,3 +121,24 @@ Needs human verification (requires Xcode + Developer ID certificates — intenti
 - Generate Sparkle EdDSA keys (`generate_keys`), set `SPARKLE_ED_KEY`, publish appcast.
 - Create the `juntook/homebrew-tap` repo, copy the cask, fill the real sha256, test `brew install --cask juntook/tap/mothball` on a clean machine.
 - Onboarding + FDA flow visually (en/zh-Hans), degraded banner with FDA revoked.
+
+## M7 — V2 information architecture + new shell — DONE (2026-07-12)
+
+Shipped:
+- SPEC rewritten to V2 (same-anchor policy: §4.3, §5.1–§5.6, §5.8, §8.5, §9 keep their V1 meaning; code references stay valid). New sections: V2 IA (§5.7), S0–S3 presentation-layer risk scores (§4.4, M8), ports (§5.9), process metrics (§5.10), Homebrew services (§5.11), protection rules (§5.12), sessions (§5.13), menu bar (§5.14), notifications (§5.15), history view (§5.16), M7–M11 roadmap.
+- App layer rebuilt on the V2 IA: sidebar Overview / Active Resources / Storage / Settings (⌘1–⌘3; Sessions and History intentionally absent until M10/M11 — no placeholder sections), sidebar footer (last scan, lifetime reclaimed, version, help link), toolbar scan (⌘R) + search field.
+- Overview: greeting with running-resource count, four metric cards (running resources, active ports, dev memory, reclaimable space — all fed by existing Core scanners), prioritized "needs attention" list (docker daemon down, biggest reclaimables ≥ 1 GB, stale projects ≥ 90 days holding ≥ 500 MB), each row deep-links to its page. First launch auto-scans.
+- Active Resources: Processes tab (former Runtime table) with row-selection inspector (detail grid, stop-impact note, stop/force-kill flow unchanged); Containers tab (running/stopped lifecycle kinds).
+- Storage: Project Artifacts / Tool Caches / Docker tabs. Project rows open the cleanup-detail sheet (kind-grouped selectable items, per-project clean button); persistent bottom selection bar ("N selected · X reclaimable · Review & Clean…") — the mandatory §5.6 preview is the only path to execution, so the prototype's separate "Proceed" button is deliberately folded into review. Docker tab hosts the disk-weight kinds (dangling/tagged images, volumes, build cache, stopped containers).
+- Settings regrouped per §5.7: General (direct delete), Scan Scope (roots + exclusions, newly exposed), Language & Region (System/中文/English), Privacy & Updates (Sparkle check + audit log), Advanced (Doctor entry + ignore list). Doctor stays a separate window, now reachable from Settings and the Developer menu.
+- Onboarding rebuilt as the §5.8 two-page flow (welcome features + combined permissions page with live FDA status).
+- In-app language override with immediate effect: explicit `<lang>.lproj` sub-bundle resolution for both App and Core catalogs (`CoreResources.bundle` accessor added to Core), plus `\.locale` environment injection for FormatStyles. No `AppleLanguages` mutation.
+- Search: current-page filtering (processes, projects, tool caches) per SPEC §5.7; global search deferred to M11. ⌘K focuses the field on macOS 15+ (`searchFocused` API); the menu item is hidden on macOS 14.
+- Strings: 81 keys added, 15 obsolete removed; en + zh-Hans complete; generated .strings in sync (`--check` green).
+- 96 tests green; rule validation green; 12-second launch smoke test passed.
+
+Needs human verification:
+- Visual pass of every page in en and zh-Hans, plus the in-app language switch (per §8.5 acceptance hook).
+- Cleanup flow end-to-end on real data in the new Storage UI (selection bar → preview → trash → result).
+- Process inspector + stop/force-kill visually; container tabs under a running daemon.
+- Onboarding two-page flow on a fresh user account (delete the `onboardingComplete` default to re-trigger).
