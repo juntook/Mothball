@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Test-first per CLAUDE.md: every rejection branch of the deletion gate
-// (SPEC §5.6) is specified here before/alongside the implementation.
+// Covers every rejection branch of the deletion gate (SPEC §5.6).
 import Foundation
 import Testing
 @testable import Core
