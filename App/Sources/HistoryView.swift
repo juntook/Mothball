@@ -95,7 +95,7 @@ struct HistoryView: View {
     }
 
     private var recordList: some View {
-        baseRecordList.scrollContentBackground(.hidden)
+        baseRecordList.scrollContentBackground(.hidden).cardContainer()
     }
 
     private var baseRecordList: some View {

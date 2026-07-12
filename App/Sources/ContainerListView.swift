@@ -98,7 +98,7 @@ struct ContainerListView: View {
     }
 
     private var resourceList: some View {
-        baseList.scrollContentBackground(.hidden)
+        baseList.scrollContentBackground(.hidden).cardContainer()
     }
 
     private var baseList: some View {

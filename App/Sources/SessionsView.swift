@@ -111,7 +111,7 @@ struct SessionsView: View {
     }
 
     private var sessionList: some View {
-        baseSessionList.scrollContentBackground(.hidden)
+        baseSessionList.scrollContentBackground(.hidden).cardContainer()
     }
 
     private var baseSessionList: some View {

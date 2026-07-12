@@ -36,6 +36,9 @@ struct MothballApp: App {
                 .environment(\.locale, loc.locale)
         }
         .commands {
+            // Keep the menu bar lean: no New Window, no boilerplate Help.
+            CommandGroup(replacing: .newItem) {}
+            CommandGroup(replacing: .help) {}
             CommandGroup(after: .appInfo) {
                 Button {
                     updaterModel.checkForUpdates()
@@ -92,14 +95,6 @@ struct MothballApp: App {
                     }
                     .keyboardShortcut("k", modifiers: .command)
                 }
-            }
-            CommandMenu(Text("menu.developer", bundle: loc.appBundle)) {
-                Button {
-                    openWindow(id: "doctor")
-                } label: {
-                    Text("doctor.title", bundle: loc.appBundle)
-                }
-                .keyboardShortcut("d", modifiers: [.command, .shift])
             }
         }
 

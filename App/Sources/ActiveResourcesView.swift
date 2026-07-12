@@ -84,14 +84,11 @@ struct ActiveResourcesView: View {
                 if Task.isCancelled { break }
             }
         }
-        .inspector(isPresented: Binding(
-            get: { (shell.activeResourceTab == .ports || shell.activeResourceTab == .processes) && selectedService != nil },
-            set: { if !$0 { selectedPID = nil } }
-        )) {
-            if let service = selectedService {
-                ServiceInspector(service: service)
-                    .inspectorColumnWidth(min: 260, ideal: 300)
-            }
+        .sheet(item: Binding(
+            get: { (shell.activeResourceTab == .ports || shell.activeResourceTab == .processes) ? selectedService : nil },
+            set: { if $0 == nil { selectedPID = nil } }
+        )) { service in
+            ServiceInspector(service: service)
         }
         .confirmationDialog(
             Text("runtime.forceKill.title", bundle: loc.appBundle),
@@ -158,7 +155,7 @@ struct ActiveResourcesView: View {
                     Text("ports.empty.description", bundle: loc.appBundle)
                 }
             } else {
-                portTable
+                portTable.cardContainer()
             }
         case .processes:
             if runtime.services.isEmpty && !runtime.isRefreshing {
@@ -172,7 +169,7 @@ struct ActiveResourcesView: View {
                     Text("runtime.empty.description", bundle: loc.appBundle)
                 }
             } else {
-                processTable
+                processTable.cardContainer()
             }
         case .containers:
             ContainerListView(kinds: [.runningContainer, .stoppedContainer])
@@ -388,6 +385,7 @@ struct ServiceInspector: View {
     @Environment(LocalizationModel.self) private var loc
     @Environment(ScanModel.self) private var scan
     @Environment(RuntimeModel.self) private var runtime
+    @Environment(\.dismiss) private var dismiss
     let service: RunningService
 
     var body: some View {
@@ -470,6 +468,12 @@ struct ServiceInspector: View {
                         }
                     }
                     Spacer()
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("cleanup.done", bundle: loc.appBundle)
+                    }
+                    .keyboardShortcut(.cancelAction)
                     if runtime.stoppingPIDs.contains(service.pid) {
                         ProgressView().controlSize(.small)
                     } else {
@@ -492,6 +496,7 @@ struct ServiceInspector: View {
             }
             .padding(14)
         }
+        .frame(width: 380, height: 500)
     }
 
     private func detailRow(_ key: LocalizedStringKey, @ViewBuilder value: () -> some View) -> some View {

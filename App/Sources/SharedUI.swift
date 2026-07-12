@@ -44,6 +44,21 @@ extension View {
     func prototypeCard(cornerRadius: CGFloat = 12) -> some View {
         modifier(PrototypeCard(cornerRadius: cornerRadius))
     }
+
+    /// Wraps a full-bleed list or table into a prototype card floating on
+    /// the tinted backdrop.
+    func cardContainer() -> some View {
+        self
+            .background(.regularMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .strokeBorder(.separator.opacity(0.4), lineWidth: 1)
+            }
+            .shadow(color: .black.opacity(0.06), radius: 10, y: 3)
+            .padding(.horizontal, 16)
+            .padding(.bottom, 16)
+    }
 }
 
 /// Colored rounded-square sidebar icon, matching the prototype's visual

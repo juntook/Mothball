@@ -143,49 +143,12 @@ struct AppShell: View {
         @Bindable var shell = shell
         return VStack(spacing: 0) {
             List(selection: $shell.section) {
-                Label {
-                    Text("sidebar.overview", bundle: loc.appBundle)
-                } icon: {
-                    SidebarChip(color: .blue, systemImage: "gauge.with.dots.needle.33percent")
-                }
-                .tag(SidebarSection.overview)
-
-                Label {
-                    Text("sidebar.activeResources", bundle: loc.appBundle)
-                } icon: {
-                    SidebarChip(color: .green, systemImage: "bolt.fill")
-                }
-                .tag(SidebarSection.activeResources)
-                .badge(runningResourceCount)
-
-                Label {
-                    Text("sidebar.storage", bundle: loc.appBundle)
-                } icon: {
-                    SidebarChip(color: .orange, systemImage: "internaldrive.fill")
-                }
-                .tag(SidebarSection.storage)
-
-                Label {
-                    Text("sidebar.sessions", bundle: loc.appBundle)
-                } icon: {
-                    SidebarChip(color: .purple, systemImage: "rectangle.stack.badge.play.fill")
-                }
-                .tag(SidebarSection.sessions)
-                .badge(sessionModel.sessions.count)
-
-                Label {
-                    Text("sidebar.history", bundle: loc.appBundle)
-                } icon: {
-                    SidebarChip(color: .teal, systemImage: "clock.arrow.circlepath")
-                }
-                .tag(SidebarSection.history)
-
-                Label {
-                    Text("sidebar.settings", bundle: loc.appBundle)
-                } icon: {
-                    SidebarChip(color: .gray, systemImage: "gearshape.fill")
-                }
-                .tag(SidebarSection.settings)
+                sidebarRow(.overview, color: .blue, icon: "gauge.with.dots.needle.33percent", titleKey: "sidebar.overview", count: nil)
+                sidebarRow(.activeResources, color: .green, icon: "bolt.fill", titleKey: "sidebar.activeResources", count: runningResourceCount)
+                sidebarRow(.storage, color: .orange, icon: "internaldrive.fill", titleKey: "sidebar.storage", count: nil)
+                sidebarRow(.sessions, color: .purple, icon: "rectangle.stack.badge.play.fill", titleKey: "sidebar.sessions", count: sessionModel.sessions.count)
+                sidebarRow(.history, color: .teal, icon: "clock.arrow.circlepath", titleKey: "sidebar.history", count: nil)
+                sidebarRow(.settings, color: .gray, icon: "gearshape.fill", titleKey: "sidebar.settings", count: nil)
             }
             .listStyle(.sidebar)
 
@@ -193,6 +156,32 @@ struct AppShell: View {
             sidebarFooter
         }
         .navigationSplitViewColumnWidth(min: 190, ideal: 210)
+    }
+
+    /// Plain HStack row with an explicit tag: selection stays reliable and
+    /// the count renders as a prototype-style capsule.
+    private func sidebarRow(
+        _ section: SidebarSection,
+        color: Color,
+        icon: String,
+        titleKey: LocalizedStringKey,
+        count: Int?
+    ) -> some View {
+        HStack(spacing: 8) {
+            SidebarChip(color: color, systemImage: icon)
+            Text(titleKey, bundle: loc.appBundle)
+            Spacer()
+            if let count, count > 0 {
+                Text(verbatim: "\(count)")
+                    .font(.caption2)
+                    .monospacedDigit()
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 1)
+                    .background(.quaternary, in: Capsule())
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .tag(section)
     }
 
     private var runningResourceCount: Int {
@@ -272,13 +261,10 @@ struct AppShell: View {
     }
 
     private var versionString: String {
-        let short = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
-        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
-        switch (short, build) {
-        case let (s?, b?): return "v\(s) (\(b))"
-        case let (s?, nil): return "v\(s)"
-        default: return "dev"
+        if let short = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
+            return "v\(short)"
         }
+        return "dev"
     }
 
     // MARK: Toolbar

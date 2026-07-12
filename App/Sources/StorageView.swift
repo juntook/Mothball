@@ -125,6 +125,7 @@ struct StorageView: View {
                     }
                 }
                 .scrollContentBackground(.hidden)
+                .cardContainer()
             }
         }
     }
@@ -197,6 +198,7 @@ struct StorageView: View {
                     }
                 }
                 .scrollContentBackground(.hidden)
+                .cardContainer()
             }
         }
     }

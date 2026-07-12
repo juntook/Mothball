@@ -73,7 +73,7 @@ struct BrewServicesSection: View {
     }
 
     private var serviceList: some View {
-        baseServiceList.scrollContentBackground(.hidden)
+        baseServiceList.scrollContentBackground(.hidden).cardContainer()
     }
 
     private var baseServiceList: some View {
