@@ -141,6 +141,7 @@
 "kind.history" = "History";
 "kind.log" = "Logs";
 "kind.state" = "State";
+"menu.about" = "About Mothball";
 "menu.checkForUpdates" = "Check for Updates…";
 "menu.developer" = "Developer";
 "menu.search" = "Search";

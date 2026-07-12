@@ -39,6 +39,17 @@ struct MothballApp: App {
             // Keep the menu bar lean: no New Window, no boilerplate Help.
             CommandGroup(replacing: .newItem) {}
             CommandGroup(replacing: .help) {}
+            CommandGroup(replacing: .appInfo) {
+                Button {
+                    // Standard about panel minus the parenthesized build
+                    // number ("0.1.0 (1)" reads as noise to end users).
+                    NSApplication.shared.orderFrontStandardAboutPanel(
+                        options: [.version: ""]
+                    )
+                } label: {
+                    Text("menu.about", bundle: loc.appBundle)
+                }
+            }
             CommandGroup(after: .appInfo) {
                 Button {
                     updaterModel.checkForUpdates()

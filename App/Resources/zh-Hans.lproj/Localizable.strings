@@ -141,6 +141,7 @@
 "kind.history" = "历史";
 "kind.log" = "日志";
 "kind.state" = "状态";
+"menu.about" = "关于 Mothball";
 "menu.checkForUpdates" = "检查更新…";
 "menu.developer" = "开发者";
 "menu.search" = "搜索";
