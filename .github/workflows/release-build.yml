@@ -15,6 +15,10 @@ on:
   push:
     tags: ["v*"]
 
+# Publishing a release needs write access; the default token is read-only.
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: macos-15
