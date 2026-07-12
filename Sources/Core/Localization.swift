@@ -1,6 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
 import Foundation
 
+/// The Core resource bundle. Exposed so the app layer can resolve Core-owned
+/// strings (safety tiers, rule copy) against an explicit language sub-bundle
+/// when the user overrides the system language (SPEC §8.5(6)).
+public enum CoreResources {
+    public static var bundle: Bundle { .module }
+}
+
 extension Safety {
     /// Localized tier name for UI display.
     public var localizedName: String {
