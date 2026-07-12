@@ -2,6 +2,41 @@
 import Core
 import SwiftUI
 
+/// Colored rounded-square sidebar icon, matching the prototype's visual
+/// language (SPEC §5.7).
+struct SidebarChip: View {
+    let color: Color
+    let systemImage: String
+
+    var body: some View {
+        RoundedRectangle(cornerRadius: 6, style: .continuous)
+            .fill(color.gradient)
+            .frame(width: 22, height: 22)
+            .overlay {
+                Image(systemName: systemImage)
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.white)
+            }
+    }
+}
+
+/// Tinted icon chip used in list rows (attention list, search results).
+struct IconChip: View {
+    let color: Color
+    let systemImage: String
+
+    var body: some View {
+        RoundedRectangle(cornerRadius: 8, style: .continuous)
+            .fill(color.opacity(0.15))
+            .frame(width: 30, height: 30)
+            .overlay {
+                Image(systemName: systemImage)
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundStyle(color)
+            }
+    }
+}
+
 /// Monospaced-digit byte size, locale-aware (SPEC §8.5(4)).
 struct SizeText: View {
     let bytes: Int64
@@ -161,12 +196,14 @@ struct FDABanner: View {
     }
 }
 
-/// Overview metric card (SPEC §5.7). The whole card is a click target.
+/// Overview metric card (SPEC §5.7), prototype-styled: muted title, colored
+/// glyph top-right, large figure. The whole card is a click target.
 struct MetricCard: View {
     @Environment(LocalizationModel.self) private var loc
     let titleKey: LocalizedStringKey
     let value: Text
     let systemImage: String
+    var iconColor: Color = .secondary
     let action: () -> Void
 
     var body: some View {
@@ -178,7 +215,8 @@ struct MetricCard: View {
                         .foregroundStyle(.secondary)
                     Spacer()
                     Image(systemName: systemImage)
-                        .foregroundStyle(.tertiary)
+                        .font(.callout.weight(.medium))
+                        .foregroundStyle(iconColor)
                 }
                 value
                     .font(.title.weight(.semibold))
@@ -186,7 +224,11 @@ struct MetricCard: View {
             }
             .padding(14)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(.background.secondary, in: RoundedRectangle(cornerRadius: 10))
+            .background(Color(nsColor: .controlBackgroundColor), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .strokeBorder(.separator.opacity(0.5), lineWidth: 1)
+            }
         }
         .buttonStyle(.plain)
     }

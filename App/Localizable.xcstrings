@@ -1905,19 +1905,19 @@
         }
       }
     },
-    "footer.totalReclaimed %@": {
-      "comment": "Sidebar footer; %@ is a byte count",
+    "footer.totalReclaimed.label": {
+      "comment": "Sidebar footer label; the figure follows separately",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reclaimed %@ so far"
+            "value": "Reclaimed so far"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "累计已释放 %@"
+            "value": "累计已释放"
           }
         }
       }
@@ -5335,6 +5335,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "工具缓存"
+          }
+        }
+      }
+    },
+    "toolbar.endSession": {
+      "comment": "Prominent toolbar action; opens the session confirmation",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "End Dev Session"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "结束开发会话"
           }
         }
       }

@@ -42,6 +42,21 @@ struct AppShell: View {
             ToolbarItem(placement: .primaryAction) {
                 scanButton
             }
+            if let session = sessionModel.sessions.first {
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        shell.open(.sessions)
+                        sessionModel.beginConfirmation(session)
+                    } label: {
+                        Label {
+                            Text("toolbar.endSession", bundle: loc.appBundle)
+                        } icon: {
+                            Image(systemName: "power")
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+            }
         }
         .task {
             scan.loadRulesIfNeeded()
@@ -130,14 +145,14 @@ struct AppShell: View {
                 Label {
                     Text("sidebar.overview", bundle: loc.appBundle)
                 } icon: {
-                    Image(systemName: "gauge.with.dots.needle.33percent")
+                    SidebarChip(color: .blue, systemImage: "gauge.with.dots.needle.33percent")
                 }
                 .tag(SidebarSection.overview)
 
                 Label {
                     Text("sidebar.activeResources", bundle: loc.appBundle)
                 } icon: {
-                    Image(systemName: "bolt")
+                    SidebarChip(color: .green, systemImage: "bolt.fill")
                 }
                 .tag(SidebarSection.activeResources)
                 .badge(runningResourceCount)
@@ -145,14 +160,14 @@ struct AppShell: View {
                 Label {
                     Text("sidebar.storage", bundle: loc.appBundle)
                 } icon: {
-                    Image(systemName: "internaldrive")
+                    SidebarChip(color: .orange, systemImage: "internaldrive.fill")
                 }
                 .tag(SidebarSection.storage)
 
                 Label {
                     Text("sidebar.sessions", bundle: loc.appBundle)
                 } icon: {
-                    Image(systemName: "rectangle.stack.badge.play")
+                    SidebarChip(color: .purple, systemImage: "rectangle.stack.badge.play.fill")
                 }
                 .tag(SidebarSection.sessions)
                 .badge(sessionModel.sessions.count)
@@ -160,14 +175,14 @@ struct AppShell: View {
                 Label {
                     Text("sidebar.history", bundle: loc.appBundle)
                 } icon: {
-                    Image(systemName: "clock.arrow.circlepath")
+                    SidebarChip(color: .teal, systemImage: "clock.arrow.circlepath")
                 }
                 .tag(SidebarSection.history)
 
                 Label {
                     Text("sidebar.settings", bundle: loc.appBundle)
                 } icon: {
-                    Image(systemName: "gearshape")
+                    SidebarChip(color: .gray, systemImage: "gearshape.fill")
                 }
                 .tag(SidebarSection.settings)
             }
@@ -206,41 +221,53 @@ struct AppShell: View {
         )
     }
 
+    /// Prototype-style status block: scan-state dot, lifetime reclaimed with
+    /// an emphasized figure, then version + feedback on one muted line.
     private var sidebarFooter: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 6) {
             Divider()
-            if let last = scan.lastScanDate {
-                Label {
+            HStack(spacing: 6) {
+                Circle()
+                    .fill(scan.isScanning ? Color.orange : .green)
+                    .frame(width: 7, height: 7)
+                if scan.isScanning {
+                    Text("toolbar.scanning", bundle: loc.appBundle)
+                } else if let last = scan.lastScanDate {
                     Text("footer.lastScan \(Text(last, format: .relative(presentation: .named)))", bundle: loc.appBundle)
-                } icon: {
-                    Image(systemName: "clock")
-                }
-            } else {
-                Label {
+                } else {
                     Text("footer.notScanned", bundle: loc.appBundle)
-                } icon: {
-                    Image(systemName: "clock")
                 }
             }
+            .font(.caption)
+            .foregroundStyle(.secondary)
+
             if cleanup.totalReclaimedBytes > 0 {
-                Label {
-                    Text("footer.totalReclaimed \(Text(cleanup.totalReclaimedBytes, format: .byteCount(style: .file)))", bundle: loc.appBundle)
-                } icon: {
+                HStack(spacing: 6) {
                     Image(systemName: "trash")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Text("footer.totalReclaimed.label", bundle: loc.appBundle)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Text(cleanup.totalReclaimedBytes, format: .byteCount(style: .file))
+                        .font(.callout.weight(.semibold))
+                        .monospacedDigit()
                 }
             }
+
             HStack {
                 Text(verbatim: versionString)
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
                 Spacer()
                 Link(destination: URL(string: "https://mothball.dev/")!) {
                     Text("footer.helpFeedback", bundle: loc.appBundle)
                 }
+                .font(.caption)
             }
         }
-        .font(.caption)
-        .foregroundStyle(.secondary)
-        .padding(.horizontal, 10)
-        .padding(.vertical, 8)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 10)
     }
 
     private var versionString: String {

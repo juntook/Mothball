@@ -110,7 +110,7 @@
 "footer.helpFeedback" = "帮助与反馈";
 "footer.lastScan %@" = "上次扫描 %@";
 "footer.notScanned" = "尚未扫描";
-"footer.totalReclaimed %@" = "累计已释放 %@";
+"footer.totalReclaimed.label" = "累计已释放";
 "history.empty.description" = "每一次停止、清理和容器操作都会记录在这里。";
 "history.empty.title" = "还没有操作记录";
 "history.export.errorTitle" = "导出失败";
@@ -312,6 +312,7 @@
 "storage.tab.docker" = "Docker 存储";
 "storage.tab.projects" = "项目产物";
 "storage.tab.toolCaches" = "工具缓存";
+"toolbar.endSession" = "结束开发会话";
 "toolbar.scan" = "扫描";
 "toolbar.scanning" = "正在扫描…";
 "tools.empty.description" = "点击工具栏中的「扫描」,查看各开发工具的磁盘占用。";

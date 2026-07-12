@@ -74,7 +74,7 @@
 
 - **平台**:macOS 14.0+,仅 arm64(Apple Silicon)。不做 Intel 切片。
 - **语言/框架**:Swift(Swift 6 toolchain,开启 strict concurrency),SwiftUI。禁止引入 Electron/Tauri/webview。
-- **视觉基调**:系统原生控件 + SF Symbols + 系统材质;不自绘仪表盘、不引入自定义设计系统。在新系统上由系统控件自动获得当代外观(Liquid Glass 等),在 macOS 14/15 上优雅降级;**不为特定系统版本写分叉的自定义视觉代码**。
+- **视觉基调**:以系统原生控件 + SF Symbols 为基座,视觉细节对齐产品原型:侧栏彩色圆角图标芯片、白底圆角卡片、胶囊角标、彩色指标图形、蓝色主操作按钮。全部用 SwiftUI 系统能力实现(颜色/形状/材质),深浅色自适应;不引入 webview、不自绘控件、不为特定系统版本写分叉视觉代码。
 - **架构分层**:
   - `Core`(SwiftPM 包):规则引擎、扫描器、归属识别、运行时探测、Docker 客户端、清理执行器。零 UI 依赖,全部可单元测试,不持有偏好设置(由 App 传入)。
   - `App`(SwiftUI target):纯展示层,只调用 Core 的公开接口。

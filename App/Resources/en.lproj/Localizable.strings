@@ -110,7 +110,7 @@
 "footer.helpFeedback" = "Help & Feedback";
 "footer.lastScan %@" = "Last scan %@";
 "footer.notScanned" = "Not scanned yet";
-"footer.totalReclaimed %@" = "Reclaimed %@ so far";
+"footer.totalReclaimed.label" = "Reclaimed so far";
 "history.empty.description" = "Every stop, cleanup, and container operation is recorded here.";
 "history.empty.title" = "No operations yet";
 "history.export.errorTitle" = "Export failed";
@@ -312,6 +312,7 @@
 "storage.tab.docker" = "Docker";
 "storage.tab.projects" = "Project Artifacts";
 "storage.tab.toolCaches" = "Tool Caches";
+"toolbar.endSession" = "End Dev Session";
 "toolbar.scan" = "Scan";
 "toolbar.scanning" = "Scanning…";
 "tools.empty.description" = "Click Scan in the toolbar to measure what your dev tools are using.";

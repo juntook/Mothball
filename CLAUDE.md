@@ -6,7 +6,7 @@ Read SPEC.md first. This file distills the non-negotiable rules for any agent or
 
 - macOS 14.0+, arm64 (Apple Silicon) only. No Intel slice, no Windows/Linux.
 - Swift 6 toolchain, strict concurrency enabled. SwiftUI for all UI. No Electron/Tauri/webview.
-- Native system controls, SF Symbols, and system materials only — no bespoke design system, no version-forked custom visuals. Newer macOS releases pick up their contemporary look through the system controls automatically.
+- Native SwiftUI controls and SF Symbols as the base, styled to match the product prototype (colored sidebar icon chips, rounded cards, capsule badges, tinted metric glyphs, prominent blue primary actions). Light/dark adaptive; no webview, no custom-drawn controls, no version-forked visuals.
 - Layering: `Sources/Core` (SwiftPM library, zero UI dependencies, fully unit-testable) → `App` (SwiftUI, presentation only, calls Core public API) → `Sources/cli` (debug CLI over Core).
 - Runs as the logged-in user only. **Never request sudo. Never install a privileged helper.** Features that would require privileges are simply not built.
 - No App Sandbox (incompatible with core features); distribution is Developer ID signing + notarization, not the App Store.

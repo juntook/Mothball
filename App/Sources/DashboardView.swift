@@ -85,28 +85,32 @@ struct DashboardView: View {
             MetricCard(
                 titleKey: "dashboard.card.running",
                 value: Text("dashboard.card.running.value \(runningCount)", bundle: loc.appBundle),
-                systemImage: "bolt"
+                systemImage: "bolt.fill",
+                iconColor: .green
             ) {
                 shell.openActiveResources(tab: .processes)
             }
             MetricCard(
                 titleKey: "dashboard.card.ports",
                 value: Text("dashboard.card.ports.value \(activePortCount)", bundle: loc.appBundle),
-                systemImage: "network"
+                systemImage: "network",
+                iconColor: .blue
             ) {
-                shell.openActiveResources(tab: .processes)
+                shell.openActiveResources(tab: .ports)
             }
             MetricCard(
                 titleKey: "dashboard.card.memory",
                 value: Text(devMemoryBytes, format: .byteCount(style: .memory)),
-                systemImage: "memorychip"
+                systemImage: "memorychip",
+                iconColor: .purple
             ) {
                 shell.openActiveResources(tab: .processes)
             }
             MetricCard(
                 titleKey: "dashboard.card.reclaimable",
                 value: Text(scan.totalBytes, format: .byteCount(style: .file)),
-                systemImage: "internaldrive"
+                systemImage: "internaldrive.fill",
+                iconColor: .orange
             ) {
                 shell.openStorage(tab: .projects)
             }
@@ -132,7 +136,7 @@ struct DashboardView: View {
             items.append(AttentionItem(
                 id: "docker-down",
                 icon: "shippingbox",
-                iconColor: .secondary,
+                iconColor: .gray,
                 title: Text("dashboard.attention.dockerDown", bundle: loc.appBundle),
                 subtitle: Text("dashboard.attention.dockerDown.detail", bundle: loc.appBundle),
                 action: { shell.openActiveResources(tab: .containers) }
@@ -233,9 +237,7 @@ struct DashboardView: View {
     private func attentionRow(_ item: AttentionItem) -> some View {
         Button(action: item.action) {
             HStack(spacing: 10) {
-                Image(systemName: item.icon)
-                    .foregroundStyle(item.iconColor)
-                    .frame(width: 22)
+                IconChip(color: item.iconColor, systemImage: item.icon)
                 VStack(alignment: .leading, spacing: 2) {
                     item.title
                         .fontWeight(.medium)
@@ -313,9 +315,7 @@ struct DashboardView: View {
     private func searchRow(icon: String, title: String, subtitle: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             HStack(spacing: 10) {
-                Image(systemName: icon)
-                    .foregroundStyle(.secondary)
-                    .frame(width: 20)
+                IconChip(color: iconChipColor(for: icon), systemImage: icon)
                 VStack(alignment: .leading, spacing: 1) {
                     Text(verbatim: title).fontWeight(.medium)
                     Text(verbatim: subtitle)
@@ -334,6 +334,14 @@ struct DashboardView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+    }
+
+    private func iconChipColor(for icon: String) -> Color {
+        switch icon {
+        case "bolt": .green
+        case "folder": .orange
+        default: .blue
+        }
     }
 
     // MARK: Current session (SPEC §5.13)
