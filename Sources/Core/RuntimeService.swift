@@ -15,8 +15,8 @@ public struct SystemExclusions: Sendable {
             var excludedProcessNames: [String]
         }
         guard
-            let url = Bundle.module.url(forResource: "system-exclusions", withExtension: "json", subdirectory: "rules")
-                ?? Bundle.module.url(forResource: "system-exclusions", withExtension: "json"),
+            let url = CoreResources.bundle.url(forResource: "system-exclusions", withExtension: "json", subdirectory: "rules")
+                ?? CoreResources.bundle.url(forResource: "system-exclusions", withExtension: "json"),
             let data = try? Data(contentsOf: url),
             let decoded = try? JSONDecoder().decode(FileShape.self, from: data)
         else {

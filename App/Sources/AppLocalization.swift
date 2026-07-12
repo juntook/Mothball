@@ -12,6 +12,24 @@ enum AppLanguage: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 }
 
+/// Resolves the app target's SwiftPM resource bundle. The generated
+/// `Bundle.module` accessor for executable targets only checks the .app root
+/// and the original build directory, so a relocated release bundle (resources
+/// under Contents/Resources) needs this explicit lookup.
+enum AppResources {
+    static let bundle: Bundle = {
+        let name = "Mothball_MothballApp.bundle"
+        for base in [Bundle.main.resourceURL, Bundle.main.bundleURL] {
+            if let url = base?.appendingPathComponent(name),
+               let bundle = Bundle(url: url) {
+                return bundle
+            }
+        }
+        // Bare `swift run` development builds resolve via the accessor.
+        return .module
+    }()
+}
+
 /// Resolves strings against explicit language sub-bundles so an in-app
 /// language override takes effect immediately, without relying on
 /// process-level AppleLanguages mutation (SPEC §8.5(6), §9.12).
@@ -29,7 +47,7 @@ final class LocalizationModel {
     private(set) var locale: Locale = .current
     /// Bundle for app-target strings; the main module bundle when following
     /// the system, a language sub-bundle when overridden.
-    private(set) var appBundle: Bundle = .module
+    private(set) var appBundle: Bundle = AppResources.bundle
     /// Same for Core-owned strings (safety tiers, rule copy).
     private(set) var coreBundle: Bundle = CoreResources.bundle
 
@@ -43,11 +61,11 @@ final class LocalizationModel {
         switch language {
         case .system:
             locale = .current
-            appBundle = .module
+            appBundle = AppResources.bundle
             coreBundle = CoreResources.bundle
         case .english, .simplifiedChinese:
             locale = Locale(identifier: language.rawValue)
-            appBundle = Self.subBundle(of: .module, language: language.rawValue)
+            appBundle = Self.subBundle(of: AppResources.bundle, language: language.rawValue)
             coreBundle = Self.subBundle(of: CoreResources.bundle, language: language.rawValue)
         }
     }

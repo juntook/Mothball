@@ -65,8 +65,8 @@ public struct RuleLoader: Sendable {
     }
 
     func builtinRuleURLs() -> [URL] {
-        guard let dir = Bundle.module.url(forResource: "rules/tools", withExtension: nil)
-            ?? Bundle.module.url(forResource: "tools", withExtension: nil, subdirectory: "rules")
+        guard let dir = CoreResources.bundle.url(forResource: "rules/tools", withExtension: nil)
+            ?? CoreResources.bundle.url(forResource: "tools", withExtension: nil, subdirectory: "rules")
         else { return [] }
         let urls = (try? FileManager.default.contentsOfDirectory(
             at: dir, includingPropertiesForKeys: nil

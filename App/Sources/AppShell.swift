@@ -80,7 +80,7 @@ struct AppShell: View {
             NSApp.setActivationPolicy(.regular)
             NSApp.activate(ignoringOtherApps: true)
             if Bundle.main.bundleIdentifier == nil,
-               let iconURL = Bundle.module.url(forResource: "AppIcon", withExtension: "png"),
+               let iconURL = AppResources.bundle.url(forResource: "AppIcon", withExtension: "png"),
                let icon = NSImage(contentsOf: iconURL) {
                 NSApp.applicationIconImage = icon
             }

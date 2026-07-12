@@ -76,7 +76,7 @@ struct OnboardingView: View {
 
     private var welcome: some View {
         VStack(spacing: 16) {
-            if let iconURL = Bundle.module.url(forResource: "AppIcon", withExtension: "png"),
+            if let iconURL = AppResources.bundle.url(forResource: "AppIcon", withExtension: "png"),
                let icon = NSImage(contentsOf: iconURL) {
                 Image(nsImage: icon)
                     .resizable()

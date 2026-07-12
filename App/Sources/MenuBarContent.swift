@@ -6,7 +6,7 @@ import SwiftUI
 /// it for light/dark menu bars (SPEC §5.14 — static icon, no animation).
 struct MenuBarIcon: View {
     static let templateImage: NSImage? = {
-        guard let url = Bundle.module.url(forResource: "MenuBarIcon", withExtension: "png"),
+        guard let url = AppResources.bundle.url(forResource: "MenuBarIcon", withExtension: "png"),
               let image = NSImage(contentsOf: url) else { return nil }
         image.isTemplate = true
         image.size = NSSize(width: 18, height: 18)
