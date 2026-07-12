@@ -75,7 +75,13 @@ echo "==> Verifying signature"
 codesign --verify --strict --verbose=2 "$APP"
 
 echo "==> Creating $DMG"
-hdiutil create -volname "Mothball" -srcfolder "$APP" -ov -format UDZO "$DMG"
+# Standard drag-to-install layout: the app plus an /Applications symlink.
+STAGING=dist/dmg-staging
+rm -rf "$STAGING" && mkdir -p "$STAGING"
+ditto "$APP" "$STAGING/Mothball.app"
+ln -s /Applications "$STAGING/Applications"
+hdiutil create -volname "Mothball" -srcfolder "$STAGING" -ov -format UDZO "$DMG"
+rm -rf "$STAGING"
 if [[ "$IDENTITY" != "-" ]]; then
     # Gatekeeper assesses the dmg's own signature, not just the app inside.
     codesign --force --timestamp --sign "$IDENTITY" "$DMG"
