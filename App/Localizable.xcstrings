@@ -5118,6 +5118,57 @@
         }
       }
     },
+    "settings.update.autoCheck": {
+      "comment": "Sparkle scheduled check toggle",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatically check for updates"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动检查更新"
+          }
+        }
+      }
+    },
+    "settings.update.autoDownload": {
+      "comment": "Sparkle automatic download toggle",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatically download and install updates"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动下载并安装更新"
+          }
+        }
+      }
+    },
+    "settings.update.unavailable": {
+      "comment": "Shown when the updater cannot run",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Updates work in the signed, released app (via GitHub Releases). They are unavailable in local unsigned builds."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更新功能在正式签名发布的版本中可用(通过 GitHub Releases 分发);本地未签名构建暂不可用。"
+          }
+        }
+      }
+    },
     "sidebar.activeResources": {
       "comment": "Sidebar item: running processes and containers",
       "localizations": {

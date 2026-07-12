@@ -28,6 +28,18 @@ final class UpdaterModel {
         updatingSupported && controller.updater.canCheckForUpdates
     }
 
+    /// Sparkle's scheduled background check (user still confirms installs).
+    var automaticallyChecksForUpdates: Bool {
+        get { controller.updater.automaticallyChecksForUpdates }
+        set { controller.updater.automaticallyChecksForUpdates = newValue }
+    }
+
+    /// Fully automatic download + install on quit.
+    var automaticallyDownloadsUpdates: Bool {
+        get { controller.updater.automaticallyDownloadsUpdates }
+        set { controller.updater.automaticallyDownloadsUpdates = newValue }
+    }
+
     func checkForUpdates() {
         controller.checkForUpdates(nil)
     }

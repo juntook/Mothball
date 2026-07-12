@@ -299,6 +299,9 @@
 "settings.section.notifications" = "Notifications";
 "settings.section.privacy" = "Privacy & Updates";
 "settings.section.protection" = "Protection Rules";
+"settings.update.autoCheck" = "Automatically check for updates";
+"settings.update.autoDownload" = "Automatically download and install updates";
+"settings.update.unavailable" = "Updates work in the signed, released app (via GitHub Releases). They are unavailable in local unsigned builds.";
 "sidebar.activeResources" = "Active Resources";
 "sidebar.history" = "History";
 "sidebar.overview" = "Overview";

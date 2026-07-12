@@ -15,7 +15,7 @@ struct MothballApp: App {
     @State private var protectionModel = ProtectionModel()
     @State private var sessionModel = SessionModel()
     @State private var notificationModel = NotificationModel()
-    @AppStorage("menuBarEnabled") private var menuBarEnabled = false
+    @AppStorage("menuBarEnabled") private var menuBarEnabled = true
     @Environment(\.openWindow) private var openWindow
 
     var body: some Scene {

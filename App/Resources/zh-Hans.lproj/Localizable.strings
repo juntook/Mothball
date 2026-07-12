@@ -299,6 +299,9 @@
 "settings.section.notifications" = "通知";
 "settings.section.privacy" = "隐私与更新";
 "settings.section.protection" = "保护规则";
+"settings.update.autoCheck" = "自动检查更新";
+"settings.update.autoDownload" = "自动下载并安装更新";
+"settings.update.unavailable" = "更新功能在正式签名发布的版本中可用(通过 GitHub Releases 分发);本地未签名构建暂不可用。";
 "sidebar.activeResources" = "活动资源";
 "sidebar.history" = "历史记录";
 "sidebar.overview" = "概览";

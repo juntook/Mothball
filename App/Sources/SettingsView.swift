@@ -17,7 +17,7 @@ struct SettingsView: View {
     @State private var exclusions: [String] = []
     @State private var newRuleKind: ProtectionRule.Kind = .pathPrefix
     @State private var newRuleValue = ""
-    @AppStorage("menuBarEnabled") private var menuBarEnabled = false
+    @AppStorage("menuBarEnabled") private var menuBarEnabled = true
     @AppStorage("scanFrequency") private var scanFrequency = "manual"
 
     var body: some View {
@@ -165,8 +165,17 @@ struct SettingsView: View {
                     .font(.caption)
             }
 
-            // MARK: Privacy
+            // MARK: Privacy & updates
             Section {
+                @Bindable var updater = updater
+                Toggle(isOn: $updater.automaticallyChecksForUpdates) {
+                    Text("settings.update.autoCheck", bundle: loc.appBundle)
+                }
+                .disabled(!updater.updatingSupported)
+                Toggle(isOn: $updater.automaticallyDownloadsUpdates) {
+                    Text("settings.update.autoDownload", bundle: loc.appBundle)
+                }
+                .disabled(!updater.updatingSupported || !updater.automaticallyChecksForUpdates)
                 Button {
                     updater.checkForUpdates()
                 } label: {
@@ -181,8 +190,13 @@ struct SettingsView: View {
             } header: {
                 Text("settings.section.privacy", bundle: loc.appBundle)
             } footer: {
-                Text("settings.privacy.note", bundle: loc.appBundle)
-                    .font(.caption)
+                VStack(alignment: .leading, spacing: 2) {
+                    if !updater.canCheckForUpdates {
+                        Text("settings.update.unavailable", bundle: loc.appBundle)
+                    }
+                    Text("settings.privacy.note", bundle: loc.appBundle)
+                }
+                .font(.caption)
             }
 
             // MARK: Protection rules (SPEC §5.12)
