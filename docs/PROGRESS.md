@@ -209,3 +209,8 @@ Needs human verification:
 - Overview greeting has a dedicated idle variant instead of "0 resources running".
 - Docker-missing empty state mentions Podman ("detected, not yet manageable") when only Podman is installed.
 - Already covered and re-verified: no Docker CLI / daemon down (informational cards, standard install locations listed), no Homebrew, no code roots (guided to settings), FDA denied (persistent banner), empty scan, no listening ports, no sessions, empty history, notifications unavailable outside a bundle.
+
+## Release pipeline — CI signing + notarization (2026-07-12)
+
+- `.github/workflows/release-build.yml`: workflow_dispatch + v* tags. Imports the Developer ID .p12 from `MAC_CSC_LINK`/`MAC_CSC_KEY_PASSWORD` into a throwaway keychain, parses the team id from the identity, runs `scripts/release.sh` (hardened runtime on because a real identity is present), notarizes with `APPLE_ID`/`APPLE_APP_SPECIFIC_PASSWORD`, staples, Gatekeeper-asserts, generates a Sparkle appcast (`scripts/gen-appcast.py` — Apple-code-signature validation, no EdDSA needed since SUPublicEDKey is unset), uploads artifacts, and publishes a GitHub Release on tags.
+- Release recipe: bump CFBundleShortVersionString + CFBundleVersion in App/Info.plist → tag `v<version>` → push tag. Users on older builds get the update via Sparkle from releases/latest/download/appcast.xml.
