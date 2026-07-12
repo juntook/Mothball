@@ -50,19 +50,26 @@ fi
 
 echo "==> Signing"
 IDENTITY="${CODESIGN_IDENTITY:--}"
+# Hardened runtime enables library validation, which rejects ad-hoc-signed
+# frameworks (Sparkle) at load. It is required for notarization, so enable
+# it only when signing with a real identity.
+SIGN_FLAGS=(--force --timestamp --sign "$IDENTITY")
 if [[ "$IDENTITY" == "-" ]]; then
-    echo "    (ad-hoc — set CODESIGN_IDENTITY for a distributable build)"
+    echo "    (ad-hoc, no hardened runtime — set CODESIGN_IDENTITY for a distributable build)"
+    SIGN_FLAGS=(--force --sign "$IDENTITY")
+else
+    SIGN_FLAGS+=(--options runtime)
 fi
 if [[ -d "$APP/Contents/Frameworks/Sparkle.framework" ]]; then
     # Sign nested Sparkle helpers first (inside-out).
-    codesign --force --options runtime --timestamp --sign "$IDENTITY" \
+    codesign "${SIGN_FLAGS[@]}" \
         "$APP/Contents/Frameworks/Sparkle.framework/Versions/B/Autoupdate" 2>/dev/null || true
-    codesign --force --options runtime --timestamp --sign "$IDENTITY" \
+    codesign "${SIGN_FLAGS[@]}" \
         "$APP/Contents/Frameworks/Sparkle.framework/Versions/B/Updater.app" 2>/dev/null || true
-    codesign --force --options runtime --timestamp --sign "$IDENTITY" \
+    codesign "${SIGN_FLAGS[@]}" \
         "$APP/Contents/Frameworks/Sparkle.framework"
 fi
-codesign --force --options runtime --timestamp --sign "$IDENTITY" --deep "$APP"
+codesign "${SIGN_FLAGS[@]}" --deep "$APP"
 
 echo "==> Verifying signature"
 codesign --verify --strict --verbose=2 "$APP"
