@@ -13,6 +13,8 @@
 "brew.error.title" = "Service operation failed";
 "brew.exitCode %lld" = "exit code %lld";
 "brew.footer" = "Stop keeps the login registration; Stop & Disable removes it. Data directories are never touched.";
+"brew.loadError.hint" = "Try updating Homebrew (brew update) and refresh. Nothing on your system was changed.";
+"brew.loadError.title" = "Couldn't read Homebrew services";
 "brew.notInstalled.message" = "Background services managed by Homebrew appear here once brew is installed.";
 "brew.notInstalled.title" = "Homebrew not installed";
 "brew.protected.help" = "Protected by your rules — excluded from batch operations.";
@@ -57,6 +59,7 @@
 "dashboard.card.running" = "Running";
 "dashboard.card.running.value %lld" = "%lld";
 "dashboard.greeting %lld" = "%lld development resources are still running";
+"dashboard.greeting.zero" = "No development resources are running right now";
 "dashboard.lastScan %@" = "Last scan %@ ·";
 "dashboard.privacyNote" = "All analysis happens on this Mac; nothing is uploaded.";
 "dashboard.search.empty" = "No matches across processes, projects, or caches.";

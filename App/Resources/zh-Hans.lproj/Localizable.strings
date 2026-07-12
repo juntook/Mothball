@@ -13,6 +13,8 @@
 "brew.error.title" = "服务操作失败";
 "brew.exitCode %lld" = "退出码 %lld";
 "brew.footer" = "「停止一次」保留登录自启注册;「停止并禁用自启」会取消注册。数据目录永远不会被动到。";
+"brew.loadError.hint" = "可尝试更新 Homebrew(brew update)后重试。系统没有任何改动。";
+"brew.loadError.title" = "无法读取 Homebrew 服务";
 "brew.notInstalled.message" = "安装 Homebrew 后,这里会显示它管理的后台服务。";
 "brew.notInstalled.title" = "未安装 Homebrew";
 "brew.protected.help" = "已被你的规则保护,不会进入批量操作。";
@@ -57,6 +59,7 @@
 "dashboard.card.running" = "运行中资源";
 "dashboard.card.running.value %lld" = "%lld 项";
 "dashboard.greeting %lld" = "你好,今天有 %lld 个开发资源仍在运行";
+"dashboard.greeting.zero" = "当前没有发现正在运行的开发资源";
 "dashboard.lastScan %@" = "上次扫描 %@ ·";
 "dashboard.privacyNote" = "所有分析均在本机完成,不上传任何数据。";
 "dashboard.search.empty" = "在进程、项目和缓存中都没有找到匹配项。";

@@ -10,28 +10,48 @@ import Observation
 final class BrewModel {
     private(set) var services: [BrewService] = []
     private(set) var brewInstalled = true
+    /// Non-nil when brew exists but listing failed — shown as an error
+    /// state, never silently as "no services".
+    private(set) var loadError: String?
     private(set) var isRefreshing = false
     private(set) var busyNames: Set<String> = []
     var actionError: String?
 
     private let auditLog = AuditLog()
 
+    private enum ListOutcome: Sendable {
+        case notInstalled
+        case listed([BrewService])
+        case failed(String)
+    }
+
     func refresh() {
         guard !isRefreshing else { return }
         isRefreshing = true
         Task {
-            let result = await Task.detached(priority: .userInitiated) { () -> [BrewService]? in
-                guard let binary = BrewServicesClient.resolveBinary() else { return nil }
-                return (try? BrewServicesClient(binary: binary).list()) ?? []
+            let outcome = await Task.detached(priority: .userInitiated) { () -> ListOutcome in
+                guard let binary = BrewServicesClient.resolveBinary() else { return .notInstalled }
+                do {
+                    return .listed(try BrewServicesClient(binary: binary).list())
+                } catch {
+                    return .failed(error.localizedDescription)
+                }
             }.value
-            if let result {
+            switch outcome {
+            case .notInstalled:
+                brewInstalled = false
+                services = []
+                loadError = nil
+            case .listed(let result):
                 brewInstalled = true
+                loadError = nil
                 services = result.sorted {
                     ($0.isRunning ? 0 : 1, $0.name) < ($1.isRunning ? 0 : 1, $1.name)
                 }
-            } else {
-                brewInstalled = false
+            case .failed(let message):
+                brewInstalled = true
                 services = []
+                loadError = message
             }
             isRefreshing = false
         }

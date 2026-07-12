@@ -16,10 +16,20 @@ struct ContainerListView: View {
         @Bindable var containers = containers
         return Group {
             if let diag = containers.diagnostics, diag.binaryPath == nil {
-                emptyCard(
-                    title: "docker.noBinary.title",
-                    message: "docker.noBinary.message"
-                )
+                ContentUnavailableView {
+                    Label {
+                        Text("docker.noBinary.title", bundle: loc.appBundle)
+                    } icon: {
+                        Image(systemName: "shippingbox")
+                    }
+                } description: {
+                    VStack(spacing: 4) {
+                        Text("docker.noBinary.message", bundle: loc.appBundle)
+                        if diag.podmanDetected {
+                            Text("docker.podman.notice", bundle: loc.appBundle)
+                        }
+                    }
+                }
             } else if let diag = containers.diagnostics, !diag.daemonReachable {
                 emptyCard(
                     title: "docker.daemonDown.title",

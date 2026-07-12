@@ -22,6 +22,25 @@ struct BrewServicesSection: View {
                 } description: {
                     Text("brew.notInstalled.message", bundle: loc.appBundle)
                 }
+            } else if let error = brew.loadError {
+                ContentUnavailableView {
+                    Label {
+                        Text("brew.loadError.title", bundle: loc.appBundle)
+                    } icon: {
+                        Image(systemName: "exclamationmark.triangle")
+                    }
+                } description: {
+                    VStack(spacing: 4) {
+                        Text(verbatim: error)
+                        Text("brew.loadError.hint", bundle: loc.appBundle)
+                    }
+                } actions: {
+                    Button {
+                        brew.refresh()
+                    } label: {
+                        Text("runtime.refresh", bundle: loc.appBundle)
+                    }
+                }
             } else if brew.services.isEmpty && !brew.isRefreshing {
                 ContentUnavailableView {
                     Label {

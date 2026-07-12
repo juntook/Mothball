@@ -201,3 +201,11 @@ Needs human verification:
 - History rows against real operations; diagnostics zip contents.
 - Notifications from the bundled .app (threshold + rate caps).
 - Daily scheduled scan fires after 24 h of app uptime (or by clearing lastAutoScanDate).
+
+## M11.1 — Environment edge-case hardening — DONE (2026-07-12)
+
+- Homebrew present but `brew services list` failing now shows an explicit error state with a retry button (was silently rendered as "no services").
+- Rule-library load errors now surface on the Storage → Projects tab too (previously only on Tool Caches).
+- Overview greeting has a dedicated idle variant instead of "0 resources running".
+- Docker-missing empty state mentions Podman ("detected, not yet manageable") when only Podman is installed.
+- Already covered and re-verified: no Docker CLI / daemon down (informational cards, standard install locations listed), no Homebrew, no code roots (guided to settings), FDA denied (persistent banner), empty scan, no listening ports, no sessions, empty history, notifications unavailable outside a bundle.

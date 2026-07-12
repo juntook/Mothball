@@ -58,8 +58,13 @@ struct DashboardView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("dashboard.greeting \(runningCount)", bundle: loc.appBundle)
-                .font(.title.weight(.semibold))
+            if runningCount == 0 {
+                Text("dashboard.greeting.zero", bundle: loc.appBundle)
+                    .font(.title.weight(.semibold))
+            } else {
+                Text("dashboard.greeting \(runningCount)", bundle: loc.appBundle)
+                    .font(.title.weight(.semibold))
+            }
             HStack(spacing: 4) {
                 if let last = scan.lastScanDate {
                     Text("dashboard.lastScan \(Text(last, format: .relative(presentation: .named)))", bundle: loc.appBundle)

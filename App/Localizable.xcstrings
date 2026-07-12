@@ -256,6 +256,40 @@
         }
       }
     },
+    "brew.loadError.hint": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try updating Homebrew (brew update) and refresh. Nothing on your system was changed."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可尝试更新 Homebrew(brew update)后重试。系统没有任何改动。"
+          }
+        }
+      }
+    },
+    "brew.loadError.title": {
+      "comment": "Services tab error state",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't read Homebrew services"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法读取 Homebrew 服务"
+          }
+        }
+      }
+    },
     "brew.notInstalled.message": {
       "comment": "",
       "localizations": {
@@ -1000,6 +1034,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "你好,今天有 %lld 个开发资源仍在运行"
+          }
+        }
+      }
+    },
+    "dashboard.greeting.zero": {
+      "comment": "Overview headline when idle",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No development resources are running right now"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当前没有发现正在运行的开发资源"
           }
         }
       }

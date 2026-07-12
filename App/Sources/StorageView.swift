@@ -79,7 +79,17 @@ struct StorageView: View {
 
     private var projectsTab: some View {
         Group {
-            if scan.codeRoots.isEmpty && scan.projects.isEmpty {
+            if let error = scan.loadError {
+                ContentUnavailableView {
+                    Label {
+                        Text("tools.error.title", bundle: loc.appBundle)
+                    } icon: {
+                        Image(systemName: "exclamationmark.triangle")
+                    }
+                } description: {
+                    Text(verbatim: error)
+                }
+            } else if scan.codeRoots.isEmpty && scan.projects.isEmpty {
                 ContentUnavailableView {
                     Label {
                         Text("projects.noRoots.title", bundle: loc.appBundle)
