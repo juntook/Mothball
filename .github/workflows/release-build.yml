@@ -1,0 +1,99 @@
+# SPDX-License-Identifier: Apache-2.0
+# Signed + notarized release build. Runs on demand, and publishes a GitHub
+# Release with the dmg and Sparkle appcast when a v* tag is pushed.
+#
+# Required repository secrets:
+#   MAC_CSC_LINK                 base64-encoded Developer ID Application .p12
+#   MAC_CSC_KEY_PASSWORD         password of the .p12
+#   APPLE_ID                     Apple ID for notarization
+#   APPLE_APP_SPECIFIC_PASSWORD  app-specific password for that Apple ID
+# The team id is parsed from the certificate identity.
+name: Release build
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+jobs:
+  release:
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Import signing certificate
+        env:
+          MAC_CSC_LINK: ${{ secrets.MAC_CSC_LINK }}
+          MAC_CSC_KEY_PASSWORD: ${{ secrets.MAC_CSC_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          KEYCHAIN="$RUNNER_TEMP/build.keychain-db"
+          KEYCHAIN_PASSWORD=$(uuidgen)
+          printf '%s' "$MAC_CSC_LINK" | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security import "$RUNNER_TEMP/cert.p12" -k "$KEYCHAIN" \
+            -P "$MAC_CSC_KEY_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: \
+            -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN" > /dev/null
+          security list-keychains -d user -s "$KEYCHAIN" login.keychain-db
+          rm "$RUNNER_TEMP/cert.p12"
+
+          IDENTITY=$(security find-identity -v -p codesigning "$KEYCHAIN" \
+            | awk -F'"' '/Developer ID Application/ {print $2; exit}')
+          if [ -z "$IDENTITY" ]; then
+            echo "No Developer ID Application identity found in the certificate" >&2
+            exit 1
+          fi
+          TEAM_ID=$(printf '%s' "$IDENTITY" | sed -n 's/.*(\(.*\))$/\1/p')
+          echo "CODESIGN_IDENTITY=$IDENTITY" >> "$GITHUB_ENV"
+          echo "APPLE_TEAM_ID=$TEAM_ID" >> "$GITHUB_ENV"
+          echo "Signing as: $IDENTITY (team $TEAM_ID)"
+
+      - name: Build, sign, package
+        run: scripts/release.sh
+
+      - name: Notarize and staple
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+        run: |
+          set -euo pipefail
+          DMG=$(ls dist/Mothball-*.dmg)
+          xcrun notarytool submit "$DMG" \
+            --apple-id "$APPLE_ID" \
+            --password "$APPLE_APP_SPECIFIC_PASSWORD" \
+            --team-id "$APPLE_TEAM_ID" \
+            --wait
+          xcrun stapler staple "$DMG"
+          spctl --assess --type open --context context:primary-signature -vv "$DMG"
+
+      - name: Generate appcast
+        run: |
+          set -euo pipefail
+          DMG=$(ls dist/Mothball-*.dmg)
+          VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" App/Info.plist)
+          BUILD=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" App/Info.plist)
+          URL="https://github.com/${GITHUB_REPOSITORY}/releases/latest/download/$(basename "$DMG")"
+          python3 scripts/gen-appcast.py "$DMG" "$VERSION" "$BUILD" "$URL" > dist/appcast.xml
+          cat dist/appcast.xml
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mothball-dmg
+          path: |
+            dist/Mothball-*.dmg
+            dist/appcast.xml
+          if-no-files-found: error
+
+      - name: Publish release (tags only)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/Mothball-*.dmg
+            dist/appcast.xml
+          generate_release_notes: true
