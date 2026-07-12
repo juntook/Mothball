@@ -124,6 +124,7 @@ struct StorageView: View {
                         .buttonStyle(.plain)
                     }
                 }
+                .scrollContentBackground(.hidden)
             }
         }
     }
@@ -195,6 +196,7 @@ struct StorageView: View {
                         }
                     }
                 }
+                .scrollContentBackground(.hidden)
             }
         }
     }
@@ -251,9 +253,10 @@ struct StorageView: View {
                 .disabled(scan.isScanning)
             }
             .padding(.horizontal, 16)
-            .padding(.vertical, 10)
-            .background(.bar)
-            .overlay(alignment: .top) { Divider() }
+            .padding(.vertical, 12)
+            .prototypeCard(cornerRadius: 14)
+            .padding(.horizontal, 16)
+            .padding(.bottom, 12)
         }
     }
 }

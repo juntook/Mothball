@@ -107,6 +107,8 @@
 "evidence.processCwd" = "Process working directory in the project";
 "fda.banner" = "Results may be incomplete: Full Disk Access has not been granted.";
 "fda.banner.action" = "Grant…";
+"fda.banner.relaunch" = "Reopen";
+"fda.banner.restartHint" = "Granted it already? macOS applies the change to a fresh launch — reopen Mothball. Local rebuilds also need re-granting.";
 "footer.helpFeedback" = "Help & Feedback";
 "footer.lastScan %@" = "Last scan %@";
 "footer.notScanned" = "Not scanned yet";

@@ -95,6 +95,10 @@ struct HistoryView: View {
     }
 
     private var recordList: some View {
+        baseRecordList.scrollContentBackground(.hidden)
+    }
+
+    private var baseRecordList: some View {
         List {
             ForEach(dayGroups) { group in
                 Section {

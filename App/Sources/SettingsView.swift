@@ -288,6 +288,7 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
+        .scrollContentBackground(.hidden)
         .navigationTitle(Text("sidebar.settings", bundle: loc.appBundle))
         .onAppear {
             directDelete = cleanup.directDeleteEnabled

@@ -111,6 +111,10 @@ struct SessionsView: View {
     }
 
     private var sessionList: some View {
+        baseSessionList.scrollContentBackground(.hidden)
+    }
+
+    private var baseSessionList: some View {
         List {
             if !sessionModel.sessions.isEmpty {
                 Section {

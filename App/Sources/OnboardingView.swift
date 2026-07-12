@@ -177,9 +177,12 @@ struct OnboardingView: View {
                 }
             }
 
-            Text("onboarding.permissions.fdaNote", bundle: loc.appBundle)
-                .font(.caption)
-                .foregroundStyle(.tertiary)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("onboarding.permissions.fdaNote", bundle: loc.appBundle)
+                Text("fda.banner.restartHint", bundle: loc.appBundle)
+            }
+            .font(.caption)
+            .foregroundStyle(.tertiary)
         }
         .padding()
     }

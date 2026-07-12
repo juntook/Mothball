@@ -2,6 +2,50 @@
 import Core
 import SwiftUI
 
+/// Prototype-style content backdrop: a faint cool gradient in light mode,
+/// a deep neutral one in dark mode.
+struct AppBackground: View {
+    @Environment(\.colorScheme) private var colorScheme
+
+    var body: some View {
+        if colorScheme == .dark {
+            LinearGradient(
+                colors: [Color(red: 0.11, green: 0.11, blue: 0.13), Color(red: 0.08, green: 0.08, blue: 0.10)],
+                startPoint: .top, endPoint: .bottom
+            )
+            .ignoresSafeArea()
+        } else {
+            LinearGradient(
+                colors: [Color(red: 0.965, green: 0.965, blue: 0.985), Color(red: 0.93, green: 0.935, blue: 0.97)],
+                startPoint: .top, endPoint: .bottom
+            )
+            .ignoresSafeArea()
+        }
+    }
+}
+
+/// Prototype card surface: translucent material, continuous corners,
+/// hairline border, soft shadow.
+struct PrototypeCard: ViewModifier {
+    var cornerRadius: CGFloat = 12
+
+    func body(content: Content) -> some View {
+        content
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .strokeBorder(.separator.opacity(0.4), lineWidth: 1)
+            }
+            .shadow(color: .black.opacity(0.07), radius: 10, y: 3)
+    }
+}
+
+extension View {
+    func prototypeCard(cornerRadius: CGFloat = 12) -> some View {
+        modifier(PrototypeCard(cornerRadius: cornerRadius))
+    }
+}
+
 /// Colored rounded-square sidebar icon, matching the prototype's visual
 /// language (SPEC §5.7).
 struct SidebarChip: View {
@@ -167,7 +211,8 @@ struct EvidenceLabel: View {
 }
 
 /// Persistent banner shown above content while FDA is missing — results must
-/// never look silently incomplete (SPEC §5.8 degraded mode).
+/// never look silently incomplete (SPEC §5.8 degraded mode). TCC grants only
+/// apply to a freshly launched process, so the banner offers a relaunch.
 struct FDABanner: View {
     @Environment(LocalizationModel.self) private var loc
     let status: FullDiskAccess.Status
@@ -177,8 +222,13 @@ struct FDABanner: View {
             HStack(spacing: 8) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .foregroundStyle(.orange)
-                Text("fda.banner", bundle: loc.appBundle)
-                    .font(.callout)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text("fda.banner", bundle: loc.appBundle)
+                        .font(.callout)
+                    Text("fda.banner.restartHint", bundle: loc.appBundle)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
                 Spacer()
                 Button {
                     if let url = URL(string: FullDiskAccess.settingsPaneURL) {
@@ -188,10 +238,29 @@ struct FDABanner: View {
                     Text("fda.banner.action", bundle: loc.appBundle)
                 }
                 .controlSize(.small)
+                if Bundle.main.bundleIdentifier != nil {
+                    Button {
+                        relaunch()
+                    } label: {
+                        Text("fda.banner.relaunch", bundle: loc.appBundle)
+                    }
+                    .controlSize(.small)
+                }
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
             .background(.orange.opacity(0.12))
+        }
+    }
+
+    /// Quit and reopen so a fresh process picks up the new TCC verdict.
+    private func relaunch() {
+        let url = Bundle.main.bundleURL
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.createsNewApplicationInstance = true
+        NSWorkspace.shared.openApplication(at: url, configuration: configuration) { _, _ in }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            NSApp.terminate(nil)
         }
     }
 }
@@ -224,11 +293,7 @@ struct MetricCard: View {
             }
             .padding(14)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color(nsColor: .controlBackgroundColor), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .overlay {
-                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .strokeBorder(.separator.opacity(0.5), lineWidth: 1)
-            }
+            .prototypeCard()
         }
         .buttonStyle(.plain)
     }

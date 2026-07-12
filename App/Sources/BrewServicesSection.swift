@@ -73,6 +73,10 @@ struct BrewServicesSection: View {
     }
 
     private var serviceList: some View {
+        baseServiceList.scrollContentBackground(.hidden)
+    }
+
+    private var baseServiceList: some View {
         List {
             Section {
                 ForEach(brew.services) { service in

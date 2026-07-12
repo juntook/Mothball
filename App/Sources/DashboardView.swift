@@ -229,7 +229,7 @@ struct DashboardView: View {
                         attentionRow(item)
                     }
                 }
-                .background(.background.secondary, in: RoundedRectangle(cornerRadius: 10))
+                .prototypeCard()
             }
         }
     }
@@ -330,7 +330,7 @@ struct DashboardView: View {
                     .foregroundStyle(.tertiary)
             }
             .padding(10)
-            .background(.background.secondary, in: RoundedRectangle(cornerRadius: 8))
+            .prototypeCard(cornerRadius: 10)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -382,7 +382,7 @@ struct DashboardView: View {
                     }
                 }
                 .padding(14)
-                .background(.background.secondary, in: RoundedRectangle(cornerRadius: 10))
+                .prototypeCard()
             }
         }
     }
@@ -396,6 +396,6 @@ struct DashboardView: View {
         }
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.background.secondary, in: RoundedRectangle(cornerRadius: 10))
+        .prototypeCard()
     }
 }

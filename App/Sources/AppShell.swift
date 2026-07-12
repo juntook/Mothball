@@ -30,6 +30,7 @@ struct AppShell: View {
                 FDABanner(status: fdaStatus)
                 detailView
             }
+            .background(AppBackground())
         }
         .frame(minWidth: 920, minHeight: 560)
         .searchable(

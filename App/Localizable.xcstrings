@@ -1854,6 +1854,40 @@
         }
       }
     },
+    "fda.banner.relaunch": {
+      "comment": "Relaunches the app to pick up the TCC grant",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reopen"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新打开"
+          }
+        }
+      }
+    },
+    "fda.banner.restartHint": {
+      "comment": "Explains TCC relaunch semantics",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Granted it already? macOS applies the change to a fresh launch — reopen Mothball. Local rebuilds also need re-granting."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已经授权了?macOS 需要重新打开应用才会生效;本地重新打包后也需要重新授权一次。"
+          }
+        }
+      }
+    },
     "footer.helpFeedback": {
       "comment": "Sidebar footer link",
       "localizations": {

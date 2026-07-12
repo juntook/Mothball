@@ -107,6 +107,8 @@
 "evidence.processCwd" = "进程工作目录位于项目内";
 "fda.banner" = "结果可能不完整:未授予完全磁盘访问。";
 "fda.banner.action" = "去授权…";
+"fda.banner.relaunch" = "重新打开";
+"fda.banner.restartHint" = "已经授权了?macOS 需要重新打开应用才会生效;本地重新打包后也需要重新授权一次。";
 "footer.helpFeedback" = "帮助与反馈";
 "footer.lastScan %@" = "上次扫描 %@";
 "footer.notScanned" = "尚未扫描";

@@ -98,6 +98,10 @@ struct ContainerListView: View {
     }
 
     private var resourceList: some View {
+        baseList.scrollContentBackground(.hidden)
+    }
+
+    private var baseList: some View {
         List {
             if let podman = containers.diagnostics?.podmanDetected, podman {
                 Section {
