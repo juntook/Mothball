@@ -1038,6 +1038,40 @@
         }
       }
     },
+    "dashboard.search.empty": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No matches across processes, projects, or caches."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在进程、项目和缓存中都没有找到匹配项。"
+          }
+        }
+      }
+    },
+    "dashboard.search.title %@": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Results for “%@”"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」的搜索结果"
+          }
+        }
+      }
+    },
     "dashboard.session.summary %lld %lld %@": {
       "comment": "",
       "localizations": {
@@ -1837,6 +1871,176 @@
         }
       }
     },
+    "history.empty.description": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every stop, cleanup, and container operation is recorded here."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每一次停止、清理和容器操作都会记录在这里。"
+          }
+        }
+      }
+    },
+    "history.empty.title": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No operations yet"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "还没有操作记录"
+          }
+        }
+      }
+    },
+    "history.export.errorTitle": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export failed"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "导出失败"
+          }
+        }
+      }
+    },
+    "history.exportDiagnostics": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export Diagnostics…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "导出诊断信息…"
+          }
+        }
+      }
+    },
+    "history.method.delete": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deleted"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直接删除"
+          }
+        }
+      }
+    },
+    "history.method.sessionEnd": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ended session"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "结束会话"
+          }
+        }
+      }
+    },
+    "history.method.stop": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stopped process"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止进程"
+          }
+        }
+      }
+    },
+    "history.method.trash": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moved to Trash"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到废纸篓"
+          }
+        }
+      }
+    },
+    "history.openLog": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Log File"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开日志文件"
+          }
+        }
+      }
+    },
+    "history.openTrash": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Trash"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开废纸篓"
+          }
+        }
+      }
+    },
     "inspector.children": {
       "comment": "Process inspector field label",
       "localizations": {
@@ -2326,6 +2530,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld 个活动端口 · %lld 个运行资源"
+          }
+        }
+      }
+    },
+    "notify.longRunning.body %lld": {
+      "comment": "Notification body",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld service(s) have been running for over 8 hours."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有 %lld 个服务已连续运行超过 8 小时。"
+          }
+        }
+      }
+    },
+    "notify.longRunning.title": {
+      "comment": "Notification title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Development services still running"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开发服务仍在运行"
+          }
+        }
+      }
+    },
+    "notify.space.body %@": {
+      "comment": "Notification body",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mothball found %@ that can be safely reviewed and reclaimed."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mothball 发现了 %@ 可以查看并安全释放的空间。"
+          }
+        }
+      }
+    },
+    "notify.space.title": {
+      "comment": "Notification title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclaimable development space"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有可释放的开发空间"
           }
         }
       }
@@ -4421,6 +4693,91 @@
         }
       }
     },
+    "settings.notify.longRunning": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Services running longer than 8 hours"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "服务运行超过 8 小时时提醒"
+          }
+        }
+      }
+    },
+    "settings.notify.note": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Storage alerts fire at most once a week; service alerts at most once a day."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "存储提醒每周至多一次;服务提醒每天至多一次。"
+          }
+        }
+      }
+    },
+    "settings.notify.space": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclaimable space exceeds threshold"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可释放空间超过阈值时提醒"
+          }
+        }
+      }
+    },
+    "settings.notify.threshold %lld": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Threshold: %lld GB"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "阈值:%lld GB"
+          }
+        }
+      }
+    },
+    "settings.notify.unavailable": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications require the bundled app (they are unavailable in a bare development run)."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知需要打包后的应用才可用(裸开发运行下不可用)。"
+          }
+        }
+      }
+    },
     "settings.openAuditLog": {
       "comment": "Settings button",
       "localizations": {
@@ -4468,6 +4825,91 @@
           "stringUnit": {
             "state": "translated",
             "value": "受保护对象不会进入批量操作、默认不勾选并显示锁标。用户保护优先于自动推荐。"
+          }
+        }
+      }
+    },
+    "settings.scanFrequency": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scheduled scan"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "定时扫描"
+          }
+        }
+      }
+    },
+    "settings.scanFrequency.daily": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daily"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每天"
+          }
+        }
+      }
+    },
+    "settings.scanFrequency.manual": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manual only"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅手动"
+          }
+        }
+      }
+    },
+    "settings.scanFrequency.note": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scheduled scans only produce a report — nothing is ever deleted automatically."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "定时扫描只生成报告,绝不会自动删除任何内容。"
+          }
+        }
+      }
+    },
+    "settings.scanFrequency.weekly": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekly"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每周"
           }
         }
       }
@@ -4574,6 +5016,23 @@
         }
       }
     },
+    "settings.section.notifications": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知"
+          }
+        }
+      }
+    },
     "settings.section.privacy": {
       "comment": "Settings section",
       "localizations": {
@@ -4621,6 +5080,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "活动资源"
+          }
+        }
+      }
+    },
+    "sidebar.history": {
+      "comment": "Sidebar item",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "History"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "历史记录"
           }
         }
       }

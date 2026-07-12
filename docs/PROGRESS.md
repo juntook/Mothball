@@ -187,3 +187,17 @@ Shipped:
 Needs human verification:
 - End a real mixed session (vite + compose) and check stop order, partial-failure reporting, and container refresh.
 - Menu bar toggle on/off, and the end-session path from the menu bar.
+
+## M11 — History view + notifications + scheduled scan + global search — DONE (2026-07-12)
+
+Shipped:
+- History page (⌘5, SPEC §5.16): audit log grouped by day (newest first, capped at 500 rows), method icons and localized labels, failure rows show the raw result in orange, successful trash operations offer "Open Trash". Toolbar: open log file, export diagnostics (operations.jsonl + environment.txt zipped via /usr/bin/ditto — version, macOS, FDA state, rule counts, docker/brew presence; no extra user paths beyond the log itself).
+- Notifications (SPEC §5.15): reclaimable-space alert (configurable GB threshold, at most weekly) and long-running-services alert (at most daily), independently switchable, authorization requested on first enable. Gated on a real bundle identifier — bare `swift run` shows an explanatory footer instead. Notifications never trigger actions.
+- Scheduled scan: manual/daily/weekly picker; an hourly in-app ticker starts a scan when due. The timer path calls only `scan()` — the deletion pipeline stays exclusively behind the interactive preview.
+- Global search: with text in the search field, Overview switches to cross-page results (processes, projects, cache items, capped at 5 each) with jump links; other pages keep their local filtering.
+- 119 tests green; localization sync green (317 app keys, 86 core keys).
+
+Needs human verification:
+- History rows against real operations; diagnostics zip contents.
+- Notifications from the bundled .app (threshold + rate caps).
+- Daily scheduled scan fires after 24 h of app uptime (or by clearing lastAutoScanDate).

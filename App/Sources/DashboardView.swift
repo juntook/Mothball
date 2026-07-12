@@ -15,10 +15,16 @@ struct DashboardView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                header
-                metricGrid
-                attentionSection
-                currentSessionSection
+                if shell.searchText.isEmpty {
+                    header
+                    metricGrid
+                    attentionSection
+                    currentSessionSection
+                } else {
+                    // Global search (SPEC §5.7/M11): matches across pages
+                    // with jump links.
+                    globalSearchResults
+                }
             }
             .padding(20)
         }
@@ -241,6 +247,85 @@ struct DashboardView: View {
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 9)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: Global search (M11)
+
+    @ViewBuilder
+    private var globalSearchResults: some View {
+        let needle = shell.searchText
+        let matchedServices = runtime.services.filter {
+            $0.name.localizedCaseInsensitiveContains(needle)
+                || $0.listeningPorts.contains { String($0).contains(needle) }
+                || ($0.attribution?.projectPath.localizedCaseInsensitiveContains(needle) ?? false)
+        }.prefix(5)
+        let matchedProjects = scan.projects.filter {
+            $0.name.localizedCaseInsensitiveContains(needle)
+                || $0.path.localizedCaseInsensitiveContains(needle)
+        }.prefix(5)
+        let matchedItems = scan.items.filter {
+            $0.path.localizedCaseInsensitiveContains(needle)
+        }.prefix(5)
+
+        VStack(alignment: .leading, spacing: 12) {
+            Text("dashboard.search.title \(needle)", bundle: loc.appBundle)
+                .font(.headline)
+
+            if matchedServices.isEmpty && matchedProjects.isEmpty && matchedItems.isEmpty {
+                Text("dashboard.search.empty", bundle: loc.appBundle)
+                    .foregroundStyle(.secondary)
+            }
+
+            ForEach(Array(matchedServices)) { service in
+                searchRow(
+                    icon: "bolt",
+                    title: service.name,
+                    subtitle: service.listeningPorts.map { ":\($0)" }.joined(separator: " ")
+                ) {
+                    shell.openActiveResources(tab: .processes)
+                }
+            }
+            ForEach(Array(matchedProjects)) { project in
+                searchRow(icon: "folder", title: project.name, subtitle: project.path) {
+                    shell.openStorage(tab: .projects)
+                }
+            }
+            ForEach(Array(matchedItems)) { item in
+                searchRow(
+                    icon: "internaldrive",
+                    title: (item.path as NSString).lastPathComponent,
+                    subtitle: (item.path as NSString).abbreviatingWithTildeInPath
+                ) {
+                    shell.openStorage(tab: item.attribution == nil ? .toolCaches : .projects)
+                }
+            }
+        }
+    }
+
+    private func searchRow(icon: String, title: String, subtitle: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 10) {
+                Image(systemName: icon)
+                    .foregroundStyle(.secondary)
+                    .frame(width: 20)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(verbatim: title).fontWeight(.medium)
+                    Text(verbatim: subtitle)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+            }
+            .padding(10)
+            .background(.background.secondary, in: RoundedRectangle(cornerRadius: 8))
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)

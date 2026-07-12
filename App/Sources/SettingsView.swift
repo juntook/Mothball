@@ -9,6 +9,7 @@ struct SettingsView: View {
     @Environment(ScanModel.self) private var scan
     @Environment(UpdaterModel.self) private var updater
     @Environment(ProtectionModel.self) private var protection
+    @Environment(NotificationModel.self) private var notifications
     @Environment(\.openWindow) private var openWindow
 
     @State private var directDelete = false
@@ -17,6 +18,7 @@ struct SettingsView: View {
     @State private var newRuleKind: ProtectionRule.Kind = .pathPrefix
     @State private var newRuleValue = ""
     @AppStorage("menuBarEnabled") private var menuBarEnabled = false
+    @AppStorage("scanFrequency") private var scanFrequency = "manual"
 
     var body: some View {
         @Bindable var loc = loc
@@ -42,10 +44,42 @@ struct SettingsView: View {
                 .onChange(of: directDelete) { _, newValue in
                     cleanup.directDeleteEnabled = newValue
                 }
+                Picker(selection: $scanFrequency) {
+                    Text("settings.scanFrequency.manual", bundle: loc.appBundle).tag("manual")
+                    Text("settings.scanFrequency.daily", bundle: loc.appBundle).tag("daily")
+                    Text("settings.scanFrequency.weekly", bundle: loc.appBundle).tag("weekly")
+                } label: {
+                    Text("settings.scanFrequency", bundle: loc.appBundle)
+                }
             } header: {
                 Text("settings.section.general", bundle: loc.appBundle)
             } footer: {
-                Text("settings.directDelete.userDataNote", bundle: loc.appBundle)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("settings.directDelete.userDataNote", bundle: loc.appBundle)
+                    Text("settings.scanFrequency.note", bundle: loc.appBundle)
+                }
+                .font(.caption)
+            }
+
+            // MARK: Notifications (SPEC §5.15)
+            Section {
+                @Bindable var notifications = notifications
+                Toggle(isOn: $notifications.spaceAlertEnabled) {
+                    Text("settings.notify.space", bundle: loc.appBundle)
+                }
+                .disabled(!notifications.available)
+                Stepper(value: $notifications.spaceThresholdGB, in: 1...500, step: 5) {
+                    Text("settings.notify.threshold \(notifications.spaceThresholdGB)", bundle: loc.appBundle)
+                }
+                .disabled(!notifications.available || !notifications.spaceAlertEnabled)
+                Toggle(isOn: $notifications.longRunningAlertEnabled) {
+                    Text("settings.notify.longRunning", bundle: loc.appBundle)
+                }
+                .disabled(!notifications.available)
+            } header: {
+                Text("settings.section.notifications", bundle: loc.appBundle)
+            } footer: {
+                Text(notifications.available ? "settings.notify.note" : "settings.notify.unavailable", bundle: loc.appBundle)
                     .font(.caption)
             }
 

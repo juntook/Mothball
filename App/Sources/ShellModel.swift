@@ -9,6 +9,7 @@ enum SidebarSection: String, CaseIterable, Identifiable {
     case activeResources
     case storage
     case sessions
+    case history
     case settings
 
     var id: String { rawValue }

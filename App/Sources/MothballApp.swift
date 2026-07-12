@@ -14,6 +14,7 @@ struct MothballApp: App {
     @State private var brewModel = BrewModel()
     @State private var protectionModel = ProtectionModel()
     @State private var sessionModel = SessionModel()
+    @State private var notificationModel = NotificationModel()
     @AppStorage("menuBarEnabled") private var menuBarEnabled = false
     @Environment(\.openWindow) private var openWindow
 
@@ -31,6 +32,7 @@ struct MothballApp: App {
                 .environment(brewModel)
                 .environment(protectionModel)
                 .environment(sessionModel)
+                .environment(notificationModel)
                 .environment(\.locale, loc.locale)
         }
         .commands {
@@ -68,6 +70,12 @@ struct MothballApp: App {
                     Text("sidebar.sessions", bundle: loc.appBundle)
                 }
                 .keyboardShortcut("4", modifiers: .command)
+                Button {
+                    shell.open(.history)
+                } label: {
+                    Text("sidebar.history", bundle: loc.appBundle)
+                }
+                .keyboardShortcut("5", modifiers: .command)
                 Divider()
                 Button {
                     scanModel.scan()

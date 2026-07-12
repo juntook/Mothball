@@ -14,6 +14,9 @@ struct AppShell: View {
     @Environment(RiskModel.self) private var risk
     @Environment(ProtectionModel.self) private var protection
     @Environment(SessionModel.self) private var sessionModel
+    @Environment(NotificationModel.self) private var notifications
+
+    @AppStorage("scanFrequency") private var scanFrequency = "manual"
 
     @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "onboardingComplete")
     @State private var fdaStatus = FullDiskAccess.check()
@@ -43,6 +46,14 @@ struct AppShell: View {
         .task {
             scan.loadRulesIfNeeded()
         }
+        .task {
+            // Scheduled scans only ever produce a report — the deletion path
+            // stays behind the interactive preview, always (SPEC §5.15).
+            while !Task.isCancelled {
+                autoScanIfDue()
+                try? await Task.sleep(for: .seconds(3600))
+            }
+        }
         .onAppear {
             // Bare `swift run` executables have no bundle, so AppKit will not
             // bring the window forward on its own.
@@ -64,10 +75,12 @@ struct AppShell: View {
                     rebuildRisk()
                     cleanup.defaultSelect(items: scan.items, assessments: risk.itemAssessments)
                 }
+                notifications.maybeNotifyReclaimable(totalBytes: scan.totalBytes, loc: loc)
             }
         }
         .onChange(of: runtime.services) { _, _ in
             rebuildRisk()
+            notifications.maybeNotifyLongRunning(services: runtime.services, loc: loc)
         }
         .onChange(of: containers.resources) { _, _ in
             rebuildRisk()
@@ -140,6 +153,13 @@ struct AppShell: View {
                 .badge(sessionModel.sessions.count)
 
                 Label {
+                    Text("sidebar.history", bundle: loc.appBundle)
+                } icon: {
+                    Image(systemName: "clock.arrow.circlepath")
+                }
+                .tag(SidebarSection.history)
+
+                Label {
                     Text("sidebar.settings", bundle: loc.appBundle)
                 } icon: {
                     Image(systemName: "gearshape")
@@ -157,6 +177,19 @@ struct AppShell: View {
     private var runningResourceCount: Int {
         runtime.services.count
             + containers.resources.filter { $0.kind == .runningContainer }.count
+    }
+
+    private func autoScanIfDue() {
+        let interval: TimeInterval? = switch scanFrequency {
+        case "daily": 24 * 3600
+        case "weekly": 7 * 24 * 3600
+        default: nil
+        }
+        guard let interval, !scan.isScanning else { return }
+        let last = UserDefaults.standard.object(forKey: "lastAutoScanDate") as? Date ?? .distantPast
+        guard Date().timeIntervalSince(last) >= interval else { return }
+        UserDefaults.standard.set(Date(), forKey: "lastAutoScanDate")
+        scan.scan()
     }
 
     private func rebuildRisk() {
@@ -250,6 +283,8 @@ struct AppShell: View {
             StorageView()
         case .sessions:
             SessionsView()
+        case .history:
+            HistoryView()
         case .settings:
             SettingsView()
         }
