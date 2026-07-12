@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "gradle",
+  "name": "Gradle",
+  "vendor": "Gradle Inc.",
+  "category": "build-tool",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyPaths": [
+      "~/.gradle"
+    ]
+  },
+  "targets": [
+    {
+      "id": "caches",
+      "scope": "global",
+      "paths": [
+        "~/.gradle/caches"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Dependency and build caches",
+      "regenerateHint": "Re-downloaded/rebuilt on the next Gradle build"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "huggingface",
+  "name": "Hugging Face",
+  "vendor": "Hugging Face",
+  "category": "runtime",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyPaths": [
+      "~/.cache/huggingface"
+    ]
+  },
+  "targets": [
+    {
+      "id": "hub-cache",
+      "scope": "global",
+      "paths": [
+        "~/.cache/huggingface"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Downloaded models and datasets cache",
+      "regenerateHint": "Models re-download on demand (can be tens of GB)"
+    }
+  ]
+}

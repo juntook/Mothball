@@ -9,6 +9,7 @@ struct ContainerListView: View {
     @Environment(ScanModel.self) private var scan
     @Environment(ContainerModel.self) private var containers
     @Environment(RiskModel.self) private var risk
+    @Environment(ProtectionModel.self) private var protection
     let kinds: Set<ContainerResource.Kind>
 
     var body: some View {
@@ -179,8 +180,14 @@ struct ContainerListView: View {
                 Section {
                     ForEach(volumes) { resource in
                         row(resource) {
-                            actionButton("docker.action.removeVolume", resource: resource) {
-                                containers.volumePendingRemoval = resource
+                            if protection.evaluator.isProtected(volumeName: resource.name) {
+                                Image(systemName: "lock")
+                                    .foregroundStyle(.secondary)
+                                    .help(Text("protection.volume.help", bundle: loc.appBundle))
+                            } else {
+                                actionButton("docker.action.removeVolume", resource: resource) {
+                                    containers.volumePendingRemoval = resource
+                                }
                             }
                         }
                     }

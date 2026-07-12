@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "jvm-artifacts",
+  "name": "JVM project artifacts",
+  "vendor": "generic",
+  "category": "build-tool",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyPaths": [
+      "~/.gradle",
+      "~/.m2"
+    ]
+  },
+  "targets": [
+    {
+      "id": "build-output",
+      "scope": "project",
+      "projectGlobs": [
+        "build",
+        ".gradle",
+        "target"
+      ],
+      "guardFiles": [
+        "build.gradle",
+        "build.gradle.kts",
+        "settings.gradle",
+        "pom.xml"
+      ],
+      "kind": "artifact",
+      "safety": "regenerable",
+      "description": "Gradle/Maven build output inside a JVM project",
+      "regenerateHint": "Rebuilt by gradle build / mvn package"
+    }
+  ]
+}

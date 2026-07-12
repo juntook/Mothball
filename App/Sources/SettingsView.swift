@@ -8,11 +8,14 @@ struct SettingsView: View {
     @Environment(CleanupModel.self) private var cleanup
     @Environment(ScanModel.self) private var scan
     @Environment(UpdaterModel.self) private var updater
+    @Environment(ProtectionModel.self) private var protection
     @Environment(\.openWindow) private var openWindow
 
     @State private var directDelete = false
     @State private var codeRoots: [String] = []
     @State private var exclusions: [String] = []
+    @State private var newRuleKind: ProtectionRule.Kind = .pathPrefix
+    @State private var newRuleValue = ""
 
     var body: some View {
         @Bindable var loc = loc
@@ -139,6 +142,54 @@ struct SettingsView: View {
                     .font(.caption)
             }
 
+            // MARK: Protection rules (SPEC §5.12)
+            Section {
+                ForEach(protection.rules) { rule in
+                    HStack {
+                        Text(kindKey(rule.kind), bundle: loc.appBundle)
+                            .font(.caption)
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 1)
+                            .background(.quaternary, in: Capsule())
+                        Text(verbatim: rule.value)
+                            .lineLimit(1)
+                            .truncationMode(.middle)
+                        Spacer()
+                        Button {
+                            protection.remove(rule)
+                        } label: {
+                            Image(systemName: "minus.circle")
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                HStack {
+                    Picker(selection: $newRuleKind) {
+                        ForEach(ProtectionRule.Kind.allCases, id: \.self) { kind in
+                            Text(kindKey(kind), bundle: loc.appBundle).tag(kind)
+                        }
+                    } label: {
+                        EmptyView()
+                    }
+                    .labelsHidden()
+                    .fixedSize()
+                    TextField(text: $newRuleValue) {
+                        Text("protection.value.placeholder", bundle: loc.appBundle)
+                    }
+                    .textFieldStyle(.roundedBorder)
+                    .onSubmit(addProtectionRule)
+                    Button(action: addProtectionRule) {
+                        Text("protection.add", bundle: loc.appBundle)
+                    }
+                    .disabled(newRuleValue.trimmingCharacters(in: .whitespaces).isEmpty)
+                }
+            } header: {
+                Text("settings.section.protection", bundle: loc.appBundle)
+            } footer: {
+                Text("settings.protection.detail", bundle: loc.appBundle)
+                    .font(.caption)
+            }
+
             // MARK: Advanced
             Section {
                 Button {
@@ -185,6 +236,23 @@ struct SettingsView: View {
             directDelete = cleanup.directDeleteEnabled
             codeRoots = scan.codeRoots
             exclusions = scan.codeRootExclusions
+        }
+    }
+
+    private func addProtectionRule() {
+        let value = newRuleValue.trimmingCharacters(in: .whitespaces)
+        guard !value.isEmpty else { return }
+        protection.add(kind: newRuleKind, value: value)
+        newRuleValue = ""
+    }
+
+    private func kindKey(_ kind: ProtectionRule.Kind) -> LocalizedStringKey {
+        switch kind {
+        case .path: "protection.kind.path"
+        case .pathPrefix: "protection.kind.pathPrefix"
+        case .processName: "protection.kind.processName"
+        case .port: "protection.kind.port"
+        case .volumeName: "protection.kind.volumeName"
         }
     }
 

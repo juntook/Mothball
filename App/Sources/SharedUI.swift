@@ -218,6 +218,11 @@ struct SelectableResourceRow: View {
                 Image(systemName: "lock")
                     .foregroundStyle(.secondary)
                     .help(Text("row.protected.help", bundle: loc.appBundle))
+            } else if !isIgnored {
+                // Selectable tier blocked by a user protection rule (SPEC §5.12).
+                Image(systemName: "lock")
+                    .foregroundStyle(.tint)
+                    .help(Text("protection.path.help", bundle: loc.appBundle))
             }
 
             details

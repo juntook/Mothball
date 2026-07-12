@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "swift-artifacts",
+  "name": "Swift package artifacts",
+  "vendor": "generic",
+  "category": "build-tool",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyBinaries": [
+      "swift"
+    ]
+  },
+  "targets": [
+    {
+      "id": "build-dir",
+      "scope": "project",
+      "projectGlobs": [
+        ".build"
+      ],
+      "guardFiles": [
+        "Package.swift"
+      ],
+      "kind": "artifact",
+      "safety": "regenerable",
+      "description": "SwiftPM build output",
+      "regenerateHint": "Rebuilt by swift build"
+    }
+  ]
+}

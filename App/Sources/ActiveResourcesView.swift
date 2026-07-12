@@ -11,6 +11,8 @@ struct ActiveResourcesView: View {
     @Environment(ScanModel.self) private var scan
     @Environment(RuntimeModel.self) private var runtime
     @Environment(ContainerModel.self) private var containers
+    @Environment(BrewModel.self) private var brew
+    @Environment(ProtectionModel.self) private var protection
 
     @State private var selectedPID: RunningService.ID?
     /// "Development ports only" filter (SPEC §5.9): hides the ephemeral range.
@@ -30,6 +32,8 @@ struct ActiveResourcesView: View {
                         .tag(ActiveResourceTab.processes)
                     Text("active.tab.containers \(containerCount)", bundle: loc.appBundle)
                         .tag(ActiveResourceTab.containers)
+                    Text("active.tab.services \(brew.services.filter(\.isRunning).count)", bundle: loc.appBundle)
+                        .tag(ActiveResourceTab.services)
                 } label: {
                     EmptyView()
                 }
@@ -70,7 +74,8 @@ struct ActiveResourcesView: View {
         }
         .task(id: shell.activeResourceTab) {
             containers.refresh(projects: scan.projects)
-            guard shell.activeResourceTab != .containers else { return }
+            brew.refresh()
+            guard shell.activeResourceTab == .ports || shell.activeResourceTab == .processes else { return }
             // Visible-only sampling loop: cancelled the moment this view or
             // tab goes away, so idle means zero polling (SPEC §5.10).
             while !Task.isCancelled {
@@ -80,7 +85,7 @@ struct ActiveResourcesView: View {
             }
         }
         .inspector(isPresented: Binding(
-            get: { shell.activeResourceTab != .containers && selectedService != nil },
+            get: { (shell.activeResourceTab == .ports || shell.activeResourceTab == .processes) && selectedService != nil },
             set: { if !$0 { selectedPID = nil } }
         )) {
             if let service = selectedService {
@@ -171,6 +176,8 @@ struct ActiveResourcesView: View {
             }
         case .containers:
             ContainerListView(kinds: [.runningContainer, .stoppedContainer])
+        case .services:
+            BrewServicesSection()
         }
     }
 
@@ -342,14 +349,22 @@ struct ActiveResourcesView: View {
 
     @ViewBuilder
     private func projectCell(_ service: RunningService) -> some View {
-        if let attribution = service.attribution {
-            Text(verbatim: (attribution.projectPath as NSString).lastPathComponent)
-                .help(Text("evidence.processCwd", bundle: loc.appBundle))
-        } else {
-            Text(verbatim: service.workingDirectory ?? "—")
-                .foregroundStyle(.secondary)
-                .lineLimit(1)
-                .truncationMode(.middle)
+        HStack(spacing: 4) {
+            if protection.evaluator.isProtected(service: service) {
+                Image(systemName: "lock")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .help(Text("protection.service.help", bundle: loc.appBundle))
+            }
+            if let attribution = service.attribution {
+                Text(verbatim: (attribution.projectPath as NSString).lastPathComponent)
+                    .help(Text("evidence.processCwd", bundle: loc.appBundle))
+            } else {
+                Text(verbatim: service.workingDirectory ?? "—")
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+            }
         }
     }
 

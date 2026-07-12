@@ -69,6 +69,23 @@
         }
       }
     },
+    "active.tab.services %lld": {
+      "comment": "Tab title; %lld running count",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Services (%lld)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "后台服务 %lld"
+          }
+        }
+      }
+    },
     "badge.unverified": {
       "comment": "Badge on rules whose paths come from public docs, not verified on-machine",
       "localizations": {
@@ -99,6 +116,261 @@
           "stringUnit": {
             "state": "translated",
             "value": "该规则的路径来自公开资料,尚未在真机核实。可通过 Doctor 面板核实。"
+          }
+        }
+      }
+    },
+    "brew.action.start": {
+      "comment": "brew services run",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "启动"
+          }
+        }
+      }
+    },
+    "brew.action.stopDisable": {
+      "comment": "brew services stop",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop & Disable Autostart"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止并禁用自启"
+          }
+        }
+      }
+    },
+    "brew.action.stopOnce": {
+      "comment": "Stops but keeps login registration",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop Once"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止一次"
+          }
+        }
+      }
+    },
+    "brew.empty.message": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No services are registered with brew services."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "brew services 中没有注册任何服务。"
+          }
+        }
+      }
+    },
+    "brew.empty.title": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Homebrew services"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有 Homebrew 服务"
+          }
+        }
+      }
+    },
+    "brew.error.title": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Service operation failed"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "服务操作失败"
+          }
+        }
+      }
+    },
+    "brew.exitCode %lld": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "exit code %lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出码 %lld"
+          }
+        }
+      }
+    },
+    "brew.footer": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop keeps the login registration; Stop & Disable removes it. Data directories are never touched."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「停止一次」保留登录自启注册;「停止并禁用自启」会取消注册。数据目录永远不会被动到。"
+          }
+        }
+      }
+    },
+    "brew.notInstalled.message": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background services managed by Homebrew appear here once brew is installed."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安装 Homebrew 后,这里会显示它管理的后台服务。"
+          }
+        }
+      }
+    },
+    "brew.notInstalled.title": {
+      "comment": "Services tab empty state",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Homebrew not installed"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未安装 Homebrew"
+          }
+        }
+      }
+    },
+    "brew.protected.help": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protected by your rules — excluded from batch operations."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已被你的规则保护,不会进入批量操作。"
+          }
+        }
+      }
+    },
+    "brew.startsAtLogin": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starts at login"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录时自启"
+          }
+        }
+      }
+    },
+    "brew.status.error": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "错误"
+          }
+        }
+      }
+    },
+    "brew.status.running": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Running"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行中"
+          }
+        }
+      }
+    },
+    "brew.status.stopped": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stopped"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已停止"
           }
         }
       }
@@ -2517,6 +2789,176 @@
         }
       }
     },
+    "protection.add": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加"
+          }
+        }
+      }
+    },
+    "protection.kind.path": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exact Path"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "精确路径"
+          }
+        }
+      }
+    },
+    "protection.kind.pathPrefix": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Path Prefix"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "路径前缀"
+          }
+        }
+      }
+    },
+    "protection.kind.port": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Port"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "端口"
+          }
+        }
+      }
+    },
+    "protection.kind.processName": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Process Name"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "进程名"
+          }
+        }
+      }
+    },
+    "protection.kind.volumeName": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker Volume"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker 卷"
+          }
+        }
+      }
+    },
+    "protection.path.help": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protected by your rules — cannot be selected for cleanup."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已被你的规则保护,无法勾选清理。"
+          }
+        }
+      }
+    },
+    "protection.service.help": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protected service — excluded from batch stops and sessions."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "受保护的服务,不会进入批量停止或会话结束。"
+          }
+        }
+      }
+    },
+    "protection.value.placeholder": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Value (path, process name, port, or volume)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "值(路径、进程名、端口或卷名)"
+          }
+        }
+      }
+    },
+    "protection.volume.help": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protected volume — deletion is disabled."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "受保护的数据卷,已禁用删除。"
+          }
+        }
+      }
+    },
     "risk.reason.gitDirty": {
       "comment": "Risk reason tooltip",
       "localizations": {
@@ -3316,6 +3758,23 @@
         }
       }
     },
+    "settings.protection.detail": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protected objects never join batch operations, start unchecked, and show a lock badge. User protection outranks automatic recommendations."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "受保护对象不会进入批量操作、默认不勾选并显示锁标。用户保护优先于自动推荐。"
+          }
+        }
+      }
+    },
     "settings.section.advanced": {
       "comment": "Settings section",
       "localizations": {
@@ -3431,6 +3890,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "隐私与更新"
+          }
+        }
+      }
+    },
+    "settings.section.protection": {
+      "comment": "",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protection Rules"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保护规则"
           }
         }
       }

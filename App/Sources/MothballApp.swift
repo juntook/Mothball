@@ -11,6 +11,8 @@ struct MothballApp: App {
     @State private var containerModel = ContainerModel()
     @State private var updaterModel = UpdaterModel()
     @State private var riskModel = RiskModel()
+    @State private var brewModel = BrewModel()
+    @State private var protectionModel = ProtectionModel()
     @Environment(\.openWindow) private var openWindow
 
     var body: some Scene {
@@ -24,6 +26,8 @@ struct MothballApp: App {
                 .environment(containerModel)
                 .environment(updaterModel)
                 .environment(riskModel)
+                .environment(brewModel)
+                .environment(protectionModel)
                 .environment(\.locale, loc.locale)
         }
         .commands {

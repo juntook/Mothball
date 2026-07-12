@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "yarn",
+  "name": "Yarn",
+  "vendor": "Yarn",
+  "category": "package-manager",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyBinaries": [
+      "yarn"
+    ]
+  },
+  "targets": [
+    {
+      "id": "cache",
+      "scope": "global",
+      "paths": [
+        "~/Library/Caches/Yarn"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Package download cache",
+      "regenerateHint": "yarn cache clean; repopulated on install"
+    }
+  ]
+}

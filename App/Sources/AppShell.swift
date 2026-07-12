@@ -12,6 +12,7 @@ struct AppShell: View {
     @Environment(RuntimeModel.self) private var runtime
     @Environment(ContainerModel.self) private var containers
     @Environment(RiskModel.self) private var risk
+    @Environment(ProtectionModel.self) private var protection
 
     @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "onboardingComplete")
     @State private var fdaStatus = FullDiskAccess.check()
@@ -46,6 +47,10 @@ struct AppShell: View {
             // bring the window forward on its own.
             NSApp.setActivationPolicy(.regular)
             NSApp.activate(ignoringOtherApps: true)
+            let protection = protection
+            cleanup.protectedPathCheck = { path in
+                protection.evaluator.isProtected(path: path)
+            }
         }
         .onChange(of: scan.isScanning) { _, _ in
             fdaStatus = FullDiskAccess.check()

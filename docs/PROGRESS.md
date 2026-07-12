@@ -159,3 +159,17 @@ Needs human verification:
 - CPU column values against Activity Monitor for a busy process.
 - Port rows against `lsof -iTCP -sTCP:LISTEN` output.
 - S2 badge appears for a project with a running dev server and its artifacts start unchecked.
+
+## M9 — Homebrew services + protection rules + rule library expansion — DONE (2026-07-12)
+
+Shipped:
+- `BrewServicesClient` (SPEC §5.11): `brew services list --json` parsing; stop semantics mapped to brew subcommands — stop once = `kill` (keeps login registration), stop & disable = `stop` (unregisters), start = `run` (no registration). Fixed-path binary resolution (§9.1). Services tab with status badges, autostart/exit-code detail, split-button actions; brew-missing and no-services empty states; all operations audited.
+- `ProtectionRule`/`ProtectionRuleStore`/`ProtectionEvaluator` (SPEC §5.12): exact path, path prefix (case-insensitive, descendants only), process name, port, docker volume name; versioned JSON store under Application Support. Settings gains a Protection Rules section (add/remove with kind picker).
+- Enforcement wired through every batch path: default selection, row selectability, and preview all consult the protection check (CleanupModel.protectedPathCheck); protected services show locks in the process/port tables; protected volumes lose their delete button entirely.
+- Rule library: 18 new draft rules (24 files total) — xcode (DerivedData/DeviceSupport/simulator caches/SPM cache regenerable, Archives user_data), huggingface, playwright, pnpm, yarn, pip, uv, cargo, go, gradle, homebrew, cocoapods, ollama (models kept user_data so they never enter one-click cleanup), plus project-scope artifact rules for frontend (.next/.vite/dist/…), python (.venv/…), rust (target), jvm (build/.gradle/target), swift (.build). All schema-valid; zh-Hans copy seeded for every new target (SPEC §8.5(5)).
+- 8 new tests (protection store/evaluator semantics, brew JSON parsing, stop-subcommand mapping). 114 total, green.
+
+Needs human verification:
+- `brew services` flows against a real postgres/redis install (kill vs stop vs run semantics).
+- New draft rules against this machine via Doctor; promote what checks out.
+- A path-prefix protection rule visibly locks a project's artifacts and survives restart.

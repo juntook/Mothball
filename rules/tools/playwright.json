@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "playwright",
+  "name": "Playwright",
+  "vendor": "Microsoft",
+  "category": "build-tool",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyPaths": [
+      "~/Library/Caches/ms-playwright"
+    ]
+  },
+  "targets": [
+    {
+      "id": "browsers",
+      "scope": "global",
+      "paths": [
+        "~/Library/Caches/ms-playwright"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Downloaded browser binaries for testing",
+      "regenerateHint": "npx playwright install"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "rust-artifacts",
+  "name": "Rust project artifacts",
+  "vendor": "generic",
+  "category": "build-tool",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyPaths": [
+      "~/.cargo"
+    ]
+  },
+  "targets": [
+    {
+      "id": "target",
+      "scope": "project",
+      "projectGlobs": [
+        "target"
+      ],
+      "guardFiles": [
+        "Cargo.toml"
+      ],
+      "kind": "artifact",
+      "safety": "regenerable",
+      "description": "Cargo build output",
+      "regenerateHint": "Rebuilt by cargo build"
+    }
+  ]
+}

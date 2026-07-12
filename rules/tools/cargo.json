@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "cargo",
+  "name": "Cargo",
+  "vendor": "Rust Foundation",
+  "category": "package-manager",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyPaths": [
+      "~/.cargo"
+    ]
+  },
+  "targets": [
+    {
+      "id": "registry-cache",
+      "scope": "global",
+      "paths": [
+        "~/.cargo/registry/cache"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Downloaded crate archives",
+      "regenerateHint": "Re-downloaded on the next cargo build"
+    },
+    {
+      "id": "git-checkouts",
+      "scope": "global",
+      "paths": [
+        "~/.cargo/git"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Cached git dependencies",
+      "regenerateHint": "Re-cloned on the next cargo build"
+    }
+  ]
+}

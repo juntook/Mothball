@@ -34,6 +34,10 @@ final class CleanupModel {
     /// Lifetime bytes reclaimed by file cleanups, shown in the sidebar footer.
     private(set) var totalReclaimedBytes: Int64 = UserDefaults.standard.object(forKey: "totalReclaimedBytes") as? Int64 ?? 0
 
+    /// Set once at startup from the protection center (SPEC §5.12); consulted
+    /// by every selection and preview path.
+    var protectedPathCheck: (String) -> Bool = { _ in false }
+
     private let ignoreList = IgnoreList()
 
     init() {
@@ -49,6 +53,7 @@ final class CleanupModel {
         selectedPaths = Set(
             items.filter { item in
                 guard item.safety == .regenerable, !ignoredPaths.contains(item.path) else { return false }
+                guard !protectedPathCheck(item.path) else { return false }
                 if let assessment = assessments[item.path], assessment.tier >= .s2 { return false }
                 return true
             }.map(\.path)
@@ -56,7 +61,7 @@ final class CleanupModel {
     }
 
     func isSelectable(_ item: ResourceItem) -> Bool {
-        item.safety != .protected && !ignoredPaths.contains(item.path)
+        item.safety != .protected && !ignoredPaths.contains(item.path) && !protectedPathCheck(item.path)
     }
 
     func toggle(_ item: ResourceItem) {
@@ -83,7 +88,7 @@ final class CleanupModel {
 
     func beginPreview(items: [ResourceItem]) {
         previewItems = items
-            .filter { selectedPaths.contains($0.path) && $0.safety != .protected }
+            .filter { selectedPaths.contains($0.path) && $0.safety != .protected && !protectedPathCheck($0.path) }
             .map { CleanupItem(path: $0.path, safety: $0.safety, ruleID: $0.ruleID, targetID: $0.targetID, sizeBytes: $0.sizeBytes) }
             .sorted { ($0.sizeBytes ?? 0) > ($1.sizeBytes ?? 0) }
         confirmedUserDataPaths = []

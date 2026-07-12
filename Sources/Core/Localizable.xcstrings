@@ -1,105 +1,70 @@
 {
   "sourceLanguage": "en",
-  "version": "1.0",
   "strings": {
-    "safety.regenerable.name": {
-      "comment": "Safety tier label: safe-to-delete, regenerates automatically",
+    "rule.cargo.git-checkouts.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Regenerable"
+            "value": "Cached git dependencies"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "可再生"
+            "value": "缓存的 git 依赖"
           }
         }
       }
     },
-    "safety.regenerable.explanation": {
-      "comment": "Safety tier explanation shown in previews and tooltips",
+    "rule.cargo.git-checkouts.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deleting is safe; the tool recreates this automatically."
+            "value": "Re-cloned on the next cargo build"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "删除是安全的,工具会自动重建。"
+            "value": "下次 cargo build 时重新克隆"
           }
         }
       }
     },
-    "safety.user_data.name": {
-      "comment": "Safety tier label: user data, unrecoverable once deleted",
+    "rule.cargo.registry-cache.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "User data"
+            "value": "Downloaded crate archives"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "用户数据"
+            "value": "已下载的 crate 包"
           }
         }
       }
     },
-    "safety.user_data.explanation": {
-      "comment": "Safety tier explanation shown in previews and tooltips",
+    "rule.cargo.registry-cache.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your own records — not recoverable after deletion. Moved to Trash only, never deleted directly."
+            "value": "Re-downloaded on the next cargo build"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "你自己的记录,删除后无法找回。只会移入废纸篓,绝不直接删除。"
-          }
-        }
-      }
-    },
-    "safety.protected.name": {
-      "comment": "Safety tier label: protected, display only",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Protected"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "受保护"
-          }
-        }
-      }
-    },
-    "safety.protected.explanation": {
-      "comment": "Safety tier explanation shown in previews and tooltips",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Credentials and configuration. Shown for awareness only — Mothball never deletes these."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "凭证与配置文件,仅用于展示占用,Mothball 绝不删除。"
+            "value": "下次 cargo build 时重新下载"
           }
         }
       }
@@ -126,46 +91,13 @@
         }
       }
     },
-    "rule.claude-code.statsig.description": {
+    "rule.claude-code.config.description": {
       "comment": "Rule-library copy bridge; en falls back to the rule JSON",
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "遥测/功能开关缓存"
-          }
-        }
-      }
-    },
-    "rule.claude-code.statsig.hint": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自动重建"
-          }
-        }
-      }
-    },
-    "rule.claude-code.shell-snapshots.description": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Shell 环境快照"
-          }
-        }
-      }
-    },
-    "rule.claude-code.shell-snapshots.hint": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自动重建"
+            "value": "用户设置、全局记忆、初始化状态"
           }
         }
       }
@@ -192,6 +124,50 @@
         }
       }
     },
+    "rule.claude-code.shell-snapshots.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shell 环境快照"
+          }
+        }
+      }
+    },
+    "rule.claude-code.shell-snapshots.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动重建"
+          }
+        }
+      }
+    },
+    "rule.claude-code.statsig.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "遥测/功能开关缓存"
+          }
+        }
+      }
+    },
+    "rule.claude-code.statsig.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动重建"
+          }
+        }
+      }
+    },
     "rule.claude-code.todos.description": {
       "comment": "Rule-library copy bridge; en falls back to the rule JSON",
       "localizations": {
@@ -214,101 +190,47 @@
         }
       }
     },
-    "rule.claude-code.config.description": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+    "rule.cocoapods.cache.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pod download cache"
+          }
+        },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "用户设置、全局记忆、初始化状态"
+            "value": "Pod 下载缓存"
           }
         }
       }
     },
-    "rule.codex.sessions.description": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+    "rule.cocoapods.cache.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pod cache clean --all; repopulated on install"
+          }
+        },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "会话滚动记录(JSONL,按日期分桶)"
+            "value": "pod cache clean --all;安装时重新填充"
           }
         }
       }
     },
-    "rule.codex.sessions.hint": {
+    "rule.codebuddy-cli.home-dir.description": {
       "comment": "Rule-library copy bridge; en falls back to the rule JSON",
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "不可恢复——这是你的会话记录"
-          }
-        }
-      }
-    },
-    "rule.codex.logs.description": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CLI/TUI 日志"
-          }
-        }
-      }
-    },
-    "rule.codex.logs.hint": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "下次运行时重建"
-          }
-        }
-      }
-    },
-    "rule.codex.history.description": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "提示词历史"
-          }
-        }
-      }
-    },
-    "rule.codex.history.hint": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "不可恢复"
-          }
-        }
-      }
-    },
-    "rule.codex.auth.description": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "登录凭证——清理永不触碰"
-          }
-        }
-      }
-    },
-    "rule.codex.config.description": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "用户配置"
+            "value": "在缓存/历史子路径核实并拆分之前,整个用户目录仅作占用展示"
           }
         }
       }
@@ -335,13 +257,654 @@
         }
       }
     },
-    "rule.codebuddy-cli.home-dir.description": {
+    "rule.codex.auth.description": {
       "comment": "Rule-library copy bridge; en falls back to the rule JSON",
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "在缓存/历史子路径核实并拆分之前,整个用户目录仅作占用展示"
+            "value": "登录凭证——清理永不触碰"
+          }
+        }
+      }
+    },
+    "rule.codex.config.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用户配置"
+          }
+        }
+      }
+    },
+    "rule.codex.history.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提示词历史"
+          }
+        }
+      }
+    },
+    "rule.codex.history.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不可恢复"
+          }
+        }
+      }
+    },
+    "rule.codex.logs.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CLI/TUI 日志"
+          }
+        }
+      }
+    },
+    "rule.codex.logs.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下次运行时重建"
+          }
+        }
+      }
+    },
+    "rule.codex.sessions.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "会话滚动记录(JSONL,按日期分桶)"
+          }
+        }
+      }
+    },
+    "rule.codex.sessions.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不可恢复——这是你的会话记录"
+          }
+        }
+      }
+    },
+    "rule.frontend-artifacts.build-output.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Framework build output and caches inside a JS project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JS 项目内的框架构建产物与缓存"
+          }
+        }
+      }
+    },
+    "rule.frontend-artifacts.build-output.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rebuilt by your dev/build command"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "由你的 dev/build 命令重建"
+          }
+        }
+      }
+    },
+    "rule.go.build-cache.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compiler build cache"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编译器构建缓存"
+          }
+        }
+      }
+    },
+    "rule.go.build-cache.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "go clean -cache; rebuilt on the next build"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "go clean -cache;下次构建时重建"
+          }
+        }
+      }
+    },
+    "rule.gradle.caches.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dependency and build caches"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "依赖与构建缓存"
+          }
+        }
+      }
+    },
+    "rule.gradle.caches.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Re-downloaded/rebuilt on the next Gradle build"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下次 Gradle 构建时重新下载/重建"
+          }
+        }
+      }
+    },
+    "rule.homebrew.downloads.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bottle and formula download cache"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bottle 与 formula 下载缓存"
+          }
+        }
+      }
+    },
+    "rule.homebrew.downloads.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "brew cleanup; re-downloaded on demand"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "brew cleanup;按需重新下载"
+          }
+        }
+      }
+    },
+    "rule.huggingface.hub-cache.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloaded models and datasets cache"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已下载的模型与数据集缓存"
+          }
+        }
+      }
+    },
+    "rule.huggingface.hub-cache.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Models re-download on demand (can be tens of GB)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模型按需重新下载(可能达数十 GB)"
+          }
+        }
+      }
+    },
+    "rule.jvm-artifacts.build-output.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gradle/Maven build output inside a JVM project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JVM 项目内的 Gradle/Maven 构建产物"
+          }
+        }
+      }
+    },
+    "rule.jvm-artifacts.build-output.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rebuilt by gradle build / mvn package"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gradle build / mvn package 时重建"
+          }
+        }
+      }
+    },
+    "rule.node-modules.node-modules.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目已安装的依赖"
+          }
+        }
+      }
+    },
+    "rule.node-modules.node-modules.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "由 npm/pnpm/yarn install 重建"
+          }
+        }
+      }
+    },
+    "rule.npm.cacache.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "内容寻址的包缓存"
+          }
+        }
+      }
+    },
+    "rule.npm.cacache.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下次 install 时重新填充"
+          }
+        }
+      }
+    },
+    "rule.npm.logs.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "npm 调试日志"
+          }
+        }
+      }
+    },
+    "rule.npm.logs.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按需重建"
+          }
+        }
+      }
+    },
+    "rule.npm.npx-cache.description": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "npx 包缓存"
+          }
+        }
+      }
+    },
+    "rule.npm.npx-cache.hint": {
+      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下次运行 npx 时重新填充"
+          }
+        }
+      }
+    },
+    "rule.ollama.models.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloaded local models; large and slow to re-pull"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已下载的本地模型,体积大、重新拉取慢"
+          }
+        }
+      }
+    },
+    "rule.ollama.models.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ollama pull re-downloads each model"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ollama pull 可重新下载各模型"
+          }
+        }
+      }
+    },
+    "rule.pip.cache.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wheel and HTTP download cache"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wheel 与 HTTP 下载缓存"
+          }
+        }
+      }
+    },
+    "rule.pip.cache.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pip cache purge; repopulated on install"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pip cache purge;安装时重新填充"
+          }
+        }
+      }
+    },
+    "rule.playwright.browsers.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloaded browser binaries for testing"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "为测试下载的浏览器二进制"
+          }
+        }
+      }
+    },
+    "rule.playwright.browsers.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "npx playwright install"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "npx playwright install 重新安装"
+          }
+        }
+      }
+    },
+    "rule.pnpm.store.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Content-addressable package store"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "内容寻址的包存储"
+          }
+        }
+      }
+    },
+    "rule.pnpm.store.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repopulated by pnpm install; pnpm store prune trims it"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pnpm install 重新填充;pnpm store prune 可精简"
+          }
+        }
+      }
+    },
+    "rule.python-artifacts.venv-and-caches.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Virtual environments and tool caches inside a Python project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Python 项目内的虚拟环境与工具缓存"
+          }
+        }
+      }
+    },
+    "rule.python-artifacts.venv-and-caches.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recreated by uv/pip/poetry and the tools themselves"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "由 uv/pip/poetry 及各工具自动重建"
+          }
+        }
+      }
+    },
+    "rule.rust-artifacts.target.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargo build output"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargo 构建产物"
+          }
+        }
+      }
+    },
+    "rule.rust-artifacts.target.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rebuilt by cargo build"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cargo build 时重建"
+          }
+        }
+      }
+    },
+    "rule.swift-artifacts.build-dir.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SwiftPM build output"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SwiftPM 构建产物"
+          }
+        }
+      }
+    },
+    "rule.swift-artifacts.build-dir.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rebuilt by swift build"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "swift build 时重建"
+          }
+        }
+      }
+    },
+    "rule.uv.cache.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Package and build cache"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "包与构建缓存"
+          }
+        }
+      }
+    },
+    "rule.uv.cache.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "uv cache clean; repopulated on demand"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "uv cache clean;按需重新填充"
           }
         }
       }
@@ -401,93 +964,295 @@
         }
       }
     },
-    "rule.npm.cacache.description": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+    "rule.xcode.archives.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App archives with debug symbols; releases may depend on them"
+          }
+        },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "内容寻址的包缓存"
+            "value": "含调试符号的 App 归档,线上版本可能依赖它们"
           }
         }
       }
     },
-    "rule.npm.cacache.hint": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+    "rule.xcode.derived-data.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build intermediates, indexes, and module caches"
+          }
+        },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "下次 install 时重新填充"
+            "value": "构建中间产物、索引与模块缓存"
           }
         }
       }
     },
-    "rule.npm.npx-cache.description": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+    "rule.xcode.derived-data.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rebuilt by Xcode on the next build"
+          }
+        },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "npx 包缓存"
+            "value": "下次构建时由 Xcode 自动重建"
           }
         }
       }
     },
-    "rule.npm.npx-cache.hint": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+    "rule.xcode.device-support.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Debug symbols copied from connected devices"
+          }
+        },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "下次运行 npx 时重新填充"
+            "value": "从连接设备拷贝的调试符号"
           }
         }
       }
     },
-    "rule.npm.logs.description": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+    "rule.xcode.device-support.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Re-copied when the device connects again"
+          }
+        },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "npm 调试日志"
+            "value": "设备再次连接时自动重新拷贝"
           }
         }
       }
     },
-    "rule.npm.logs.hint": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+    "rule.xcode.simulator-caches.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simulator runtime caches"
+          }
+        },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "按需重建"
+            "value": "模拟器运行时缓存"
           }
         }
       }
     },
-    "rule.node-modules.node-modules.description": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+    "rule.xcode.simulator-caches.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recreated by the simulator"
+          }
+        },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "项目已安装的依赖"
+            "value": "模拟器会自动重建"
           }
         }
       }
     },
-    "rule.node-modules.node-modules.hint": {
-      "comment": "Rule-library copy bridge; en falls back to the rule JSON",
+    "rule.xcode.spm-cache.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swift Package Manager download cache"
+          }
+        },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "由 npm/pnpm/yarn install 重建"
+            "value": "Swift Package Manager 下载缓存"
+          }
+        }
+      }
+    },
+    "rule.xcode.spm-cache.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Packages re-download on the next resolve"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下次解析依赖时重新下载"
+          }
+        }
+      }
+    },
+    "rule.yarn.cache.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Package download cache"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "包下载缓存"
+          }
+        }
+      }
+    },
+    "rule.yarn.cache.hint": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yarn cache clean; repopulated on install"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yarn cache clean;安装时重新填充"
+          }
+        }
+      }
+    },
+    "safety.protected.explanation": {
+      "comment": "Safety tier explanation shown in previews and tooltips",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Credentials and configuration. Shown for awareness only — Mothball never deletes these."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "凭证与配置文件,仅用于展示占用,Mothball 绝不删除。"
+          }
+        }
+      }
+    },
+    "safety.protected.name": {
+      "comment": "Safety tier label: protected, display only",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protected"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "受保护"
+          }
+        }
+      }
+    },
+    "safety.regenerable.explanation": {
+      "comment": "Safety tier explanation shown in previews and tooltips",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deleting is safe; the tool recreates this automatically."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除是安全的,工具会自动重建。"
+          }
+        }
+      }
+    },
+    "safety.regenerable.name": {
+      "comment": "Safety tier label: safe-to-delete, regenerates automatically",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regenerable"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可再生"
+          }
+        }
+      }
+    },
+    "safety.user_data.explanation": {
+      "comment": "Safety tier explanation shown in previews and tooltips",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your own records — not recoverable after deletion. Moved to Trash only, never deleted directly."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你自己的记录,删除后无法找回。只会移入废纸篓,绝不直接删除。"
+          }
+        }
+      }
+    },
+    "safety.user_data.name": {
+      "comment": "Safety tier label: user data, unrecoverable once deleted",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "User data"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用户数据"
           }
         }
       }
     }
-  }
+  },
+  "version": "1.0"
 }
