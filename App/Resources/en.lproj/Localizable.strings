@@ -1,4 +1,6 @@
+"active.devPortsOnly" = "Development ports only";
 "active.tab.containers %lld" = "Containers (%lld)";
+"active.tab.ports %lld" = "Ports (%lld)";
 "active.tab.processes %lld" = "Processes (%lld)";
 "badge.unverified" = "Unverified";
 "badge.unverified.help" = "This rule's paths come from public documentation and have not been verified on a real machine yet. Verify via the Doctor panel.";
@@ -25,6 +27,8 @@
 "dashboard.attention.dockerDown" = "Docker daemon isn't running";
 "dashboard.attention.dockerDown.detail" = "Container resources can't be listed until it starts.";
 "dashboard.attention.empty" = "Nothing needs attention right now.";
+"dashboard.attention.highCPU %@" = "Sustained high CPU · %@";
+"dashboard.attention.longRunning %@ %@" = "Running since %@ · port %@";
 "dashboard.attention.notScanned" = "Run a scan to see what needs attention.";
 "dashboard.attention.reclaimable %@" = "%@ reclaimable";
 "dashboard.attention.review" = "Review";
@@ -83,6 +87,7 @@
 "footer.lastScan %@" = "Last scan %@";
 "footer.notScanned" = "Not scanned yet";
 "footer.totalReclaimed %@" = "Reclaimed %@ so far";
+"inspector.children" = "Child processes";
 "inspector.cwd" = "Working directory";
 "inspector.executable" = "Executable";
 "inspector.memory" = "Memory";
@@ -129,6 +134,9 @@
 "onboarding.welcome.feature.stop" = "Stop containers and local services";
 "onboarding.welcome.privacy" = "Open source (Apache-2.0). Everything runs locally on your Mac; nothing is ever uploaded. Mothball never asks for administrator privileges.";
 "onboarding.welcome.tagline" = "Reclaim the disk space your dev tools leave behind — organized by project.";
+"ports.column.protocol" = "Protocol";
+"ports.empty.description" = "No development process is currently listening on a TCP port.";
+"ports.empty.title" = "No listening ports";
 "projectDetail.clean %@" = "Clean %@";
 "projectDetail.lastActive %@" = "Last active %@";
 "projects.itemCount %lld" = "%lld items";
@@ -138,12 +146,24 @@
 "projects.selectedCount %lld" = "%lld selected";
 "projects.unattributed" = "Unattributed / Global";
 "projects.unattributed.detail" = "Tool data that does not belong to any discovered project";
+"risk.reason.gitDirty" = "This project has uncommitted changes.";
+"risk.reason.noActivitySignals" = "No recent activity, no running process, clean git state.";
+"risk.reason.projectInUse" = "This project has a running process right now.";
+"risk.reason.protectedSafety" = "Protected — display only, never deleted.";
+"risk.reason.recentlyActive" = "This project was active within the last 30 days.";
+"risk.reason.toolCache" = "Global tool cache — likely still in use by the tool.";
+"risk.reason.userData" = "User data — unrecoverable once deleted; trash only.";
+"risk.s0" = "Safe";
+"risk.s1" = "Low Risk";
+"risk.s2" = "Caution";
+"risk.s3" = "High Risk";
 "row.ignore" = "Ignore";
 "row.ignored" = "Ignored";
 "row.protected.help" = "Protected: shown for awareness only. Mothball never deletes this.";
 "row.revealInFinder" = "Reveal in Finder";
 "row.unignore" = "Stop Ignoring";
 "runtime.column.actions" = "Actions";
+"runtime.column.cpu" = "CPU";
 "runtime.column.memory" = "Memory";
 "runtime.column.name" = "Process";
 "runtime.column.port" = "Port";
@@ -158,6 +178,7 @@
 "runtime.stale.message" = "That process ID now belongs to a different process, so nothing was signaled. The list has been refreshed.";
 "runtime.stale.title" = "List out of date";
 "runtime.stop" = "Stop";
+"runtime.stopTree" = "Stop Process Tree";
 "search.prompt" = "Search ports, processes, or projects";
 "settings.codeRoots.add" = "Add directory…";
 "settings.codeRoots.detail" = "Projects are discovered inside these directories (up to 6 levels deep). Rescan after changing.";

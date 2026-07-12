@@ -60,7 +60,9 @@ public struct RuntimeScanner: Sendable {
                 workingDirectory: snapshot.workingDirectory,
                 residentMemoryBytes: snapshot.residentMemoryBytes,
                 startDate: snapshot.startDate,
-                attribution: cwdAttribution
+                attribution: cwdAttribution,
+                parentPID: snapshot.parentPID,
+                cpuTimeNanos: snapshot.cpuTimeNanos
             )
         }
         .sorted { ($0.listeningPorts.first ?? .max) < ($1.listeningPorts.first ?? .max) }

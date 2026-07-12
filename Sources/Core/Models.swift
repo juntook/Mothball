@@ -213,12 +213,17 @@ public struct RunningService: Sendable, Identifiable, Hashable {
     public var residentMemoryBytes: UInt64
     public var startDate: Date
     public var attribution: ResourceAttribution?
+    /// Parent pid for process-tree grouping (SPEC §5.10). 0 when unknown.
+    public var parentPID: Int32
+    /// Cumulative CPU time in nanoseconds at snapshot time (SPEC §5.10).
+    public var cpuTimeNanos: UInt64?
 
     public init(
         pid: Int32, name: String, executablePath: String? = nil,
         listeningPorts: [UInt16] = [], workingDirectory: String? = nil,
         residentMemoryBytes: UInt64 = 0, startDate: Date,
-        attribution: ResourceAttribution? = nil
+        attribution: ResourceAttribution? = nil,
+        parentPID: Int32 = 0, cpuTimeNanos: UInt64? = nil
     ) {
         self.pid = pid
         self.name = name
@@ -228,6 +233,8 @@ public struct RunningService: Sendable, Identifiable, Hashable {
         self.residentMemoryBytes = residentMemoryBytes
         self.startDate = startDate
         self.attribution = attribution
+        self.parentPID = parentPID
+        self.cpuTimeNanos = cpuTimeNanos
     }
 }
 

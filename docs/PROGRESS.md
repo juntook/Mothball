@@ -142,3 +142,20 @@ Needs human verification:
 - Cleanup flow end-to-end on real data in the new Storage UI (selection bar → preview → trash → result).
 - Process inspector + stop/force-kill visually; container tabs under a running daemon.
 - Onboarding two-page flow on a fresh user account (delete the `onboardingComplete` default to re-trigger).
+
+## M8 — Ports view + process metrics + risk display layer — DONE (2026-07-12)
+
+Shipped:
+- `ProcessSnapshot`/`RunningService` gain `parentPID` and `cpuTimeNanos` (mach-time converted); CPU percentages come from differencing consecutive snapshots, sampled only while a runtime tab is visible (5 s loop bound to the view's task — idle means zero polling, SPEC §5.10/§9.11).
+- Ports tab (SPEC §5.9): one row per listening port with protocol/process/project/uptime/memory/stop, "development ports only" filter (hides the ephemeral range ≥ 49152), selection shares the process inspector.
+- Process tree: outline table grouped by ppid when not searching; context menu "Stop Process Tree" stops depth-first children-before-parents; inspector shows child count and offers the tree stop.
+- `RiskEngine` (SPEC §4.4): S0–S3 presentation scores — user_data/protected always S3; regenerable → S2 when the project has a running process or uncommitted changes, S1 when recently active or a global tool cache, S0 only with no activity signals. `GitStatusProbe` feeds the dirty signal (fixed-path git, nil-safe). 10 mapping-invariant tests.
+- Risk badges with explanatory hover on every resource row (disk + container); default selection now skips S2+ items (tighten-only — enforcement unchanged).
+- Overview attention list adds sustained-high-CPU and long-running-listener rows; list capped at 8.
+- Window activation fix: bare `swift run` executables now front their window (activation policy set on appear).
+- 106 tests green.
+
+Needs human verification:
+- CPU column values against Activity Monitor for a busy process.
+- Port rows against `lsof -iTCP -sTCP:LISTEN` output.
+- S2 badge appears for a project with a running dev server and its artifacts start unchecked.

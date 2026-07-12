@@ -42,10 +42,16 @@ final class CleanupModel {
 
     // MARK: Selection
 
-    func defaultSelect(items: [ResourceItem]) {
+    func defaultSelect(items: [ResourceItem], assessments: [String: RiskAssessment] = [:]) {
         // regenerable is checked by default; user_data never is (SPEC §4.3).
+        // The risk layer only tightens: S2+ (in use / dirty) starts unchecked
+        // (SPEC §4.4).
         selectedPaths = Set(
-            items.filter { $0.safety == .regenerable && !ignoredPaths.contains($0.path) }.map(\.path)
+            items.filter { item in
+                guard item.safety == .regenerable, !ignoredPaths.contains(item.path) else { return false }
+                if let assessment = assessments[item.path], assessment.tier >= .s2 { return false }
+                return true
+            }.map(\.path)
         )
     }
 

@@ -12,11 +12,18 @@ public struct ProcessSnapshot: Sendable, Hashable {
     public var workingDirectory: String?
     public var residentMemoryBytes: UInt64
     public var startDate: Date
+    /// Parent pid, for process-tree grouping (SPEC §5.10). 0 when unknown.
+    public var parentPID: Int32
+    /// Cumulative user+system CPU time in nanoseconds. CPU percentages are
+    /// derived by differencing two snapshots (SPEC §5.10); nil when the
+    /// kernel refused rusage for this process.
+    public var cpuTimeNanos: UInt64?
 
     public init(
         pid: Int32, name: String, executablePath: String? = nil,
         listeningTCPPorts: [UInt16] = [], workingDirectory: String? = nil,
-        residentMemoryBytes: UInt64 = 0, startDate: Date = .distantPast
+        residentMemoryBytes: UInt64 = 0, startDate: Date = .distantPast,
+        parentPID: Int32 = 0, cpuTimeNanos: UInt64? = nil
     ) {
         self.pid = pid
         self.name = name
@@ -25,6 +32,8 @@ public struct ProcessSnapshot: Sendable, Hashable {
         self.workingDirectory = workingDirectory
         self.residentMemoryBytes = residentMemoryBytes
         self.startDate = startDate
+        self.parentPID = parentPID
+        self.cpuTimeNanos = cpuTimeNanos
     }
 }
 
@@ -90,6 +99,10 @@ public struct LibprocProcessProvider: ProcessProvider {
             }
         }
         let memory: UInt64 = rusageOK ? rusage.ri_resident_size : 0
+        // ri_*_time are in mach time units; convert to nanoseconds.
+        let cpuNanos: UInt64? = rusageOK
+            ? Self.machToNanos(rusage.ri_user_time &+ rusage.ri_system_time)
+            : nil
 
         return ProcessSnapshot(
             pid: pid,
@@ -98,8 +111,22 @@ public struct LibprocProcessProvider: ProcessProvider {
             listeningTCPPorts: listeningPorts(pid: pid),
             workingDirectory: cwd,
             residentMemoryBytes: memory,
-            startDate: Date(timeIntervalSince1970: TimeInterval(bsd.pbi_start_tvsec))
+            startDate: Date(timeIntervalSince1970: TimeInterval(bsd.pbi_start_tvsec)),
+            parentPID: Int32(bitPattern: bsd.pbi_ppid),
+            cpuTimeNanos: cpuNanos
         )
+    }
+
+    private static let timebase: mach_timebase_info_data_t = {
+        var info = mach_timebase_info_data_t()
+        mach_timebase_info(&info)
+        return info
+    }()
+
+    static func machToNanos(_ machTime: UInt64) -> UInt64 {
+        let tb = timebase
+        guard tb.denom != 0 else { return machTime }
+        return machTime.multipliedReportingOverflow(by: UInt64(tb.numer)).partialValue / UInt64(tb.denom)
     }
 
     public func sendSignal(_ signal: Int32, to pid: Int32) -> Bool {

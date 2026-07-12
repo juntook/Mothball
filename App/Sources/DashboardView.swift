@@ -126,6 +126,34 @@ struct DashboardView: View {
             ))
         }
 
+        // Sustained high CPU (SPEC §5.7 attention order, M8 signal).
+        for service in runtime.services {
+            if let percent = runtime.cpuPercents[service.pid], percent > 50 {
+                items.append(AttentionItem(
+                    id: "cpu-\(service.pid)",
+                    icon: "flame",
+                    iconColor: .red,
+                    title: Text(verbatim: service.name),
+                    subtitle: Text("dashboard.attention.highCPU \(Text(verbatim: String(format: "%.0f%%", percent)))", bundle: loc.appBundle),
+                    action: { shell.openActiveResources(tab: .processes) }
+                ))
+            }
+        }
+
+        // Long-running listeners (> 8 hours).
+        let longRunningCutoff = Date().addingTimeInterval(-8 * 3600)
+        for service in runtime.services
+        where !service.listeningPorts.isEmpty && service.startDate < longRunningCutoff && service.startDate > .distantPast {
+            items.append(AttentionItem(
+                id: "long-\(service.pid)",
+                icon: "clock.badge.exclamationmark",
+                iconColor: .orange,
+                title: Text(verbatim: service.name),
+                subtitle: Text("dashboard.attention.longRunning \(Text(service.startDate, format: .relative(presentation: .named))) \(Text(verbatim: service.listeningPorts.map(String.init).joined(separator: ", ")))", bundle: loc.appBundle),
+                action: { shell.openActiveResources(tab: .ports) }
+            ))
+        }
+
         // Largest reclaimable regenerable items (top 3, ≥ 1 GB).
         let big = scan.items
             .filter { $0.safety == .regenerable && ($0.sizeBytes ?? 0) >= 1_000_000_000 }
@@ -171,7 +199,7 @@ struct DashboardView: View {
 
     @ViewBuilder
     private var attentionSection: some View {
-        let items = attentionItems
+        let items = Array(attentionItems.prefix(8))
         VStack(alignment: .leading, spacing: 8) {
             Text("dashboard.attention.title", bundle: loc.appBundle)
                 .font(.headline)

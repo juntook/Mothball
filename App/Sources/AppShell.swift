@@ -11,6 +11,7 @@ struct AppShell: View {
     @Environment(CleanupModel.self) private var cleanup
     @Environment(RuntimeModel.self) private var runtime
     @Environment(ContainerModel.self) private var containers
+    @Environment(RiskModel.self) private var risk
 
     @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "onboardingComplete")
     @State private var fdaStatus = FullDiskAccess.check()
@@ -40,11 +41,30 @@ struct AppShell: View {
         .task {
             scan.loadRulesIfNeeded()
         }
+        .onAppear {
+            // Bare `swift run` executables have no bundle, so AppKit will not
+            // bring the window forward on its own.
+            NSApp.setActivationPolicy(.regular)
+            NSApp.activate(ignoringOtherApps: true)
+        }
         .onChange(of: scan.isScanning) { _, _ in
             fdaStatus = FullDiskAccess.check()
         }
         .onChange(of: scan.hasScanned) { _, scanned in
-            if scanned { cleanup.defaultSelect(items: scan.items) }
+            if scanned {
+                rebuildRisk()
+                cleanup.defaultSelect(items: scan.items, assessments: risk.itemAssessments)
+                risk.probeGitStatus(projects: scan.projects) {
+                    rebuildRisk()
+                    cleanup.defaultSelect(items: scan.items, assessments: risk.itemAssessments)
+                }
+            }
+        }
+        .onChange(of: runtime.services) { _, _ in
+            rebuildRisk()
+        }
+        .onChange(of: containers.resources) { _, _ in
+            rebuildRisk()
         }
         .sheet(isPresented: $showOnboarding) {
             OnboardingView(isPresented: $showOnboarding)
@@ -103,6 +123,15 @@ struct AppShell: View {
     private var runningResourceCount: Int {
         runtime.services.count
             + containers.resources.filter { $0.kind == .runningContainer }.count
+    }
+
+    private func rebuildRisk() {
+        risk.rebuild(
+            items: scan.items,
+            containers: containers.resources,
+            projects: scan.projects,
+            services: runtime.services
+        )
     }
 
     private var sidebarFooter: some View {

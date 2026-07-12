@@ -8,6 +8,7 @@ struct ContainerListView: View {
     @Environment(LocalizationModel.self) private var loc
     @Environment(ScanModel.self) private var scan
     @Environment(ContainerModel.self) private var containers
+    @Environment(RiskModel.self) private var risk
     let kinds: Set<ContainerResource.Kind>
 
     var body: some View {
@@ -210,6 +211,9 @@ struct ContainerListView: View {
                 HStack(spacing: 6) {
                     Text(verbatim: resource.name)
                     SafetyBadge(safety: resource.safety)
+                    if let assessment = risk.assessment(for: resource) {
+                        RiskBadge(assessment: assessment)
+                    }
                 }
                 HStack(spacing: 8) {
                     if !resource.detail.isEmpty {

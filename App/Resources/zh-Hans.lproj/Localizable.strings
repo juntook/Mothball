@@ -1,4 +1,6 @@
+"active.devPortsOnly" = "仅开发端口";
 "active.tab.containers %lld" = "容器 %lld";
+"active.tab.ports %lld" = "端口 %lld";
 "active.tab.processes %lld" = "进程 %lld";
 "badge.unverified" = "未验证";
 "badge.unverified.help" = "该规则的路径来自公开资料,尚未在真机核实。可通过 Doctor 面板核实。";
@@ -25,6 +27,8 @@
 "dashboard.attention.dockerDown" = "Docker 守护未运行";
 "dashboard.attention.dockerDown.detail" = "守护启动后才能列出容器资源。";
 "dashboard.attention.empty" = "当前没有需要关注的项。";
+"dashboard.attention.highCPU %@" = "持续高 CPU · %@";
+"dashboard.attention.longRunning %@ %@" = "已运行至 %@ 起 · 端口 %@";
 "dashboard.attention.notScanned" = "扫描后这里会显示需要关注的项。";
 "dashboard.attention.reclaimable %@" = "可释放 %@";
 "dashboard.attention.review" = "查看";
@@ -83,6 +87,7 @@
 "footer.lastScan %@" = "上次扫描 %@";
 "footer.notScanned" = "尚未扫描";
 "footer.totalReclaimed %@" = "累计已释放 %@";
+"inspector.children" = "子进程";
 "inspector.cwd" = "工作目录";
 "inspector.executable" = "可执行文件";
 "inspector.memory" = "内存";
@@ -129,6 +134,9 @@
 "onboarding.welcome.feature.stop" = "停止容器与本地服务";
 "onboarding.welcome.privacy" = "开源(Apache-2.0)。一切都在你的 Mac 上本地运行,不上传任何数据;永不请求管理员权限。";
 "onboarding.welcome.tagline" = "把开发工具留下的磁盘空间收回来——按项目聚合。";
+"ports.column.protocol" = "协议";
+"ports.empty.description" = "当前没有开发进程在监听 TCP 端口。";
+"ports.empty.title" = "没有监听端口";
 "projectDetail.clean %@" = "清理 %@";
 "projectDetail.lastActive %@" = "最后活跃 %@";
 "projects.itemCount %lld" = "%lld 项";
@@ -138,12 +146,24 @@
 "projects.selectedCount %lld" = "已选 %lld 项";
 "projects.unattributed" = "未归属 / 全局";
 "projects.unattributed.detail" = "不属于任何已发现项目的工具数据";
+"risk.reason.gitDirty" = "该项目有未提交的变更。";
+"risk.reason.noActivitySignals" = "无近期活跃、无运行中进程、Git 状态干净。";
+"risk.reason.projectInUse" = "该项目当前有正在运行的进程。";
+"risk.reason.protectedSafety" = "受保护,仅展示,绝不删除。";
+"risk.reason.recentlyActive" = "该项目最近 30 天内活跃过。";
+"risk.reason.toolCache" = "全局工具缓存,工具可能仍在使用。";
+"risk.reason.userData" = "用户数据,删除后不可恢复;只会进废纸篓。";
+"risk.s0" = "安全";
+"risk.s1" = "低风险";
+"risk.s2" = "谨慎";
+"risk.s3" = "高风险";
 "row.ignore" = "忽略";
 "row.ignored" = "已忽略";
 "row.protected.help" = "受保护:仅展示占用,Mothball 绝不删除。";
 "row.revealInFinder" = "在访达中显示";
 "row.unignore" = "取消忽略";
 "runtime.column.actions" = "操作";
+"runtime.column.cpu" = "CPU";
 "runtime.column.memory" = "内存";
 "runtime.column.name" = "进程";
 "runtime.column.port" = "端口";
@@ -158,6 +178,7 @@
 "runtime.stale.message" = "该进程 ID 已被其他进程复用,因此未发送任何信号。列表已刷新。";
 "runtime.stale.title" = "列表已过期";
 "runtime.stop" = "停止";
+"runtime.stopTree" = "停止整个进程树";
 "search.prompt" = "搜索端口、进程或项目";
 "settings.codeRoots.add" = "添加目录…";
 "settings.codeRoots.detail" = "在这些目录内发现项目(最深 6 层)。修改后请重新扫描。";

@@ -2,8 +2,9 @@
 import Core
 import SwiftUI
 
-/// Active resources (SPEC §5.7): processes and containers today; ports and
-/// background services join in M8/M9. Row selection opens an inspector.
+/// Active resources (SPEC §5.7): ports, processes, containers. Background
+/// services join in M9. Row selection opens an inspector. CPU sampling runs
+/// only while a runtime tab is visible (SPEC §5.10, §9.11).
 struct ActiveResourcesView: View {
     @Environment(LocalizationModel.self) private var loc
     @Environment(ShellModel.self) private var shell
@@ -12,21 +13,36 @@ struct ActiveResourcesView: View {
     @Environment(ContainerModel.self) private var containers
 
     @State private var selectedPID: RunningService.ID?
+    /// "Development ports only" filter (SPEC §5.9): hides the ephemeral range.
+    @AppStorage("devPortsOnly") private var devPortsOnly = true
+
+    private static let ephemeralPortFloor: UInt16 = 49152
 
     var body: some View {
         @Bindable var shell = shell
         @Bindable var runtime = runtime
         return VStack(spacing: 0) {
-            Picker(selection: $shell.activeResourceTab) {
-                Text("active.tab.processes \(runtime.services.count)", bundle: loc.appBundle)
-                    .tag(ActiveResourceTab.processes)
-                Text("active.tab.containers \(runningContainerCount)", bundle: loc.appBundle)
-                    .tag(ActiveResourceTab.containers)
-            } label: {
-                EmptyView()
+            HStack {
+                Picker(selection: $shell.activeResourceTab) {
+                    Text("active.tab.ports \(portRows.count)", bundle: loc.appBundle)
+                        .tag(ActiveResourceTab.ports)
+                    Text("active.tab.processes \(runtime.services.count)", bundle: loc.appBundle)
+                        .tag(ActiveResourceTab.processes)
+                    Text("active.tab.containers \(containerCount)", bundle: loc.appBundle)
+                        .tag(ActiveResourceTab.containers)
+                } label: {
+                    EmptyView()
+                }
+                .pickerStyle(.segmented)
+                .labelsHidden()
+
+                if shell.activeResourceTab == .ports {
+                    Toggle(isOn: $devPortsOnly) {
+                        Text("active.devPortsOnly", bundle: loc.appBundle)
+                    }
+                    .toggleStyle(.checkbox)
+                }
             }
-            .pickerStyle(.segmented)
-            .labelsHidden()
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
 
@@ -36,7 +52,8 @@ struct ActiveResourcesView: View {
         .toolbar {
             ToolbarItem {
                 Button {
-                    refresh()
+                    runtime.refresh(projects: scan.projects)
+                    containers.refresh(projects: scan.projects)
                 } label: {
                     if runtime.isRefreshing || containers.isRefreshing {
                         ProgressView().controlSize(.small)
@@ -51,11 +68,19 @@ struct ActiveResourcesView: View {
                 .disabled(runtime.isRefreshing)
             }
         }
-        .task {
-            refresh()
+        .task(id: shell.activeResourceTab) {
+            containers.refresh(projects: scan.projects)
+            guard shell.activeResourceTab != .containers else { return }
+            // Visible-only sampling loop: cancelled the moment this view or
+            // tab goes away, so idle means zero polling (SPEC §5.10).
+            while !Task.isCancelled {
+                runtime.refresh(projects: scan.projects)
+                try? await Task.sleep(for: .seconds(5))
+                if Task.isCancelled { break }
+            }
         }
         .inspector(isPresented: Binding(
-            get: { shell.activeResourceTab == .processes && selectedService != nil },
+            get: { shell.activeResourceTab != .containers && selectedService != nil },
             set: { if !$0 { selectedPID = nil } }
         )) {
             if let service = selectedService {
@@ -93,12 +118,7 @@ struct ActiveResourcesView: View {
         }
     }
 
-    private func refresh() {
-        runtime.refresh(projects: scan.projects)
-        containers.refresh(projects: scan.projects)
-    }
-
-    private var runningContainerCount: Int {
+    private var containerCount: Int {
         containers.resources.filter { $0.kind == .runningContainer || $0.kind == .stoppedContainer }.count
     }
 
@@ -121,6 +141,20 @@ struct ActiveResourcesView: View {
     @ViewBuilder
     private var tabContent: some View {
         switch shell.activeResourceTab {
+        case .ports:
+            if portRows.isEmpty && !runtime.isRefreshing {
+                ContentUnavailableView {
+                    Label {
+                        Text("ports.empty.title", bundle: loc.appBundle)
+                    } icon: {
+                        Image(systemName: "network")
+                    }
+                } description: {
+                    Text("ports.empty.description", bundle: loc.appBundle)
+                }
+            } else {
+                portTable
+            }
         case .processes:
             if runtime.services.isEmpty && !runtime.isRefreshing {
                 ContentUnavailableView {
@@ -133,74 +167,208 @@ struct ActiveResourcesView: View {
                     Text("runtime.empty.description", bundle: loc.appBundle)
                 }
             } else {
-                serviceTable
+                processTable
             }
         case .containers:
             ContainerListView(kinds: [.runningContainer, .stoppedContainer])
         }
     }
 
-    private var serviceTable: some View {
-        Table(filteredServices, selection: $selectedPID) {
-            TableColumn(Text("runtime.column.port", bundle: loc.appBundle)) { service in
-                Text(verbatim: service.listeningPorts.isEmpty
-                    ? "—"
-                    : service.listeningPorts.map(String.init).joined(separator: ", "))
-                    .monospacedDigit()
-            }
-            .width(min: 60, ideal: 90)
+    // MARK: Ports tab (SPEC §5.9)
 
-            TableColumn(Text("runtime.column.name", bundle: loc.appBundle)) { service in
+    private struct PortRow: Identifiable {
+        let port: UInt16
+        let service: RunningService
+        var id: String { "\(port):\(service.pid)" }
+    }
+
+    private var portRows: [PortRow] {
+        filteredServices
+            .flatMap { service in
+                service.listeningPorts.map { PortRow(port: $0, service: service) }
+            }
+            .filter { !devPortsOnly || $0.port < Self.ephemeralPortFloor }
+            .sorted { $0.port < $1.port }
+    }
+
+    private var portTable: some View {
+        Table(portRows, selection: Binding(
+            get: { selectedPID.map { pid in portRows.first { $0.service.pid == pid }?.id } ?? nil },
+            set: { rowID in
+                selectedPID = rowID.flatMap { id in portRows.first { $0.id == id }?.service.pid }
+            }
+        )) {
+            TableColumn(Text("runtime.column.port", bundle: loc.appBundle)) { row in
+                Text(verbatim: "\(row.port)").monospacedDigit()
+            }
+            .width(min: 60, ideal: 80)
+
+            TableColumn(Text("ports.column.protocol", bundle: loc.appBundle)) { _ in
+                Text(verbatim: "TCP").foregroundStyle(.secondary)
+            }
+            .width(min: 50, ideal: 60)
+
+            TableColumn(Text("runtime.column.name", bundle: loc.appBundle)) { row in
                 VStack(alignment: .leading, spacing: 1) {
-                    Text(verbatim: service.name)
-                    Text(verbatim: "PID \(service.pid)")
+                    Text(verbatim: row.service.name)
+                    Text(verbatim: "PID \(row.service.pid)")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                 }
             }
             .width(min: 120, ideal: 160)
 
-            TableColumn(Text("runtime.column.project", bundle: loc.appBundle)) { service in
-                if let attribution = service.attribution {
-                    Text(verbatim: (attribution.projectPath as NSString).lastPathComponent)
-                        .help(Text("evidence.processCwd", bundle: loc.appBundle))
-                } else {
-                    Text(verbatim: service.workingDirectory ?? "—")
-                        .foregroundStyle(.secondary)
-                        .lineLimit(1)
-                        .truncationMode(.middle)
-                }
+            TableColumn(Text("runtime.column.project", bundle: loc.appBundle)) { row in
+                projectCell(row.service)
             }
 
-            TableColumn(Text("runtime.column.memory", bundle: loc.appBundle)) { service in
-                SizeText(bytes: Int64(service.residentMemoryBytes)).font(.callout)
-            }
-            .width(min: 70, ideal: 90)
-
-            TableColumn(Text("runtime.column.uptime", bundle: loc.appBundle)) { service in
-                Text(service.startDate, format: .relative(presentation: .numeric))
+            TableColumn(Text("runtime.column.uptime", bundle: loc.appBundle)) { row in
+                Text(row.service.startDate, format: .relative(presentation: .numeric))
                     .foregroundStyle(.secondary)
             }
             .width(min: 90, ideal: 120)
 
-            TableColumn(Text("runtime.column.actions", bundle: loc.appBundle)) { service in
-                if runtime.stoppingPIDs.contains(service.pid) {
-                    ProgressView().controlSize(.small)
-                } else {
-                    Button {
-                        runtime.stop(service, projects: scan.projects)
-                    } label: {
-                        Text("runtime.stop", bundle: loc.appBundle)
-                    }
-                    .controlSize(.small)
-                }
+            TableColumn(Text("runtime.column.memory", bundle: loc.appBundle)) { row in
+                SizeText(bytes: Int64(row.service.residentMemoryBytes)).font(.callout)
+            }
+            .width(min: 70, ideal: 90)
+
+            TableColumn(Text("runtime.column.actions", bundle: loc.appBundle)) { row in
+                stopButton(row.service)
             }
             .width(min: 70, ideal: 80)
         }
     }
+
+    // MARK: Processes tab (tree per SPEC §5.10)
+
+    private struct ProcessNode: Identifiable {
+        let service: RunningService
+        var children: [ProcessNode]?
+        var id: Int32 { service.pid }
+    }
+
+    /// Parent/child outline when not searching; flat rows while filtering.
+    private var processNodes: [ProcessNode] {
+        let services = filteredServices
+        guard shell.searchText.isEmpty else {
+            return services.map { ProcessNode(service: $0, children: nil) }
+        }
+        let pids = Set(services.map(\.pid))
+        var childrenByParent = [Int32: [RunningService]]()
+        for service in services where pids.contains(service.parentPID) && service.parentPID != service.pid {
+            childrenByParent[service.parentPID, default: []].append(service)
+        }
+        func node(_ service: RunningService) -> ProcessNode {
+            let children = (childrenByParent[service.pid] ?? []).map(node)
+            return ProcessNode(service: service, children: children.isEmpty ? nil : children)
+        }
+        return services
+            .filter { !pids.contains($0.parentPID) || $0.parentPID == $0.pid }
+            .map(node)
+    }
+
+    private var processTable: some View {
+        Table(processNodes, children: \.children, selection: $selectedPID) {
+            TableColumn(Text("runtime.column.port", bundle: loc.appBundle)) { node in
+                Text(verbatim: node.service.listeningPorts.isEmpty
+                    ? "—"
+                    : node.service.listeningPorts.map(String.init).joined(separator: ", "))
+                    .monospacedDigit()
+            }
+            .width(min: 60, ideal: 90)
+
+            TableColumn(Text("runtime.column.name", bundle: loc.appBundle)) { node in
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(verbatim: node.service.name)
+                    Text(verbatim: "PID \(node.service.pid)")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .width(min: 130, ideal: 180)
+
+            TableColumn(Text("runtime.column.project", bundle: loc.appBundle)) { node in
+                projectCell(node.service)
+            }
+
+            TableColumn(Text("runtime.column.cpu", bundle: loc.appBundle)) { node in
+                if let percent = runtime.cpuPercents[node.service.pid] {
+                    Text(verbatim: String(format: "%.1f%%", percent))
+                        .monospacedDigit()
+                        .foregroundStyle(percent > 50 ? .orange : .primary)
+                } else {
+                    Text(verbatim: "—").foregroundStyle(.tertiary)
+                }
+            }
+            .width(min: 55, ideal: 70)
+
+            TableColumn(Text("runtime.column.memory", bundle: loc.appBundle)) { node in
+                SizeText(bytes: Int64(node.service.residentMemoryBytes)).font(.callout)
+            }
+            .width(min: 70, ideal: 90)
+
+            TableColumn(Text("runtime.column.uptime", bundle: loc.appBundle)) { node in
+                Text(node.service.startDate, format: .relative(presentation: .numeric))
+                    .foregroundStyle(.secondary)
+            }
+            .width(min: 90, ideal: 120)
+
+            TableColumn(Text("runtime.column.actions", bundle: loc.appBundle)) { node in
+                stopButton(node.service)
+            }
+            .width(min: 70, ideal: 80)
+        }
+        .contextMenu(forSelectionType: RunningService.ID.self) { pids in
+            if let pid = pids.first,
+               let service = runtime.services.first(where: { $0.pid == pid }) {
+                Button {
+                    runtime.stop(service, projects: scan.projects)
+                } label: {
+                    Text("runtime.stop", bundle: loc.appBundle)
+                }
+                if !runtime.children(of: service).isEmpty {
+                    Button {
+                        runtime.stopTree(service, projects: scan.projects)
+                    } label: {
+                        Text("runtime.stopTree", bundle: loc.appBundle)
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: Shared cells
+
+    @ViewBuilder
+    private func projectCell(_ service: RunningService) -> some View {
+        if let attribution = service.attribution {
+            Text(verbatim: (attribution.projectPath as NSString).lastPathComponent)
+                .help(Text("evidence.processCwd", bundle: loc.appBundle))
+        } else {
+            Text(verbatim: service.workingDirectory ?? "—")
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+                .truncationMode(.middle)
+        }
+    }
+
+    @ViewBuilder
+    private func stopButton(_ service: RunningService) -> some View {
+        if runtime.stoppingPIDs.contains(service.pid) {
+            ProgressView().controlSize(.small)
+        } else {
+            Button {
+                runtime.stop(service, projects: scan.projects)
+            } label: {
+                Text("runtime.stop", bundle: loc.appBundle)
+            }
+            .controlSize(.small)
+        }
+    }
 }
 
-/// Process detail inspector (SPEC §5.7).
+/// Process detail inspector (SPEC §5.7/§5.9).
 struct ServiceInspector: View {
     @Environment(LocalizationModel.self) private var loc
     @Environment(ScanModel.self) private var scan
@@ -247,11 +415,21 @@ struct ServiceInspector: View {
                                 .truncationMode(.middle)
                         }
                     }
+                    if let percent = runtime.cpuPercents[service.pid] {
+                        detailRow("runtime.column.cpu") {
+                            Text(verbatim: String(format: "%.1f%%", percent)).monospacedDigit()
+                        }
+                    }
                     detailRow("inspector.memory") {
                         SizeText(bytes: Int64(service.residentMemoryBytes))
                     }
                     detailRow("inspector.uptime") {
                         Text(service.startDate, format: .relative(presentation: .named))
+                    }
+                    if !runtime.children(of: service).isEmpty {
+                        detailRow("inspector.children") {
+                            Text(verbatim: "\(runtime.children(of: service).count)")
+                        }
                     }
                 }
                 .font(.callout)
@@ -280,11 +458,20 @@ struct ServiceInspector: View {
                     if runtime.stoppingPIDs.contains(service.pid) {
                         ProgressView().controlSize(.small)
                     } else {
-                        Button(role: .destructive) {
-                            runtime.stop(service, projects: scan.projects)
+                        Menu {
+                            if !runtime.children(of: service).isEmpty {
+                                Button {
+                                    runtime.stopTree(service, projects: scan.projects)
+                                } label: {
+                                    Text("runtime.stopTree", bundle: loc.appBundle)
+                                }
+                            }
                         } label: {
                             Text("runtime.stop", bundle: loc.appBundle)
+                        } primaryAction: {
+                            runtime.stop(service, projects: scan.projects)
                         }
+                        .fixedSize()
                     }
                 }
             }

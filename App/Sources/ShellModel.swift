@@ -13,9 +13,10 @@ enum SidebarSection: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 }
 
-/// Tabs inside Active Resources. Ports and background services arrive with
-/// M8/M9 (SPEC §5.7).
+/// Tabs inside Active Resources. Background services arrive with M9
+/// (SPEC §5.7).
 enum ActiveResourceTab: String, CaseIterable, Identifiable {
+    case ports
     case processes
     case containers
 

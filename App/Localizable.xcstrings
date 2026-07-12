@@ -1,6 +1,23 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "active.devPortsOnly": {
+      "comment": "Ports tab filter toggle",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Development ports only"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅开发端口"
+          }
+        }
+      }
+    },
     "active.tab.containers %lld": {
       "comment": "Tab title; %lld is a count",
       "localizations": {
@@ -14,6 +31,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "容器 %lld"
+          }
+        }
+      }
+    },
+    "active.tab.ports %lld": {
+      "comment": "Tab title; %lld is a count",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ports (%lld)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "端口 %lld"
           }
         }
       }
@@ -456,6 +490,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "当前没有需要关注的项。"
+          }
+        }
+      }
+    },
+    "dashboard.attention.highCPU %@": {
+      "comment": "Attention row subtitle; %@ is a percentage",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sustained high CPU · %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "持续高 CPU · %@"
+          }
+        }
+      }
+    },
+    "dashboard.attention.longRunning %@ %@": {
+      "comment": "Attention row subtitle; relative date, port list",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Running since %@ · port %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已运行至 %@ 起 · 端口 %@"
           }
         }
       }
@@ -1446,6 +1514,23 @@
         }
       }
     },
+    "inspector.children": {
+      "comment": "Process inspector field label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Child processes"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "子进程"
+          }
+        }
+      }
+    },
     "inspector.cwd": {
       "comment": "Process inspector field label",
       "localizations": {
@@ -2228,6 +2313,57 @@
         }
       }
     },
+    "ports.column.protocol": {
+      "comment": "Ports table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protocol"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "协议"
+          }
+        }
+      }
+    },
+    "ports.empty.description": {
+      "comment": "Ports tab empty state message",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No development process is currently listening on a TCP port."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当前没有开发进程在监听 TCP 端口。"
+          }
+        }
+      }
+    },
+    "ports.empty.title": {
+      "comment": "Ports tab empty state title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No listening ports"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有监听端口"
+          }
+        }
+      }
+    },
     "projectDetail.clean %@": {
       "comment": "Project sheet primary action; %@ is a byte count",
       "localizations": {
@@ -2381,6 +2517,193 @@
         }
       }
     },
+    "risk.reason.gitDirty": {
+      "comment": "Risk reason tooltip",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This project has uncommitted changes."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "该项目有未提交的变更。"
+          }
+        }
+      }
+    },
+    "risk.reason.noActivitySignals": {
+      "comment": "Risk reason tooltip",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No recent activity, no running process, clean git state."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无近期活跃、无运行中进程、Git 状态干净。"
+          }
+        }
+      }
+    },
+    "risk.reason.projectInUse": {
+      "comment": "Risk reason tooltip",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This project has a running process right now."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "该项目当前有正在运行的进程。"
+          }
+        }
+      }
+    },
+    "risk.reason.protectedSafety": {
+      "comment": "Risk reason tooltip",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protected — display only, never deleted."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "受保护,仅展示,绝不删除。"
+          }
+        }
+      }
+    },
+    "risk.reason.recentlyActive": {
+      "comment": "Risk reason tooltip",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This project was active within the last 30 days."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "该项目最近 30 天内活跃过。"
+          }
+        }
+      }
+    },
+    "risk.reason.toolCache": {
+      "comment": "Risk reason tooltip",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Global tool cache — likely still in use by the tool."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全局工具缓存,工具可能仍在使用。"
+          }
+        }
+      }
+    },
+    "risk.reason.userData": {
+      "comment": "Risk reason tooltip",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "User data — unrecoverable once deleted; trash only."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用户数据,删除后不可恢复;只会进废纸篓。"
+          }
+        }
+      }
+    },
+    "risk.s0": {
+      "comment": "Risk tier S0 badge (SPEC 4.4)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safe"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安全"
+          }
+        }
+      }
+    },
+    "risk.s1": {
+      "comment": "Risk tier S1 badge",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Low Risk"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "低风险"
+          }
+        }
+      }
+    },
+    "risk.s2": {
+      "comment": "Risk tier S2 badge",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caution"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "谨慎"
+          }
+        }
+      }
+    },
+    "risk.s3": {
+      "comment": "Risk tier S3 badge",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "High Risk"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "高风险"
+          }
+        }
+      }
+    },
     "row.ignore": {
       "comment": "Context menu: add to ignore list",
       "localizations": {
@@ -2479,6 +2802,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "操作"
+          }
+        }
+      }
+    },
+    "runtime.column.cpu": {
+      "comment": "Process table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU"
           }
         }
       }
@@ -2717,6 +3057,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "停止"
+          }
+        }
+      }
+    },
+    "runtime.stopTree": {
+      "comment": "Context-menu action stopping a subtree, children first",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop Process Tree"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止整个进程树"
           }
         }
       }

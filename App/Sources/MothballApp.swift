@@ -10,6 +10,7 @@ struct MothballApp: App {
     @State private var runtimeModel = RuntimeModel()
     @State private var containerModel = ContainerModel()
     @State private var updaterModel = UpdaterModel()
+    @State private var riskModel = RiskModel()
     @Environment(\.openWindow) private var openWindow
 
     var body: some Scene {
@@ -22,6 +23,7 @@ struct MothballApp: App {
                 .environment(runtimeModel)
                 .environment(containerModel)
                 .environment(updaterModel)
+                .environment(riskModel)
                 .environment(\.locale, loc.locale)
         }
         .commands {
@@ -87,6 +89,7 @@ struct MothballApp: App {
             .environment(loc)
             .environment(scanModel)
             .environment(cleanupModel)
+            .environment(riskModel)
             .environment(\.locale, loc.locale)
             .frame(minWidth: 600, minHeight: 400)
         }

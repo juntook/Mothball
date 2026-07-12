@@ -34,6 +34,46 @@ struct SafetyBadge: View {
     }
 }
 
+/// S0–S3 presentation-layer risk badge (SPEC §4.4). Hover explains why.
+struct RiskBadge: View {
+    @Environment(LocalizationModel.self) private var loc
+    let assessment: RiskAssessment
+
+    var body: some View {
+        Text(tierKey, bundle: loc.appBundle)
+            .font(.caption2)
+            .padding(.horizontal, 5)
+            .padding(.vertical, 1)
+            .background(color.opacity(0.18), in: Capsule())
+            .foregroundStyle(color)
+            .help(reasonText)
+    }
+
+    private var tierKey: LocalizedStringKey {
+        switch assessment.tier {
+        case .s0: "risk.s0"
+        case .s1: "risk.s1"
+        case .s2: "risk.s2"
+        case .s3: "risk.s3"
+        }
+    }
+
+    private var color: Color {
+        switch assessment.tier {
+        case .s0: .green
+        case .s1: .yellow
+        case .s2: .orange
+        case .s3: .red
+        }
+    }
+
+    private var reasonText: String {
+        assessment.reasons
+            .map { loc.string("risk.reason.\($0.rawValue)") }
+            .joined(separator: "\n")
+    }
+}
+
 struct DraftBadge: View {
     @Environment(LocalizationModel.self) private var loc
 
@@ -159,6 +199,7 @@ struct SelectableResourceRow: View {
     @Environment(ScanModel.self) private var scan
     @Environment(CleanupModel.self) private var cleanup
     @Environment(LocalizationModel.self) private var loc
+    @Environment(RiskModel.self) private var risk
     let item: ResourceItem
 
     private var isIgnored: Bool { cleanup.ignoredPaths.contains(item.path) }
@@ -216,6 +257,9 @@ struct SelectableResourceRow: View {
             HStack(spacing: 6) {
                 Text(verbatim: displayName)
                 SafetyBadge(safety: item.safety)
+                if let assessment = risk.assessment(for: item) {
+                    RiskBadge(assessment: assessment)
+                }
                 if isIgnored {
                     Text("row.ignored", bundle: loc.appBundle)
                         .font(.caption2)
