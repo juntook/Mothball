@@ -30,6 +30,9 @@ struct AppShell: View {
                 FDABanner(status: fdaStatus)
                 detailView
             }
+            // Pin to the top and fill the column — otherwise a non-greedy
+            // page gets centered with blank space above the banner.
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(AppBackground())
         }
         .frame(minWidth: 920, minHeight: 560)
@@ -54,6 +57,7 @@ struct AppShell: View {
                         } icon: {
                             Image(systemName: "power")
                         }
+                        .labelStyle(.titleAndIcon)
                     }
                     .buttonStyle(.borderedProminent)
                 }
@@ -284,6 +288,7 @@ struct AppShell: View {
                 } icon: {
                     Image(systemName: "arrow.clockwise")
                 }
+                .labelStyle(.titleAndIcon)
             }
         }
         .disabled(scan.isScanning)
