@@ -13,6 +13,7 @@ struct AppShell: View {
     @Environment(ContainerModel.self) private var containers
     @Environment(RiskModel.self) private var risk
     @Environment(ProtectionModel.self) private var protection
+    @Environment(SessionModel.self) private var sessionModel
 
     @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "onboardingComplete")
     @State private var fdaStatus = FullDiskAccess.check()
@@ -80,6 +81,26 @@ struct AppShell: View {
         )) {
             CleanupSheet()
         }
+        .sheet(item: Binding(
+            get: { sessionModel.pendingEnd },
+            set: { if $0 == nil { sessionModel.dismiss() } }
+        )) { session in
+            SessionEndSheet(session: session)
+        }
+        .onChange(of: runtime.services) { _, _ in
+            sessionModel.rebuild(
+                projects: scan.projects,
+                services: runtime.services,
+                containers: containers.resources
+            )
+        }
+        .onChange(of: containers.resources) { _, _ in
+            sessionModel.rebuild(
+                projects: scan.projects,
+                services: runtime.services,
+                containers: containers.resources
+            )
+        }
     }
 
     // MARK: Sidebar
@@ -109,6 +130,14 @@ struct AppShell: View {
                     Image(systemName: "internaldrive")
                 }
                 .tag(SidebarSection.storage)
+
+                Label {
+                    Text("sidebar.sessions", bundle: loc.appBundle)
+                } icon: {
+                    Image(systemName: "rectangle.stack.badge.play")
+                }
+                .tag(SidebarSection.sessions)
+                .badge(sessionModel.sessions.count)
 
                 Label {
                     Text("sidebar.settings", bundle: loc.appBundle)
@@ -219,6 +248,8 @@ struct AppShell: View {
             ActiveResourcesView()
         case .storage:
             StorageView()
+        case .sessions:
+            SessionsView()
         case .settings:
             SettingsView()
         }

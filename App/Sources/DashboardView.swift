@@ -10,6 +10,7 @@ struct DashboardView: View {
     @Environment(ScanModel.self) private var scan
     @Environment(RuntimeModel.self) private var runtime
     @Environment(ContainerModel.self) private var containers
+    @Environment(SessionModel.self) private var sessionModel
 
     var body: some View {
         ScrollView {
@@ -17,6 +18,7 @@ struct DashboardView: View {
                 header
                 metricGrid
                 attentionSection
+                currentSessionSection
             }
             .padding(20)
         }
@@ -242,6 +244,49 @@ struct DashboardView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+    }
+
+    // MARK: Current session (SPEC §5.13)
+
+    @ViewBuilder
+    private var currentSessionSection: some View {
+        if let session = sessionModel.sessions.first {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("dashboard.session.title", bundle: loc.appBundle)
+                    .font(.headline)
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Text(verbatim: session.projectName)
+                            .fontWeight(.semibold)
+                        Text(verbatim: (session.projectPath as NSString).abbreviatingWithTildeInPath)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                            .truncationMode(.middle)
+                        Spacer()
+                    }
+                    Text("dashboard.session.summary \(session.services.count) \(session.containers.count) \(Text(session.totalMemoryBytes, format: .byteCount(style: .memory)))", bundle: loc.appBundle)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    HStack {
+                        Spacer()
+                        Button {
+                            shell.open(.sessions)
+                        } label: {
+                            Text("dashboard.session.view", bundle: loc.appBundle)
+                        }
+                        Button {
+                            sessionModel.beginConfirmation(session)
+                        } label: {
+                            Text("sessions.end", bundle: loc.appBundle)
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                }
+                .padding(14)
+                .background(.background.secondary, in: RoundedRectangle(cornerRadius: 10))
+            }
+        }
     }
 
     private var emptyAttention: some View {

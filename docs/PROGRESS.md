@@ -173,3 +173,17 @@ Needs human verification:
 - `brew services` flows against a real postgres/redis install (kill vs stop vs run semantics).
 - New draft rules against this machine via Doctor; promote what checks out.
 - A path-prefix protection rule visibly locks a project's artifacts and survives restart.
+
+## M10 — Dev sessions + menu bar — DONE (2026-07-12)
+
+Shipped:
+- `SessionResolver` (SPEC §5.13): running services and running containers group into per-project sessions via the existing attribution chain (no new heuristics); stopped containers and unattributed resources never join. `SessionTemplate` + versioned store (save/apply/remove; replace-by-name).
+- Sessions page (⌘4): session cards with resource chips (protected ones locked), memory/port impact line, save-as-template, end-session; templates section with apply (routes to the live session's confirmation, or explains there is nothing running).
+- End-session sheet: per-resource checkboxes grouped processes/containers, protected resources listed under "Kept" and never selectable, live progress ("Stopping X…"), per-step results with partial-failure summary; optional "review this project's regenerable artifacts" hands off to the mandatory cleanup preview afterwards — the sheet itself never deletes files. Processes stop via SIGTERM + grace (no auto-SIGKILL; survivors are reported and can be force-quit individually), then containers via `docker stop`. Every step audited under ruleID "session".
+- Overview gains the current-session card; sidebar gains Sessions with a live badge.
+- `MenuBarExtra` (SPEC §5.14, opt-in via Settings → General): port/resource/reclaimable summary, current session with "End Development Session…" (opens the main-window confirmation — nothing destructive fires from the menu), find port, scan, open main window, quit. Static SF Symbol icon, no animation.
+- 5 new tests (session grouping/sorting/exclusions, template store). 119 total, green.
+
+Needs human verification:
+- End a real mixed session (vite + compose) and check stop order, partial-failure reporting, and container refresh.
+- Menu bar toggle on/off, and the end-session path from the menu bar.

@@ -16,12 +16,21 @@ struct SettingsView: View {
     @State private var exclusions: [String] = []
     @State private var newRuleKind: ProtectionRule.Kind = .pathPrefix
     @State private var newRuleValue = ""
+    @AppStorage("menuBarEnabled") private var menuBarEnabled = false
 
     var body: some View {
         @Bindable var loc = loc
         return Form {
             // MARK: General
             Section {
+                Toggle(isOn: $menuBarEnabled) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("settings.menuBar", bundle: loc.appBundle)
+                        Text("settings.menuBar.detail", bundle: loc.appBundle)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
                 Toggle(isOn: $directDelete) {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("settings.directDelete", bundle: loc.appBundle)

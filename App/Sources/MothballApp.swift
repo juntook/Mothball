@@ -13,10 +13,12 @@ struct MothballApp: App {
     @State private var riskModel = RiskModel()
     @State private var brewModel = BrewModel()
     @State private var protectionModel = ProtectionModel()
+    @State private var sessionModel = SessionModel()
+    @AppStorage("menuBarEnabled") private var menuBarEnabled = false
     @Environment(\.openWindow) private var openWindow
 
     var body: some Scene {
-        WindowGroup("Mothball") {
+        WindowGroup("Mothball", id: "main") {
             AppShell()
                 .environment(loc)
                 .environment(shell)
@@ -28,6 +30,7 @@ struct MothballApp: App {
                 .environment(riskModel)
                 .environment(brewModel)
                 .environment(protectionModel)
+                .environment(sessionModel)
                 .environment(\.locale, loc.locale)
         }
         .commands {
@@ -59,6 +62,12 @@ struct MothballApp: App {
                     Text("sidebar.storage", bundle: loc.appBundle)
                 }
                 .keyboardShortcut("3", modifiers: .command)
+                Button {
+                    shell.open(.sessions)
+                } label: {
+                    Text("sidebar.sessions", bundle: loc.appBundle)
+                }
+                .keyboardShortcut("4", modifiers: .command)
                 Divider()
                 Button {
                     scanModel.scan()
@@ -96,6 +105,19 @@ struct MothballApp: App {
             .environment(riskModel)
             .environment(\.locale, loc.locale)
             .frame(minWidth: 600, minHeight: 400)
+        }
+
+        MenuBarExtra(isInserted: $menuBarEnabled) {
+            MenuBarContent()
+                .environment(loc)
+                .environment(shell)
+                .environment(scanModel)
+                .environment(runtimeModel)
+                .environment(containerModel)
+                .environment(sessionModel)
+                .environment(\.locale, loc.locale)
+        } label: {
+            Image(systemName: "shippingbox")
         }
     }
 }
