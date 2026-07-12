@@ -1,3 +1,5 @@
+**English** | [简体中文](README.zh-Hans.md)
+
 # Mothball
 
 **Reclaim the disk space your dev tools leave behind.**
@@ -17,13 +19,15 @@ Pre-release, under active development. See [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## Install
 
-Once releases are published:
+Download the notarized dmg from [Releases](https://github.com/juntook/Mothball/releases). Updates arrive in-app via Sparkle.
+
+Homebrew cask coming soon:
 
 ```sh
 brew install --cask juntook/tap/mothball
 ```
 
-Or download the notarized dmg from [Releases](https://github.com/juntook/Mothball/releases). Updates arrive in-app via Sparkle. Not on the Mac App Store — the core features (scanning arbitrary tool directories, process management) are incompatible with App Sandbox.
+Not on the Mac App Store — the core features (scanning arbitrary tool directories, process management) are incompatible with App Sandbox.
 
 ## Build
 
@@ -33,7 +37,7 @@ swift test           # unit tests
 ./scripts/validate-rules.sh   # rule library validation
 ```
 
-Requires the Swift 6 toolchain. Building the distributable, signed app requires full Xcode (see `scripts/`, arriving with M6).
+Requires the Swift 6 toolchain. `scripts/release.sh` assembles the signed, distributable app; CI notarizes and publishes releases on `v*` tags.
 
 ## Contributing rules
 
@@ -42,42 +46,3 @@ Tool layouts move fast — especially AI CLIs. Rules carry a `status` field: `dr
 ## License
 
 Apache License 2.0 — see [LICENSE](LICENSE) and [NOTICE](NOTICE).
-
----
-
-# Mothball(简体中文)
-
-**把开发工具留下的磁盘空间收回来。**
-
-Mothball 是一个 macOS 原生小工具,把散落在你电脑各处的开发资源——AI 编程工具的缓存与会话历史、项目构建产物、还在后台监听端口的开发服务、Docker 容器与镜像——按**项目**聚合起来,可视化地一键释放。
-
-市面工具都是"资源类型视角"(只看 Docker、只看 node_modules);Mothball 是"项目视角":选中一个项目,看到它拖着的全部占用,一键收拾。
-
-- **原生**:Swift 6 + SwiftUI,Apple Silicon(macOS 14+),不用 Electron。
-- **安全优先**:三级安全分级——缓存可一键清理;会话历史只进废纸篓且逐项确认;凭证与配置只读展示,代码里根本不存在删除它们的路径。
-- **本地开源**:Apache-2.0,数据不出本机,无账号体系,永不请求 sudo。
-- **社区规则库**:每个工具把什么存在哪里、删了是否安全,都写在声明式 JSON 规则库(`rules/`)里,欢迎共同维护。
-
-## 安装
-
-发布后可通过 Homebrew 安装:
-
-```sh
-brew install --cask juntook/tap/mothball
-```
-
-或从 [Releases](https://github.com/juntook/Mothball/releases) 下载经过公证的 dmg。应用内通过 Sparkle 自动更新。不上 Mac App Store——核心功能(扫描任意工具目录、进程管理)与 App Sandbox 不兼容。
-
-## 构建
-
-```sh
-swift build
-swift test
-./scripts/validate-rules.sh
-```
-
-需要 Swift 6 工具链;产出可分发的签名 App 需要完整 Xcode(见 `scripts/`,随 M6 交付)。
-
-## 参与规则库
-
-AI 工具的目录布局变化很快。规则带有 `status` 字段:`draft`(路径来自公开资料,未核实)/ `verified`(在真机上通过应用内 Doctor 面板核实)。新增工具或核实 draft 规则是最有价值的贡献,可从 `rules/BACKLOG.md` 开始。
