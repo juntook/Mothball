@@ -39,6 +39,7 @@ struct SessionEndSheet: View {
             footer
         }
         .frame(width: 520, height: 480)
+        .interactiveDismissDisabled(sessionModel.phase == .running)
         .onAppear {
             guard !initialized else { return }
             initialized = true
@@ -296,11 +297,13 @@ struct SessionEndSheet: View {
             let projectItems = scan.items.filter {
                 $0.attribution?.projectPath == projectPath && $0.safety == .regenerable
             }
+            var selectedAny = false
             for item in projectItems where cleanup.isSelectable(item) {
                 cleanup.selectedPaths.insert(item.path)
+                selectedAny = true
             }
             shell.openStorage(tab: .projects)
-            if !projectItems.isEmpty {
+            if selectedAny {
                 cleanup.beginPreview(items: scan.items)
             }
         }
