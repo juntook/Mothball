@@ -76,6 +76,10 @@ codesign --verify --strict --verbose=2 "$APP"
 
 echo "==> Creating $DMG"
 hdiutil create -volname "Mothball" -srcfolder "$APP" -ov -format UDZO "$DMG"
+if [[ "$IDENTITY" != "-" ]]; then
+    # Gatekeeper assesses the dmg's own signature, not just the app inside.
+    codesign --force --timestamp --sign "$IDENTITY" "$DMG"
+fi
 
 echo "==> Done: $DMG"
 echo "    Next: scripts/notarize.sh $DMG"
