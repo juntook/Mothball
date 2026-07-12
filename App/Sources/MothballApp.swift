@@ -125,7 +125,7 @@ struct MothballApp: App {
                 .environment(sessionModel)
                 .environment(\.locale, loc.locale)
         } label: {
-            Image(systemName: "shippingbox")
+            MenuBarIcon()
         }
     }
 }

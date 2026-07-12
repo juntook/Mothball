@@ -2,6 +2,26 @@
 import Core
 import SwiftUI
 
+/// Menu-bar label: the moth glyph as a template image so the system tints
+/// it for light/dark menu bars (SPEC §5.14 — static icon, no animation).
+struct MenuBarIcon: View {
+    static let templateImage: NSImage? = {
+        guard let url = Bundle.module.url(forResource: "MenuBarIcon", withExtension: "png"),
+              let image = NSImage(contentsOf: url) else { return nil }
+        image.isTemplate = true
+        image.size = NSSize(width: 18, height: 18)
+        return image
+    }()
+
+    var body: some View {
+        if let image = Self.templateImage {
+            Image(nsImage: image)
+        } else {
+            Image(systemName: "shippingbox")
+        }
+    }
+}
+
 /// Menu-bar extra content (SPEC §5.14): summary, current session, quick
 /// actions. Ending a session routes through the main window's mandatory
 /// preview — nothing destructive happens straight from the menu.
