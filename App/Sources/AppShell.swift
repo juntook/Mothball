@@ -56,9 +56,14 @@ struct AppShell: View {
         }
         .onAppear {
             // Bare `swift run` executables have no bundle, so AppKit will not
-            // bring the window forward on its own.
+            // bring the window forward or pick up the app icon on its own.
             NSApp.setActivationPolicy(.regular)
             NSApp.activate(ignoringOtherApps: true)
+            if Bundle.main.bundleIdentifier == nil,
+               let iconURL = Bundle.module.url(forResource: "AppIcon", withExtension: "png"),
+               let icon = NSImage(contentsOf: iconURL) {
+                NSApp.applicationIconImage = icon
+            }
             let protection = protection
             cleanup.protectedPathCheck = { path in
                 protection.evaluator.isProtected(path: path)
@@ -227,7 +232,7 @@ struct AppShell: View {
             HStack {
                 Text(verbatim: versionString)
                 Spacer()
-                Link(destination: URL(string: "https://mothball.dev")!) {
+                Link(destination: URL(string: "https://mothball.dev/")!) {
                     Text("footer.helpFeedback", bundle: loc.appBundle)
                 }
             }

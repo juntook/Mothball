@@ -33,6 +33,9 @@ if [[ -n "${SPARKLE_ED_KEY:-}" ]]; then
     /usr/libexec/PlistBuddy -c "Add :SUPublicEDKey string $SPARKLE_ED_KEY" "$APP/Contents/Info.plist" || true
 fi
 
+# App icon.
+cp App/AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
+
 # Resource bundles produced by SwiftPM (localizations, rule library).
 for bundle in .build/arm64-apple-macosx/release/Mothball_*.bundle; do
     cp -R "$bundle" "$APP/Contents/Resources/"

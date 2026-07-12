@@ -55,7 +55,9 @@ let package = Package(
                 useLocalSparkle ? "Sparkle" : .product(name: "Sparkle", package: "Sparkle"),
             ],
             path: "App",
-            exclude: ["Info.plist", "Localizable.xcstrings"],
+            // AppIcon.icns ships at the bundle root via scripts/release.sh,
+            // not through SwiftPM resource processing.
+            exclude: ["Info.plist", "Localizable.xcstrings", "AppIcon.icns"],
             sources: ["Sources"],
             resources: [
                 .process("Resources"),

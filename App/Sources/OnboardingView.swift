@@ -76,9 +76,17 @@ struct OnboardingView: View {
 
     private var welcome: some View {
         VStack(spacing: 16) {
-            Image(systemName: "shippingbox.fill")
-                .font(.system(size: 52))
-                .foregroundStyle(.tint)
+            if let iconURL = Bundle.module.url(forResource: "AppIcon", withExtension: "png"),
+               let icon = NSImage(contentsOf: iconURL) {
+                Image(nsImage: icon)
+                    .resizable()
+                    .interpolation(.high)
+                    .frame(width: 88, height: 88)
+            } else {
+                Image(systemName: "shippingbox.fill")
+                    .font(.system(size: 52))
+                    .foregroundStyle(.tint)
+            }
             Text(verbatim: "Mothball")
                 .font(.largeTitle.bold())
             Text("onboarding.welcome.tagline", bundle: loc.appBundle)
