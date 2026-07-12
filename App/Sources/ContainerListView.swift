@@ -2,10 +2,13 @@
 import Core
 import SwiftUI
 
-/// Container resources for the Runtime view (SPEC §5.5 matrix).
-struct ContainerSection: View {
+/// Container resources filtered by kind (SPEC §5.5 matrix). Active Resources
+/// shows the container lifecycle kinds; Storage shows the disk-weight kinds.
+struct ContainerListView: View {
+    @Environment(LocalizationModel.self) private var loc
     @Environment(ScanModel.self) private var scan
     @Environment(ContainerModel.self) private var containers
+    let kinds: Set<ContainerResource.Kind>
 
     var body: some View {
         @Bindable var containers = containers
@@ -13,21 +16,24 @@ struct ContainerSection: View {
             if let diag = containers.diagnostics, diag.binaryPath == nil {
                 emptyCard(
                     title: "docker.noBinary.title",
-                    message: "docker.noBinary.message",
-                    icon: "shippingbox"
+                    message: "docker.noBinary.message"
                 )
             } else if let diag = containers.diagnostics, !diag.daemonReachable {
                 emptyCard(
                     title: "docker.daemonDown.title",
-                    message: "docker.daemonDown.message",
-                    icon: "shippingbox"
+                    message: "docker.daemonDown.message"
+                )
+            } else if visibleResources.isEmpty && !containers.isRefreshing {
+                emptyCard(
+                    title: "docker.empty.title",
+                    message: "docker.empty.message"
                 )
             } else {
                 resourceList
             }
         }
         .confirmationDialog(
-            Text("docker.volume.confirm.title", bundle: .module),
+            Text("docker.volume.confirm.title", bundle: loc.appBundle),
             isPresented: Binding(
                 get: { containers.volumePendingRemoval != nil },
                 set: { if !$0 { containers.volumePendingRemoval = nil } }
@@ -37,29 +43,29 @@ struct ContainerSection: View {
             Button(role: .destructive) {
                 containers.removeVolumeConfirmed(projects: scan.projects)
             } label: {
-                Text("docker.volume.confirm.button \(volume.name)", bundle: .module)
+                Text("docker.volume.confirm.button \(volume.name)", bundle: loc.appBundle)
             }
         } message: { volume in
-            Text("docker.volume.confirm.message \(volume.name)", bundle: .module)
+            Text("docker.volume.confirm.message \(volume.name)", bundle: loc.appBundle)
         }
         .confirmationDialog(
-            Text("docker.image.confirm.title", bundle: .module),
+            Text("docker.image.confirm.title", bundle: loc.appBundle),
             isPresented: Binding(
                 get: { containers.imagePendingRemoval != nil },
                 set: { if !$0 { containers.imagePendingRemoval = nil } }
             ),
             presenting: containers.imagePendingRemoval
-        ) { image in
+        ) { _ in
             Button(role: .destructive) {
                 containers.removeTaggedImageConfirmed(projects: scan.projects)
             } label: {
-                Text("docker.image.confirm.button", bundle: .module)
+                Text("docker.image.confirm.button", bundle: loc.appBundle)
             }
         } message: { image in
-            Text("docker.image.confirm.message \(image.name)", bundle: .module)
+            Text("docker.image.confirm.message \(image.name)", bundle: loc.appBundle)
         }
         .alert(
-            Text("docker.error.title", bundle: .module),
+            Text("docker.error.title", bundle: loc.appBundle),
             isPresented: Binding(
                 get: { containers.actionError != nil },
                 set: { if !$0 { containers.actionError = nil } }
@@ -68,11 +74,15 @@ struct ContainerSection: View {
             Button {
                 containers.actionError = nil
             } label: {
-                Text("cleanup.done", bundle: .module)
+                Text("cleanup.done", bundle: loc.appBundle)
             }
         } message: {
             Text(verbatim: containers.actionError ?? "")
         }
+    }
+
+    private var visibleResources: [ContainerResource] {
+        containers.resources.filter { kinds.contains($0.kind) }
     }
 
     private var resourceList: some View {
@@ -80,7 +90,7 @@ struct ContainerSection: View {
             if let podman = containers.diagnostics?.podmanDetected, podman {
                 Section {
                     Label {
-                        Text("docker.podman.notice", bundle: .module)
+                        Text("docker.podman.notice", bundle: loc.appBundle)
                     } icon: {
                         Image(systemName: "info.circle")
                     }
@@ -89,12 +99,13 @@ struct ContainerSection: View {
                 }
             }
 
-            let running = containers.resources.filter { $0.kind == .runningContainer }
-            let stopped = containers.resources.filter { $0.kind == .stoppedContainer }
-            let dangling = containers.resources.filter { $0.kind == .danglingImage }
-            let tagged = containers.resources.filter { $0.kind == .taggedImage }
-            let volumes = containers.resources.filter { $0.kind == .volume }
-            let cache = containers.resources.first { $0.kind == .buildCache }
+            let resources = visibleResources
+            let running = resources.filter { $0.kind == .runningContainer }
+            let stopped = resources.filter { $0.kind == .stoppedContainer }
+            let dangling = resources.filter { $0.kind == .danglingImage }
+            let tagged = resources.filter { $0.kind == .taggedImage }
+            let volumes = resources.filter { $0.kind == .volume }
+            let cache = resources.first { $0.kind == .buildCache }
 
             if !running.isEmpty {
                 Section {
@@ -106,7 +117,7 @@ struct ContainerSection: View {
                         }
                     }
                 } header: {
-                    Text("docker.section.running", bundle: .module)
+                    Text("docker.section.running", bundle: loc.appBundle)
                 }
             }
 
@@ -120,7 +131,7 @@ struct ContainerSection: View {
                         }
                     }
                 } header: {
-                    Text("docker.section.stopped", bundle: .module)
+                    Text("docker.section.stopped", bundle: loc.appBundle)
                 }
             }
 
@@ -135,12 +146,12 @@ struct ContainerSection: View {
                     }
                 } header: {
                     HStack {
-                        Text("docker.section.dangling", bundle: .module)
+                        Text("docker.section.dangling", bundle: loc.appBundle)
                         Spacer()
                         Button {
                             containers.removeAllDanglingImages(projects: scan.projects)
                         } label: {
-                            Text("docker.action.removeAllDangling \(dangling.count)", bundle: .module)
+                            Text("docker.action.removeAllDangling \(dangling.count)", bundle: loc.appBundle)
                         }
                         .controlSize(.small)
                     }
@@ -157,9 +168,9 @@ struct ContainerSection: View {
                         }
                     }
                 } header: {
-                    Text("docker.section.taggedUnused", bundle: .module)
+                    Text("docker.section.taggedUnused", bundle: loc.appBundle)
                 } footer: {
-                    Text("docker.taggedUnused.footer", bundle: .module).font(.caption)
+                    Text("docker.taggedUnused.footer", bundle: loc.appBundle).font(.caption)
                 }
             }
 
@@ -173,9 +184,9 @@ struct ContainerSection: View {
                         }
                     }
                 } header: {
-                    Text("docker.section.volumes", bundle: .module)
+                    Text("docker.section.volumes", bundle: loc.appBundle)
                 } footer: {
-                    Text("docker.volumes.footer", bundle: .module).font(.caption)
+                    Text("docker.volumes.footer", bundle: loc.appBundle).font(.caption)
                 }
             }
 
@@ -187,7 +198,7 @@ struct ContainerSection: View {
                         }
                     }
                 } header: {
-                    Text("docker.section.buildCache", bundle: .module)
+                    Text("docker.section.buildCache", bundle: loc.appBundle)
                 }
             }
         }
@@ -210,7 +221,7 @@ struct ContainerSection: View {
                         } icon: {
                             Image(systemName: "folder")
                         }
-                        .help(Text("evidence.composeLabel", bundle: .module))
+                        .help(Text("evidence.composeLabel", bundle: loc.appBundle))
                     }
                 }
                 .font(.caption)
@@ -231,22 +242,22 @@ struct ContainerSection: View {
                 ProgressView().controlSize(.small)
             } else {
                 Button(action: perform) {
-                    Text(key, bundle: .module)
+                    Text(key, bundle: loc.appBundle)
                 }
                 .controlSize(.small)
             }
         }
     }
 
-    private func emptyCard(title: LocalizedStringKey, message: LocalizedStringKey, icon: String) -> some View {
+    private func emptyCard(title: LocalizedStringKey, message: LocalizedStringKey) -> some View {
         ContentUnavailableView {
             Label {
-                Text(title, bundle: .module)
+                Text(title, bundle: loc.appBundle)
             } icon: {
-                Image(systemName: icon)
+                Image(systemName: "shippingbox")
             }
         } description: {
-            Text(message, bundle: .module)
+            Text(message, bundle: loc.appBundle)
         }
     }
 }

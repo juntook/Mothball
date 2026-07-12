@@ -6,6 +6,7 @@ import SwiftUI
 struct CleanupSheet: View {
     @Environment(CleanupModel.self) private var cleanup
     @Environment(ScanModel.self) private var scan
+    @Environment(LocalizationModel.self) private var loc
     @State private var showDirectDeleteConfirm = false
 
     var body: some View {
@@ -15,7 +16,7 @@ struct CleanupSheet: View {
                 previewContent
             case .running:
                 ProgressView {
-                    Text("cleanup.running", bundle: .module)
+                    Text("cleanup.running", bundle: loc.appBundle)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             case .finished:
@@ -39,10 +40,10 @@ struct CleanupSheet: View {
                             userDataRow(item)
                         }
                     } header: {
-                        Text("cleanup.section.userData", bundle: .module)
+                        Text("cleanup.section.userData", bundle: loc.appBundle)
                             .foregroundStyle(.orange)
                     } footer: {
-                        Text("cleanup.userData.footer", bundle: .module)
+                        Text("cleanup.userData.footer", bundle: loc.appBundle)
                             .font(.caption)
                     }
                 }
@@ -52,7 +53,7 @@ struct CleanupSheet: View {
                             previewRow(item)
                         }
                     } header: {
-                        Text("cleanup.section.regenerable", bundle: .module)
+                        Text("cleanup.section.regenerable", bundle: loc.appBundle)
                     }
                 }
             }
@@ -60,9 +61,9 @@ struct CleanupSheet: View {
             Divider()
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("cleanup.preview.total \(cleanup.previewItems.count) \(Int64(cleanup.previewTotalBytes).formatted(.byteCount(style: .file)))", bundle: .module)
+                    Text("cleanup.preview.total \(cleanup.previewItems.count) \(Int64(cleanup.previewTotalBytes).formatted(.byteCount(style: .file)))", bundle: loc.appBundle)
                         .font(.callout)
-                    Text(cleanup.directDeleteEnabled ? "cleanup.method.delete" : "cleanup.method.trash", bundle: .module)
+                    Text(cleanup.directDeleteEnabled ? "cleanup.method.delete" : "cleanup.method.trash", bundle: loc.appBundle)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -70,13 +71,13 @@ struct CleanupSheet: View {
                 Button {
                     cleanup.dismiss()
                 } label: {
-                    Text("cleanup.cancel", bundle: .module)
+                    Text("cleanup.cancel", bundle: loc.appBundle)
                 }
                 .keyboardShortcut(.cancelAction)
                 Button {
                     confirmAndExecute()
                 } label: {
-                    Text("cleanup.confirm", bundle: .module)
+                    Text("cleanup.confirm", bundle: loc.appBundle)
                 }
                 .keyboardShortcut(.defaultAction)
                 .buttonStyle(.borderedProminent)
@@ -85,17 +86,17 @@ struct CleanupSheet: View {
             .padding(12)
         }
         .confirmationDialog(
-            Text("cleanup.directDelete.confirm.title", bundle: .module),
+            Text("cleanup.directDelete.confirm.title", bundle: loc.appBundle),
             isPresented: $showDirectDeleteConfirm
         ) {
             Button(role: .destructive) {
                 cleanup.hasConfirmedDirectDeleteThisSession = true
                 runExecution()
             } label: {
-                Text("cleanup.directDelete.confirm.button", bundle: .module)
+                Text("cleanup.directDelete.confirm.button", bundle: loc.appBundle)
             }
         } message: {
-            Text("cleanup.directDelete.confirm.message", bundle: .module)
+            Text("cleanup.directDelete.confirm.message", bundle: loc.appBundle)
         }
     }
 
@@ -183,7 +184,7 @@ struct CleanupSheet: View {
                             }
                         }
                     } header: {
-                        Text("cleanup.result.reclaimed \(Int64(result.reclaimedBytes).formatted(.byteCount(style: .file)))", bundle: .module)
+                        Text("cleanup.result.reclaimed \(Int64(result.reclaimedBytes).formatted(.byteCount(style: .file)))", bundle: loc.appBundle)
                             .font(.headline)
                     }
                 }
@@ -200,7 +201,7 @@ struct CleanupSheet: View {
                 Button {
                     cleanup.dismiss()
                 } label: {
-                    Text("cleanup.done", bundle: .module)
+                    Text("cleanup.done", bundle: loc.appBundle)
                 }
                 .keyboardShortcut(.defaultAction)
                 .buttonStyle(.borderedProminent)
@@ -212,7 +213,7 @@ struct CleanupSheet: View {
     private func banner(_ key: LocalizedStringKey, color: Color) -> some View {
         HStack(alignment: .top, spacing: 6) {
             Image(systemName: "info.circle")
-            Text(key, bundle: .module)
+            Text(key, bundle: loc.appBundle)
         }
         .font(.caption)
         .foregroundStyle(color)
@@ -237,22 +238,22 @@ struct CleanupSheet: View {
 
     private func outcomeText(_ outcome: CleanupExecutor.ItemResult.Outcome) -> Text {
         switch outcome {
-        case .trashed: Text("cleanup.outcome.trashed", bundle: .module)
-        case .deleted: Text("cleanup.outcome.deleted", bundle: .module)
-        case .rejected: Text("cleanup.outcome.rejected", bundle: .module)
+        case .trashed: Text("cleanup.outcome.trashed", bundle: loc.appBundle)
+        case .deleted: Text("cleanup.outcome.deleted", bundle: loc.appBundle)
+        case .rejected: Text("cleanup.outcome.rejected", bundle: loc.appBundle)
         case .failed(let m): Text(verbatim: m)
         case .abortedTrashFailure(let m): Text(verbatim: m)
-        case .skippedAfterAbort: Text("cleanup.outcome.skipped", bundle: .module)
+        case .skippedAfterAbort: Text("cleanup.outcome.skipped", bundle: loc.appBundle)
         }
     }
 
     private func displayName(_ item: CleanupItem) -> String {
         guard let target = scan.target(ruleID: item.ruleID, targetID: item.targetID) else { return item.targetID }
-        return RuleLocalization.description(ruleID: item.ruleID, target: target)
+        return loc.ruleDescription(ruleID: item.ruleID, target: target)
     }
 
     private func regenerateHint(_ item: CleanupItem) -> String? {
         guard let target = scan.target(ruleID: item.ruleID, targetID: item.targetID) else { return nil }
-        return RuleLocalization.regenerateHint(ruleID: item.ruleID, target: target)
+        return loc.regenerateHint(ruleID: item.ruleID, target: target)
     }
 }

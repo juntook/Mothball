@@ -2,14 +2,42 @@
 import Core
 import SwiftUI
 
+/// Settings (SPEC §5.7): general / scan scope / language / privacy / advanced.
 struct SettingsView: View {
+    @Environment(LocalizationModel.self) private var loc
     @Environment(CleanupModel.self) private var cleanup
     @Environment(ScanModel.self) private var scan
+    @Environment(UpdaterModel.self) private var updater
+    @Environment(\.openWindow) private var openWindow
+
     @State private var directDelete = false
     @State private var codeRoots: [String] = []
+    @State private var exclusions: [String] = []
 
     var body: some View {
-        Form {
+        @Bindable var loc = loc
+        return Form {
+            // MARK: General
+            Section {
+                Toggle(isOn: $directDelete) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("settings.directDelete", bundle: loc.appBundle)
+                        Text("settings.directDelete.detail", bundle: loc.appBundle)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .onChange(of: directDelete) { _, newValue in
+                    cleanup.directDeleteEnabled = newValue
+                }
+            } header: {
+                Text("settings.section.general", bundle: loc.appBundle)
+            } footer: {
+                Text("settings.directDelete.userDataNote", bundle: loc.appBundle)
+                    .font(.caption)
+            }
+
+            // MARK: Scan scope
             Section {
                 ForEach(codeRoots, id: \.self) { root in
                     HStack {
@@ -27,48 +55,106 @@ struct SettingsView: View {
                     }
                 }
                 Button {
-                    addCodeRoot()
+                    addDirectories(to: \.codeRoots, local: $codeRoots)
                 } label: {
                     Label {
-                        Text("settings.codeRoots.add", bundle: .module)
+                        Text("settings.codeRoots.add", bundle: loc.appBundle)
                     } icon: {
                         Image(systemName: "plus")
                     }
                 }
             } header: {
-                Text("settings.section.codeRoots", bundle: .module)
+                Text("settings.section.codeRoots", bundle: loc.appBundle)
             } footer: {
-                Text("settings.codeRoots.detail", bundle: .module)
+                Text("settings.codeRoots.detail", bundle: loc.appBundle)
                     .font(.caption)
             }
 
             Section {
-                Toggle(isOn: $directDelete) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("settings.directDelete", bundle: .module)
-                        Text("settings.directDelete.detail", bundle: .module)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                ForEach(exclusions, id: \.self) { path in
+                    HStack {
+                        Text(verbatim: path)
+                            .lineLimit(1)
+                            .truncationMode(.middle)
+                        Spacer()
+                        Button {
+                            exclusions.removeAll { $0 == path }
+                            scan.codeRootExclusions = exclusions
+                        } label: {
+                            Image(systemName: "minus.circle")
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
-                .onChange(of: directDelete) { _, newValue in
-                    cleanup.directDeleteEnabled = newValue
+                Button {
+                    addDirectories(to: \.codeRootExclusions, local: $exclusions)
+                } label: {
+                    Label {
+                        Text("settings.exclusions.add", bundle: loc.appBundle)
+                    } icon: {
+                        Image(systemName: "plus")
+                    }
                 }
             } header: {
-                Text("settings.section.cleanup", bundle: .module)
+                Text("settings.section.exclusions", bundle: loc.appBundle)
             } footer: {
-                Text("settings.directDelete.userDataNote", bundle: .module)
+                Text("settings.exclusions.detail", bundle: loc.appBundle)
                     .font(.caption)
             }
 
+            // MARK: Language
             Section {
+                Picker(selection: $loc.language) {
+                    Text("settings.language.system", bundle: loc.appBundle)
+                        .tag(AppLanguage.system)
+                    Text(verbatim: "简体中文").tag(AppLanguage.simplifiedChinese)
+                    Text(verbatim: "English").tag(AppLanguage.english)
+                } label: {
+                    Text("settings.language", bundle: loc.appBundle)
+                }
+            } header: {
+                Text("settings.section.language", bundle: loc.appBundle)
+            } footer: {
+                Text("settings.language.detail", bundle: loc.appBundle)
+                    .font(.caption)
+            }
+
+            // MARK: Privacy
+            Section {
+                Button {
+                    updater.checkForUpdates()
+                } label: {
+                    Text("menu.checkForUpdates", bundle: loc.appBundle)
+                }
+                .disabled(!updater.canCheckForUpdates)
                 Button {
                     NSWorkspace.shared.activateFileViewerSelecting([AuditLog().logURL])
                 } label: {
-                    Text("settings.openAuditLog", bundle: .module)
+                    Text("settings.openAuditLog", bundle: loc.appBundle)
                 }
             } header: {
-                Text("settings.section.audit", bundle: .module)
+                Text("settings.section.privacy", bundle: loc.appBundle)
+            } footer: {
+                Text("settings.privacy.note", bundle: loc.appBundle)
+                    .font(.caption)
+            }
+
+            // MARK: Advanced
+            Section {
+                Button {
+                    openWindow(id: "doctor")
+                } label: {
+                    Label {
+                        Text("doctor.title", bundle: loc.appBundle)
+                    } icon: {
+                        Image(systemName: "stethoscope")
+                    }
+                }
+            } header: {
+                Text("settings.section.advanced", bundle: loc.appBundle)
+            } footer: {
+                Text("settings.doctor.detail", bundle: loc.appBundle)
+                    .font(.caption)
             }
 
             if !cleanup.ignoredPaths.isEmpty {
@@ -83,35 +169,39 @@ struct SettingsView: View {
                             Button {
                                 cleanup.unignore(path)
                             } label: {
-                                Text("row.unignore", bundle: .module)
+                                Text("row.unignore", bundle: loc.appBundle)
                             }
                             .controlSize(.small)
                         }
                     }
                 } header: {
-                    Text("settings.section.ignored", bundle: .module)
+                    Text("settings.section.ignored", bundle: loc.appBundle)
                 }
             }
         }
         .formStyle(.grouped)
-        .navigationTitle(Text("sidebar.settings", bundle: .module))
+        .navigationTitle(Text("sidebar.settings", bundle: loc.appBundle))
         .onAppear {
             directDelete = cleanup.directDeleteEnabled
             codeRoots = scan.codeRoots
+            exclusions = scan.codeRootExclusions
         }
     }
 
-    private func addCodeRoot() {
+    private func addDirectories(
+        to keyPath: ReferenceWritableKeyPath<ScanModel, [String]>,
+        local: Binding<[String]>
+    ) {
         let panel = NSOpenPanel()
         panel.canChooseDirectories = true
         panel.canChooseFiles = false
         panel.allowsMultipleSelection = true
         panel.directoryURL = FileManager.default.homeDirectoryForCurrentUser
         if panel.runModal() == .OK {
-            for url in panel.urls where !codeRoots.contains(url.path) {
-                codeRoots.append(url.path)
+            for url in panel.urls where !local.wrappedValue.contains(url.path) {
+                local.wrappedValue.append(url.path)
             }
-            scan.codeRoots = codeRoots
+            scan[keyPath: keyPath] = local.wrappedValue
         }
     }
 }

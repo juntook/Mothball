@@ -2,9 +2,10 @@
 import Core
 import SwiftUI
 
-/// First-launch flow (SPEC §5.8): welcome → code roots → Full Disk Access →
-/// finish (auto-starts the first scan).
+/// Two-page first-launch flow (SPEC §5.8): welcome → permissions & privacy.
+/// Finishing auto-starts the first scan.
 struct OnboardingView: View {
+    @Environment(LocalizationModel.self) private var loc
     @Environment(ScanModel.self) private var scan
     @Binding var isPresented: Bool
 
@@ -16,72 +17,84 @@ struct OnboardingView: View {
     var body: some View {
         VStack(spacing: 0) {
             Group {
-                switch step {
-                case 0: welcome
-                case 1: rootsPicker
-                default: fdaGuide
+                if step == 0 {
+                    welcome
+                } else {
+                    permissions
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             Divider()
             HStack {
-                if step > 0 {
+                if step == 1 {
                     Button {
-                        step -= 1
+                        step = 0
                     } label: {
-                        Text("onboarding.back", bundle: .module)
+                        Text("onboarding.back", bundle: loc.appBundle)
                     }
-                }
-                Spacer()
-                if step == 1 && codeRoots.isEmpty {
+                    Spacer()
                     Button {
-                        step += 1
+                        finish()
                     } label: {
-                        Text("onboarding.skip", bundle: .module)
+                        Text("onboarding.later", bundle: loc.appBundle)
                     }
+                    Button {
+                        finish()
+                    } label: {
+                        Text("onboarding.continue", bundle: loc.appBundle)
+                    }
+                    .keyboardShortcut(.defaultAction)
+                    .buttonStyle(.borderedProminent)
+                    .disabled(codeRoots.isEmpty)
+                } else {
+                    Spacer()
+                    Button {
+                        step = 1
+                        startFDAPolling()
+                    } label: {
+                        Text("onboarding.start", bundle: loc.appBundle)
+                    }
+                    .keyboardShortcut(.defaultAction)
+                    .buttonStyle(.borderedProminent)
                 }
-                Button {
-                    advance()
-                } label: {
-                    Text(step == 2 ? "onboarding.finish" : "onboarding.continue", bundle: .module)
-                }
-                .keyboardShortcut(.defaultAction)
-                .buttonStyle(.borderedProminent)
-                .disabled(step == 1 && codeRoots.isEmpty)
             }
             .padding(16)
         }
-        .frame(width: 520, height: 420)
+        .frame(width: 540, height: 470)
         .onAppear { codeRoots = scan.codeRoots }
         .onDisappear { fdaTimer?.invalidate() }
     }
 
-    private func advance() {
-        if step < 2 {
-            step += 1
-            if step == 2 { startFDAPolling() }
-        } else {
-            UserDefaults.standard.set(true, forKey: "onboardingComplete")
-            isPresented = false
-            scan.scan()
-        }
+    private func finish() {
+        UserDefaults.standard.set(true, forKey: "onboardingComplete")
+        isPresented = false
+        scan.scan()
     }
 
-    // MARK: Step 0 — welcome
+    // MARK: Page 0 — welcome
 
     private var welcome: some View {
-        VStack(spacing: 14) {
+        VStack(spacing: 16) {
             Image(systemName: "shippingbox.fill")
                 .font(.system(size: 52))
                 .foregroundStyle(.tint)
             Text(verbatim: "Mothball")
                 .font(.largeTitle.bold())
-            Text("onboarding.welcome.tagline", bundle: .module)
+            Text("onboarding.welcome.tagline", bundle: loc.appBundle)
                 .font(.title3)
                 .multilineTextAlignment(.center)
-            Text("onboarding.welcome.privacy", bundle: .module)
-                .font(.callout)
+
+            VStack(alignment: .leading, spacing: 8) {
+                bullet("onboarding.welcome.feature.ports")
+                bullet("onboarding.welcome.feature.stop")
+                bullet("onboarding.welcome.feature.caches")
+                bullet("onboarding.welcome.feature.local")
+            }
+            .padding(.top, 4)
+
+            Text("onboarding.welcome.privacy", bundle: loc.appBundle)
+                .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
@@ -89,106 +102,130 @@ struct OnboardingView: View {
         .padding()
     }
 
-    // MARK: Step 1 — code roots
-
-    private var rootsPicker: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("onboarding.roots.title", bundle: .module)
-                .font(.title2.bold())
-            Text("onboarding.roots.detail", bundle: .module)
-                .foregroundStyle(.secondary)
-
-            List {
-                ForEach(codeRoots, id: \.self) { root in
-                    HStack {
-                        Image(systemName: "folder")
-                        Text(verbatim: root).lineLimit(1).truncationMode(.middle)
-                        Spacer()
-                        Button {
-                            codeRoots.removeAll { $0 == root }
-                            scan.codeRoots = codeRoots
-                        } label: {
-                            Image(systemName: "minus.circle")
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-            }
-            .frame(minHeight: 120)
-
-            Button {
-                let panel = NSOpenPanel()
-                panel.canChooseDirectories = true
-                panel.canChooseFiles = false
-                panel.allowsMultipleSelection = true
-                panel.directoryURL = FileManager.default.homeDirectoryForCurrentUser
-                if panel.runModal() == .OK {
-                    for url in panel.urls where !codeRoots.contains(url.path) {
-                        codeRoots.append(url.path)
-                    }
-                    scan.codeRoots = codeRoots
-                }
-            } label: {
-                Label {
-                    Text("settings.codeRoots.add", bundle: .module)
-                } icon: {
-                    Image(systemName: "plus")
-                }
-            }
+    private func bullet(_ key: LocalizedStringKey) -> some View {
+        Label {
+            Text(key, bundle: loc.appBundle)
+        } icon: {
+            Image(systemName: "checkmark")
+                .foregroundStyle(.green)
         }
-        .padding()
+        .font(.callout)
     }
 
-    // MARK: Step 2 — Full Disk Access
+    // MARK: Page 1 — permissions & privacy
 
-    private var fdaGuide: some View {
+    private var permissions: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("onboarding.fda.title", bundle: .module)
+            Text("onboarding.permissions.title", bundle: loc.appBundle)
                 .font(.title2.bold())
-            Text("onboarding.fda.why", bundle: .module)
+            Text("onboarding.permissions.intro", bundle: loc.appBundle)
                 .foregroundStyle(.secondary)
 
-            HStack(spacing: 8) {
-                statusIcon
-                statusText
-            }
-            .padding(10)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(.quaternary.opacity(0.5), in: RoundedRectangle(cornerRadius: 8))
-
-            Button {
-                if let url = URL(string: FullDiskAccess.settingsPaneURL) {
-                    NSWorkspace.shared.open(url)
-                }
-            } label: {
-                Label {
-                    Text("onboarding.fda.open", bundle: .module)
-                } icon: {
-                    Image(systemName: "gear")
-                }
+            permissionRow(
+                icon: "waveform.path.ecg",
+                titleKey: "onboarding.permissions.runtime",
+                detailKey: "onboarding.permissions.runtime.detail"
+            ) {
+                Text("onboarding.permissions.granted", bundle: loc.appBundle)
+                    .font(.caption)
+                    .foregroundStyle(.green)
             }
 
-            Text("onboarding.fda.optional", bundle: .module)
+            permissionRow(
+                icon: "folder",
+                titleKey: "onboarding.permissions.roots",
+                detailKey: "onboarding.permissions.roots.detail"
+            ) {
+                HStack(spacing: 6) {
+                    if !codeRoots.isEmpty {
+                        Text("onboarding.permissions.roots.count \(codeRoots.count)", bundle: loc.appBundle)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    Button {
+                        pickRoots()
+                    } label: {
+                        Text("onboarding.permissions.roots.choose", bundle: loc.appBundle)
+                    }
+                    .controlSize(.small)
+                }
+            }
+
+            permissionRow(
+                icon: "internaldrive",
+                titleKey: "onboarding.permissions.fda",
+                detailKey: "onboarding.permissions.fda.detail"
+            ) {
+                HStack(spacing: 6) {
+                    fdaStatusIcon
+                    Button {
+                        if let url = URL(string: FullDiskAccess.settingsPaneURL) {
+                            NSWorkspace.shared.open(url)
+                        }
+                    } label: {
+                        Text("onboarding.fda.open", bundle: loc.appBundle)
+                    }
+                    .controlSize(.small)
+                }
+            }
+
+            Text("onboarding.permissions.fdaNote", bundle: loc.appBundle)
                 .font(.caption)
                 .foregroundStyle(.tertiary)
         }
         .padding()
     }
 
+    private func permissionRow(
+        icon: String,
+        titleKey: LocalizedStringKey,
+        detailKey: LocalizedStringKey,
+        @ViewBuilder trailing: () -> some View
+    ) -> some View {
+        HStack(alignment: .center, spacing: 10) {
+            Image(systemName: icon)
+                .frame(width: 24)
+                .foregroundStyle(.tint)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(titleKey, bundle: loc.appBundle)
+                    .fontWeight(.medium)
+                Text(detailKey, bundle: loc.appBundle)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer()
+            trailing()
+        }
+        .padding(10)
+        .background(.quaternary.opacity(0.4), in: RoundedRectangle(cornerRadius: 8))
+    }
+
     @ViewBuilder
-    private var statusIcon: some View {
+    private var fdaStatusIcon: some View {
         switch fdaStatus {
-        case .granted: Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
-        case .denied: Image(systemName: "xmark.circle.fill").foregroundStyle(.orange)
-        case .indeterminate: Image(systemName: "questionmark.circle").foregroundStyle(.secondary)
+        case .granted:
+            Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
+                .help(Text("onboarding.fda.granted", bundle: loc.appBundle))
+        case .denied:
+            Image(systemName: "circle.dashed").foregroundStyle(.secondary)
+                .help(Text("onboarding.fda.denied", bundle: loc.appBundle))
+        case .indeterminate:
+            Image(systemName: "questionmark.circle").foregroundStyle(.secondary)
+                .help(Text("onboarding.fda.indeterminate", bundle: loc.appBundle))
         }
     }
 
-    private var statusText: Text {
-        switch fdaStatus {
-        case .granted: Text("onboarding.fda.granted", bundle: .module)
-        case .denied: Text("onboarding.fda.denied", bundle: .module)
-        case .indeterminate: Text("onboarding.fda.indeterminate", bundle: .module)
+    private func pickRoots() {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.allowsMultipleSelection = true
+        panel.directoryURL = FileManager.default.homeDirectoryForCurrentUser
+        if panel.runModal() == .OK {
+            for url in panel.urls where !codeRoots.contains(url.path) {
+                codeRoots.append(url.path)
+            }
+            scan.codeRoots = codeRoots
         }
     }
 
@@ -199,35 +236,6 @@ struct OnboardingView: View {
             Task { @MainActor in
                 fdaStatus = status
             }
-        }
-    }
-}
-
-/// Persistent banner shown above scan results while FDA is missing —
-/// results must never look silently incomplete (SPEC §5.8 degraded mode).
-struct FDABanner: View {
-    let status: FullDiskAccess.Status
-
-    var body: some View {
-        if status == .denied {
-            HStack(spacing: 8) {
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .foregroundStyle(.orange)
-                Text("fda.banner", bundle: .module)
-                    .font(.callout)
-                Spacer()
-                Button {
-                    if let url = URL(string: FullDiskAccess.settingsPaneURL) {
-                        NSWorkspace.shared.open(url)
-                    }
-                } label: {
-                    Text("fda.banner.action", bundle: .module)
-                }
-                .controlSize(.small)
-            }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
-            .background(.orange.opacity(0.12))
         }
     }
 }

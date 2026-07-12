@@ -16,6 +16,7 @@ final class ScanModel {
     private(set) var isScanning = false
     private(set) var loadError: String?
     private(set) var hasScanned = false
+    private(set) var lastScanDate: Date?
 
     private var scanTask: Task<Void, Never>?
 
@@ -82,6 +83,7 @@ final class ScanModel {
             }
             isScanning = false
             hasScanned = true
+            lastScanDate = Date()
         }
     }
 

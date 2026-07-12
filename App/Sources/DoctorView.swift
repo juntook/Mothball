@@ -6,6 +6,7 @@ import SwiftUI
 /// can be verified and promoted (SPEC §5.1).
 struct DoctorView: View {
     @Environment(ScanModel.self) private var model
+    @Environment(LocalizationModel.self) private var loc
     @State private var reports: [Doctor.TargetReport] = []
     @State private var isRunning = false
 
@@ -17,13 +18,13 @@ struct DoctorView: View {
                 reportTable
             }
         }
-        .navigationTitle(Text("doctor.title", bundle: .module))
+        .navigationTitle(Text("doctor.title", bundle: loc.appBundle))
         .toolbar {
             Button {
                 run()
             } label: {
                 Label {
-                    Text("doctor.run", bundle: .module)
+                    Text("doctor.run", bundle: loc.appBundle)
                 } icon: {
                     Image(systemName: "stethoscope")
                 }
@@ -68,6 +69,7 @@ struct DoctorView: View {
 }
 
 struct DoctorTargetRow: View {
+    @Environment(LocalizationModel.self) private var loc
     let report: Doctor.TargetReport
 
     var body: some View {
@@ -79,7 +81,7 @@ struct DoctorTargetRow: View {
                 Spacer()
             }
             if report.scope == .project {
-                Text("doctor.projectScope \(report.pattern)", bundle: .module)
+                Text("doctor.projectScope \(report.pattern)", bundle: loc.appBundle)
                     .font(.caption)
                     .foregroundStyle(.secondary)
             } else {
@@ -106,15 +108,15 @@ struct DoctorTargetRow: View {
         if !path.exists {
             Image(systemName: "circle.dashed")
                 .foregroundStyle(.secondary)
-                .help(Text("doctor.status.missing", bundle: .module))
+                .help(Text("doctor.status.missing", bundle: loc.appBundle))
         } else if !path.readable {
             Image(systemName: "lock.circle")
                 .foregroundStyle(.orange)
-                .help(Text("doctor.status.unreadable", bundle: .module))
+                .help(Text("doctor.status.unreadable", bundle: loc.appBundle))
         } else {
             Image(systemName: "checkmark.circle")
                 .foregroundStyle(.green)
-                .help(Text("doctor.status.ok", bundle: .module))
+                .help(Text("doctor.status.ok", bundle: loc.appBundle))
         }
     }
 }

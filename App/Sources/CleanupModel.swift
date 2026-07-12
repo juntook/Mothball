@@ -31,6 +31,9 @@ final class CleanupModel {
     }
     var hasConfirmedDirectDeleteThisSession = false
 
+    /// Lifetime bytes reclaimed by file cleanups, shown in the sidebar footer.
+    private(set) var totalReclaimedBytes: Int64 = UserDefaults.standard.object(forKey: "totalReclaimedBytes") as? Int64 ?? 0
+
     private let ignoreList = IgnoreList()
 
     init() {
@@ -117,6 +120,8 @@ final class CleanupModel {
             self.selectedPaths.subtract(Set(result.results.filter {
                 $0.outcome == .trashed || $0.outcome == .deleted
             }.map(\.item.path)))
+            self.totalReclaimedBytes += result.reclaimedBytes
+            UserDefaults.standard.set(self.totalReclaimedBytes, forKey: "totalReclaimedBytes")
         }
     }
 

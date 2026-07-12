@@ -1,0 +1,246 @@
+// SPDX-License-Identifier: Apache-2.0
+import Core
+import SwiftUI
+
+/// Monospaced-digit byte size, locale-aware (SPEC §8.5(4)).
+struct SizeText: View {
+    let bytes: Int64
+
+    var body: some View {
+        Text(bytes, format: .byteCount(style: .file))
+            .monospacedDigit()
+    }
+}
+
+struct SafetyBadge: View {
+    @Environment(LocalizationModel.self) private var loc
+    let safety: Safety
+
+    var body: some View {
+        Text(verbatim: loc.safetyName(safety))
+            .font(.caption2)
+            .padding(.horizontal, 5)
+            .padding(.vertical, 1)
+            .background(color.opacity(0.18), in: Capsule())
+            .foregroundStyle(color)
+    }
+
+    private var color: Color {
+        switch safety {
+        case .regenerable: .green
+        case .userData: .orange
+        case .protected: .gray
+        }
+    }
+}
+
+struct DraftBadge: View {
+    @Environment(LocalizationModel.self) private var loc
+
+    var body: some View {
+        Text("badge.unverified", bundle: loc.appBundle)
+            .font(.caption2)
+            .padding(.horizontal, 5)
+            .padding(.vertical, 1)
+            .background(.yellow.opacity(0.25), in: Capsule())
+            .foregroundStyle(.orange)
+            .help(Text("badge.unverified.help", bundle: loc.appBundle))
+    }
+}
+
+struct KindLabel: View {
+    @Environment(LocalizationModel.self) private var loc
+    let kind: Target.Kind
+
+    var body: some View {
+        Text(key, bundle: loc.appBundle)
+    }
+
+    private var key: LocalizedStringKey {
+        switch kind {
+        case .cache: "kind.cache"
+        case .log: "kind.log"
+        case .history: "kind.history"
+        case .config: "kind.config"
+        case .credential: "kind.credential"
+        case .artifact: "kind.artifact"
+        case .state: "kind.state"
+        }
+    }
+}
+
+/// Hover-visible attribution evidence (SPEC §5.3 — "attributed via …").
+struct EvidenceLabel: View {
+    @Environment(LocalizationModel.self) private var loc
+    let evidence: AttributionEvidence
+
+    var body: some View {
+        Text(key, bundle: loc.appBundle)
+            .font(.caption2)
+            .foregroundStyle(.tertiary)
+    }
+
+    private var key: LocalizedStringKey {
+        switch evidence {
+        case .pathInsideProject: "evidence.pathInsideProject"
+        case .processCwd: "evidence.processCwd"
+        case .composeLabel: "evidence.composeLabel"
+        case .encodedPath: "evidence.encodedPath"
+        case .bindMount: "evidence.bindMount"
+        }
+    }
+}
+
+/// Persistent banner shown above content while FDA is missing — results must
+/// never look silently incomplete (SPEC §5.8 degraded mode).
+struct FDABanner: View {
+    @Environment(LocalizationModel.self) private var loc
+    let status: FullDiskAccess.Status
+
+    var body: some View {
+        if status == .denied {
+            HStack(spacing: 8) {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .foregroundStyle(.orange)
+                Text("fda.banner", bundle: loc.appBundle)
+                    .font(.callout)
+                Spacer()
+                Button {
+                    if let url = URL(string: FullDiskAccess.settingsPaneURL) {
+                        NSWorkspace.shared.open(url)
+                    }
+                } label: {
+                    Text("fda.banner.action", bundle: loc.appBundle)
+                }
+                .controlSize(.small)
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .background(.orange.opacity(0.12))
+        }
+    }
+}
+
+/// Overview metric card (SPEC §5.7). The whole card is a click target.
+struct MetricCard: View {
+    @Environment(LocalizationModel.self) private var loc
+    let titleKey: LocalizedStringKey
+    let value: Text
+    let systemImage: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Text(titleKey, bundle: loc.appBundle)
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                    Image(systemName: systemImage)
+                        .foregroundStyle(.tertiary)
+                }
+                value
+                    .font(.title.weight(.semibold))
+                    .monospacedDigit()
+            }
+            .padding(14)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(.background.secondary, in: RoundedRectangle(cornerRadius: 10))
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+/// A resource row with tier-appropriate selection affordance:
+/// regenerable — checkbox, checked by default; user_data — checkbox, unchecked;
+/// protected — no checkbox at all (SPEC §4.3).
+struct SelectableResourceRow: View {
+    @Environment(ScanModel.self) private var scan
+    @Environment(CleanupModel.self) private var cleanup
+    @Environment(LocalizationModel.self) private var loc
+    let item: ResourceItem
+
+    private var isIgnored: Bool { cleanup.ignoredPaths.contains(item.path) }
+
+    var body: some View {
+        HStack(alignment: .firstTextBaseline) {
+            if cleanup.isSelectable(item) {
+                Toggle(isOn: Binding(
+                    get: { cleanup.selectedPaths.contains(item.path) },
+                    set: { _ in cleanup.toggle(item) }
+                )) {
+                    EmptyView()
+                }
+                .labelsHidden()
+            } else if item.safety == .protected {
+                Image(systemName: "lock")
+                    .foregroundStyle(.secondary)
+                    .help(Text("row.protected.help", bundle: loc.appBundle))
+            }
+
+            details
+            Spacer()
+            if let bytes = item.sizeBytes {
+                SizeText(bytes: bytes)
+            } else {
+                ProgressView().controlSize(.small)
+            }
+        }
+        .opacity(isIgnored ? 0.45 : 1)
+        .help(helpText)
+        .contextMenu {
+            if isIgnored {
+                Button {
+                    cleanup.unignore(item.path)
+                } label: {
+                    Text("row.unignore", bundle: loc.appBundle)
+                }
+            } else if item.safety != .protected {
+                Button {
+                    cleanup.ignore(item)
+                } label: {
+                    Text("row.ignore", bundle: loc.appBundle)
+                }
+            }
+            Button {
+                NSWorkspace.shared.selectFile(item.path, inFileViewerRootedAtPath: "")
+            } label: {
+                Text("row.revealInFinder", bundle: loc.appBundle)
+            }
+        }
+    }
+
+    private var details: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            HStack(spacing: 6) {
+                Text(verbatim: displayName)
+                SafetyBadge(safety: item.safety)
+                if isIgnored {
+                    Text("row.ignored", bundle: loc.appBundle)
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            Text(verbatim: item.path)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+                .truncationMode(.middle)
+        }
+    }
+
+    private var displayName: String {
+        guard let target = scan.target(ruleID: item.ruleID, targetID: item.targetID) else { return item.targetID }
+        return loc.ruleDescription(ruleID: item.ruleID, target: target)
+    }
+
+    private var helpText: String {
+        var lines = [loc.safetyExplanation(item.safety)]
+        if let target = scan.target(ruleID: item.ruleID, targetID: item.targetID),
+           let hint = loc.regenerateHint(ruleID: item.ruleID, target: target) {
+            lines.append(hint)
+        }
+        return lines.joined(separator: "\n")
+    }
+}

@@ -1,207 +1,36 @@
 {
   "sourceLanguage": "en",
-  "version": "1.0",
   "strings": {
-    "sidebar.projects": {
-      "comment": "Sidebar item: project-centric view",
+    "active.tab.containers %lld": {
+      "comment": "Tab title; %lld is a count",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Projects"
+            "value": "Containers (%lld)"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "项目"
+            "value": "容器 %lld"
           }
         }
       }
     },
-    "sidebar.tools": {
-      "comment": "Sidebar item: per-tool global targets view",
+    "active.tab.processes %lld": {
+      "comment": "Tab title; %lld is a count",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tools"
+            "value": "Processes (%lld)"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "工具"
-          }
-        }
-      }
-    },
-    "sidebar.runtime": {
-      "comment": "Sidebar item: running processes and containers view",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Runtime"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "运行时"
-          }
-        }
-      }
-    },
-    "sidebar.settings": {
-      "comment": "Sidebar item: app settings",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "设置"
-          }
-        }
-      }
-    },
-    "placeholder.tagline": {
-      "comment": "Empty-state tagline shown in the M0 shell before scanning exists",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reclaim the disk space your dev tools leave behind."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "把开发工具留下的磁盘空间收回来。"
-          }
-        }
-      }
-    },
-    "placeholder.section.pending": {
-      "comment": "Empty-state note that this section arrives in a later milestone",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This view is under construction."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "此视图正在建设中。"
-          }
-        }
-      }
-    },
-    "toolbar.scan": {
-      "comment": "Toolbar button starting a manual scan",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scan"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "扫描"
-          }
-        }
-      }
-    },
-    "toolbar.scanning": {
-      "comment": "Toolbar state while a scan runs",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scanning…"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "正在扫描…"
-          }
-        }
-      }
-    },
-    "tools.total": {
-      "comment": "Footer row label: sum of all tool footprints",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "合计"
-          }
-        }
-      }
-    },
-    "tools.empty.title": {
-      "comment": "Empty state title in Tools view",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No scan results"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "暂无扫描结果"
-          }
-        }
-      }
-    },
-    "tools.empty.description": {
-      "comment": "Empty state description in Tools view",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Click Scan in the toolbar to measure what your dev tools are using."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "点击工具栏中的「扫描」,查看各开发工具的磁盘占用。"
-          }
-        }
-      }
-    },
-    "tools.error.title": {
-      "comment": "Error state title in Tools view",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rules failed to load"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "规则加载失败"
+            "value": "进程 %lld"
           }
         }
       }
@@ -240,159 +69,6 @@
         }
       }
     },
-    "menu.developer": {
-      "comment": "Menu bar title for developer utilities",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Developer"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "开发者"
-          }
-        }
-      }
-    },
-    "doctor.title": {
-      "comment": "Developer panel verifying rule targets on this machine",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Doctor"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Doctor"
-          }
-        }
-      }
-    },
-    "doctor.run": {
-      "comment": "Doctor toolbar button",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Re-examine"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "重新检测"
-          }
-        }
-      }
-    },
-    "doctor.projectScope %@": {
-      "comment": "Doctor row for project-scope targets",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Project glob: %@ — evaluated per discovered project"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "项目内匹配:%@——按已发现项目逐一判定"
-          }
-        }
-      }
-    },
-    "doctor.status.ok": {
-      "comment": "Doctor path status tooltip",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Exists and readable"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "存在且可读"
-          }
-        }
-      }
-    },
-    "doctor.status.missing": {
-      "comment": "Doctor path status tooltip",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Not present on this machine"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "本机不存在"
-          }
-        }
-      }
-    },
-    "doctor.status.unreadable": {
-      "comment": "Doctor path status tooltip",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Exists but not readable (permissions)"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "存在但不可读(权限)"
-          }
-        }
-      }
-    },
-    "cleanup.button %lld": {
-      "comment": "Toolbar button opening the cleanup preview; argument is the selected item count",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clean (%lld)"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "清理(%lld)"
-          }
-        }
-      }
-    },
-    "cleanup.running": {
-      "comment": "Progress label during execution",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cleaning up…"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "正在清理…"
-          }
-        }
-      }
-    },
     "cleanup.cancel": {
       "comment": "Preview sheet cancel button",
       "localizations": {
@@ -423,142 +99,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "开始清理"
-          }
-        }
-      }
-    },
-    "cleanup.done": {
-      "comment": "Results sheet close button",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Done"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "完成"
-          }
-        }
-      }
-    },
-    "cleanup.section.userData": {
-      "comment": "Preview section header for user_data items",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "User data — confirm each item"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "用户数据——需逐项确认"
-          }
-        }
-      }
-    },
-    "cleanup.section.regenerable": {
-      "comment": "Preview section header for regenerable items",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Regenerable"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "可再生"
-          }
-        }
-      }
-    },
-    "cleanup.userData.footer": {
-      "comment": "Preview footer explaining user_data confirmation",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "These are your own records and cannot be recovered after deletion. They are moved to the Trash only. Check each item to confirm."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "这些是你自己的记录,删除后无法找回;只会移入废纸篓。请逐项勾选确认。"
-          }
-        }
-      }
-    },
-    "cleanup.preview.total %lld %@": {
-      "comment": "Preview footer: item count and total size",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld items · %@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld 项 · %@"
-          }
-        }
-      }
-    },
-    "cleanup.method.trash": {
-      "comment": "Preview note when the method is trash",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Items will be moved to the Trash and can be restored from there."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "条目将移入废纸篓,可从废纸篓恢复。"
-          }
-        }
-      }
-    },
-    "cleanup.method.delete": {
-      "comment": "Preview note when direct delete is on",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Direct delete is enabled: regenerable items are removed permanently. User data still goes to the Trash."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "已开启直接删除:可再生条目将被永久删除;用户数据仍会进入废纸篓。"
-          }
-        }
-      }
-    },
-    "cleanup.directDelete.confirm.title": {
-      "comment": "First direct delete per session confirmation title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete permanently?"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "永久删除?"
           }
         }
       }
@@ -597,70 +137,70 @@
         }
       }
     },
-    "cleanup.result.reclaimed %@": {
-      "comment": "Results header with the total freed size",
+    "cleanup.directDelete.confirm.title": {
+      "comment": "First direct delete per session confirmation title",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reclaimed %@"
+            "value": "Delete permanently?"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "已释放 %@"
+            "value": "永久删除?"
           }
         }
       }
     },
-    "cleanup.result.trashFailure": {
-      "comment": "Banner when a user_data trash failure aborted the run",
+    "cleanup.done": {
+      "comment": "Results sheet close button",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Moving user data to the Trash failed (for example across volumes), so the run stopped. Nothing was deleted directly. Review the remaining items and try again."
+            "value": "Done"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "用户数据移入废纸篓失败(例如跨卷),清理已中止;没有任何内容被直接删除。请检查剩余条目后重试。"
+            "value": "完成"
           }
         }
       }
     },
-    "cleanup.result.apfsNote": {
-      "comment": "Fixed APFS snapshot explanation on the results page (SPEC §5.6)",
+    "cleanup.method.delete": {
+      "comment": "Preview note when direct delete is on",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "macOS local snapshots may keep deleted data for a while — the free space shown in Finder updates after snapshots expire, usually within 24 hours."
+            "value": "Direct delete is enabled: regenerable items are removed permanently. User data still goes to the Trash."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "macOS 本地快照可能暂时保留已删除数据,Finder 显示的可用空间会在快照过期后(通常 24 小时内)更新。"
+            "value": "已开启直接删除:可再生条目将被永久删除;用户数据仍会进入废纸篓。"
           }
         }
       }
     },
-    "cleanup.outcome.trashed": {
-      "comment": "Per-item result",
+    "cleanup.method.trash": {
+      "comment": "Preview note when the method is trash",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Moved to Trash"
+            "value": "Items will be moved to the Trash and can be restored from there."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "已移入废纸篓"
+            "value": "条目将移入废纸篓,可从废纸篓恢复。"
           }
         }
       }
@@ -716,19 +256,2127 @@
         }
       }
     },
-    "row.protected.help": {
-      "comment": "Tooltip on the lock icon of protected rows",
+    "cleanup.outcome.trashed": {
+      "comment": "Per-item result",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Protected: shown for awareness only. Mothball never deletes this."
+            "value": "Moved to Trash"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "受保护:仅展示占用,Mothball 绝不删除。"
+            "value": "已移入废纸篓"
+          }
+        }
+      }
+    },
+    "cleanup.preview.total %lld %@": {
+      "comment": "Preview footer: item count and total size",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld items · %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 项 · %@"
+          }
+        }
+      }
+    },
+    "cleanup.result.apfsNote": {
+      "comment": "Fixed APFS snapshot explanation on the results page (SPEC §5.6)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS local snapshots may keep deleted data for a while — the free space shown in Finder updates after snapshots expire, usually within 24 hours."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 本地快照可能暂时保留已删除数据,Finder 显示的可用空间会在快照过期后(通常 24 小时内)更新。"
+          }
+        }
+      }
+    },
+    "cleanup.result.reclaimed %@": {
+      "comment": "Results header with the total freed size",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclaimed %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已释放 %@"
+          }
+        }
+      }
+    },
+    "cleanup.result.trashFailure": {
+      "comment": "Banner when a user_data trash failure aborted the run",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moving user data to the Trash failed (for example across volumes), so the run stopped. Nothing was deleted directly. Review the remaining items and try again."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用户数据移入废纸篓失败(例如跨卷),清理已中止;没有任何内容被直接删除。请检查剩余条目后重试。"
+          }
+        }
+      }
+    },
+    "cleanup.running": {
+      "comment": "Progress label during execution",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cleaning up…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在清理…"
+          }
+        }
+      }
+    },
+    "cleanup.section.regenerable": {
+      "comment": "Preview section header for regenerable items",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regenerable"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可再生"
+          }
+        }
+      }
+    },
+    "cleanup.section.userData": {
+      "comment": "Preview section header for user_data items",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "User data — confirm each item"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用户数据——需逐项确认"
+          }
+        }
+      }
+    },
+    "cleanup.userData.footer": {
+      "comment": "Preview footer explaining user_data confirmation",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These are your own records and cannot be recovered after deletion. They are moved to the Trash only. Check each item to confirm."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这些是你自己的记录,删除后无法找回;只会移入废纸篓。请逐项勾选确认。"
+          }
+        }
+      }
+    },
+    "dashboard.attention.dockerDown": {
+      "comment": "Attention row title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker daemon isn't running"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker 守护未运行"
+          }
+        }
+      }
+    },
+    "dashboard.attention.dockerDown.detail": {
+      "comment": "Attention row subtitle",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Container resources can't be listed until it starts."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "守护启动后才能列出容器资源。"
+          }
+        }
+      }
+    },
+    "dashboard.attention.empty": {
+      "comment": "Attention list empty state",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing needs attention right now."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当前没有需要关注的项。"
+          }
+        }
+      }
+    },
+    "dashboard.attention.notScanned": {
+      "comment": "Attention list before first scan",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run a scan to see what needs attention."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扫描后这里会显示需要关注的项。"
+          }
+        }
+      }
+    },
+    "dashboard.attention.reclaimable %@": {
+      "comment": "Attention row subtitle; %@ is a byte count",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ reclaimable"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可释放 %@"
+          }
+        }
+      }
+    },
+    "dashboard.attention.review": {
+      "comment": "Attention row trailing action",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查看"
+          }
+        }
+      }
+    },
+    "dashboard.attention.staleProject %@ %@": {
+      "comment": "Attention row subtitle; relative date, byte count",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last active %@ · %@ reclaimable"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最后活跃 %@ · 可释放 %@"
+          }
+        }
+      }
+    },
+    "dashboard.attention.title": {
+      "comment": "Overview section header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needs Attention"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要关注"
+          }
+        }
+      }
+    },
+    "dashboard.card.memory": {
+      "comment": "Metric card title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dev Memory"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开发内存占用"
+          }
+        }
+      }
+    },
+    "dashboard.card.ports": {
+      "comment": "Metric card title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active Ports"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "活动端口"
+          }
+        }
+      }
+    },
+    "dashboard.card.ports.value %lld": {
+      "comment": "Metric card value; %lld is a count",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 个"
+          }
+        }
+      }
+    },
+    "dashboard.card.reclaimable": {
+      "comment": "Metric card title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclaimable"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可释放空间"
+          }
+        }
+      }
+    },
+    "dashboard.card.running": {
+      "comment": "Metric card title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Running"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行中资源"
+          }
+        }
+      }
+    },
+    "dashboard.card.running.value %lld": {
+      "comment": "Metric card value; %lld is a count",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 项"
+          }
+        }
+      }
+    },
+    "dashboard.greeting %lld": {
+      "comment": "Overview headline; %lld is a count",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld development resources are still running"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你好,今天有 %lld 个开发资源仍在运行"
+          }
+        }
+      }
+    },
+    "dashboard.lastScan %@": {
+      "comment": "Overview subtitle prefix; %@ is a relative date",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last scan %@ ·"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上次扫描 %@ ·"
+          }
+        }
+      }
+    },
+    "dashboard.privacyNote": {
+      "comment": "Overview subtitle privacy note",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All analysis happens on this Mac; nothing is uploaded."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有分析均在本机完成,不上传任何数据。"
+          }
+        }
+      }
+    },
+    "docker.action.prune": {
+      "comment": "Build cache prune action",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prune"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理"
+          }
+        }
+      }
+    },
+    "docker.action.remove": {
+      "comment": "Row action",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除"
+          }
+        }
+      }
+    },
+    "docker.action.removeAllDangling %lld": {
+      "comment": "Batch action for dangling images",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove all (%lld)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部删除(%lld)"
+          }
+        }
+      }
+    },
+    "docker.action.removeVolume": {
+      "comment": "Row action for volumes (leads to strong confirm)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除…"
+          }
+        }
+      }
+    },
+    "docker.action.stop": {
+      "comment": "Row action",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止"
+          }
+        }
+      }
+    },
+    "docker.daemonDown.message": {
+      "comment": "Empty state description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start Docker Desktop, OrbStack or Colima and refresh. This is informational — nothing is wrong."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "启动 Docker Desktop、OrbStack 或 Colima 后点击刷新。这只是提示,并非错误。"
+          }
+        }
+      }
+    },
+    "docker.daemonDown.title": {
+      "comment": "Empty state when the daemon is unreachable",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker engine is not running"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker 引擎未运行"
+          }
+        }
+      }
+    },
+    "docker.empty.message": {
+      "comment": "Docker list empty state message",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing to manage in this view right now."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当前没有可管理的容器侧资源。"
+          }
+        }
+      }
+    },
+    "docker.empty.title": {
+      "comment": "Docker list empty state title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No container resources"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有容器资源"
+          }
+        }
+      }
+    },
+    "docker.error.title": {
+      "comment": "Error alert title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker operation failed"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker 操作失败"
+          }
+        }
+      }
+    },
+    "docker.image.confirm.button": {
+      "comment": "Tagged image confirm button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove Image"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除镜像"
+          }
+        }
+      }
+    },
+    "docker.image.confirm.message %@": {
+      "comment": "Tagged image confirm message",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Getting \"%@\" back means pulling or rebuilding it."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "找回「%@」需要重新拉取或构建。"
+          }
+        }
+      }
+    },
+    "docker.image.confirm.title": {
+      "comment": "Tagged image confirm title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove this image?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除此镜像?"
+          }
+        }
+      }
+    },
+    "docker.noBinary.message": {
+      "comment": "Empty state description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Install Docker Desktop, OrbStack or Colima to manage container resources. Mothball looks in the standard install locations."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安装 Docker Desktop、OrbStack 或 Colima 后即可管理容器资源。Mothball 会在标准安装位置查找。"
+          }
+        }
+      }
+    },
+    "docker.noBinary.title": {
+      "comment": "Empty state when no docker binary exists",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Docker CLI not found"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未找到 Docker CLI"
+          }
+        }
+      }
+    },
+    "docker.podman.notice": {
+      "comment": "Informational row when podman exists",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podman detected — managing Podman resources is not supported yet."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检测到 Podman——暂不支持管理 Podman 资源。"
+          }
+        }
+      }
+    },
+    "docker.section.buildCache": {
+      "comment": "Section header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build cache"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "构建缓存"
+          }
+        }
+      }
+    },
+    "docker.section.dangling": {
+      "comment": "Section header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dangling images"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "悬空镜像"
+          }
+        }
+      }
+    },
+    "docker.section.running": {
+      "comment": "Section header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Running containers"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行中的容器"
+          }
+        }
+      }
+    },
+    "docker.section.stopped": {
+      "comment": "Section header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stopped containers"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已停止的容器"
+          }
+        }
+      }
+    },
+    "docker.section.taggedUnused": {
+      "comment": "Section header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tagged images with no containers"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无容器引用的镜像"
+          }
+        }
+      }
+    },
+    "docker.section.volumes": {
+      "comment": "Section header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volumes"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "卷"
+          }
+        }
+      }
+    },
+    "docker.taggedUnused.footer": {
+      "comment": "Section footer",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Re-pulling or rebuilding these costs time and bandwidth, so each removal asks for confirmation."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新拉取或构建这些镜像需要时间和带宽,因此每次删除都会单独确认。"
+          }
+        }
+      }
+    },
+    "docker.volume.confirm.button %@": {
+      "comment": "Volume strong-confirm destructive button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete volume \"%@\""
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除卷「%@」"
+          }
+        }
+      }
+    },
+    "docker.volume.confirm.message %@": {
+      "comment": "Volume strong-confirm message",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything stored in \"%@\" will be lost permanently. This cannot be undone — volumes do not go to the Trash. Make sure nothing you need lives inside."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」中存储的全部数据将永久丢失,且无法撤销——卷不会进入废纸篓。请确认其中没有你需要的数据。"
+          }
+        }
+      }
+    },
+    "docker.volume.confirm.title": {
+      "comment": "Volume strong-confirm title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete this volume permanently?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "永久删除此卷?"
+          }
+        }
+      }
+    },
+    "docker.volumes.footer": {
+      "comment": "Section footer",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volume contents can hold irreplaceable data (databases!). Volumes are shown for awareness, never join batch cleanup, and deleting one requires a strong confirmation."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "卷内可能存有不可替代的数据(比如数据库)。卷仅作展示,绝不进入批量清理;单独删除需强确认。"
+          }
+        }
+      }
+    },
+    "doctor.projectScope %@": {
+      "comment": "Doctor row for project-scope targets",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project glob: %@ — evaluated per discovered project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目内匹配:%@——按已发现项目逐一判定"
+          }
+        }
+      }
+    },
+    "doctor.run": {
+      "comment": "Doctor toolbar button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Re-examine"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新检测"
+          }
+        }
+      }
+    },
+    "doctor.status.missing": {
+      "comment": "Doctor path status tooltip",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not present on this machine"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本机不存在"
+          }
+        }
+      }
+    },
+    "doctor.status.ok": {
+      "comment": "Doctor path status tooltip",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exists and readable"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "存在且可读"
+          }
+        }
+      }
+    },
+    "doctor.status.unreadable": {
+      "comment": "Doctor path status tooltip",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exists but not readable (permissions)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "存在但不可读(权限)"
+          }
+        }
+      }
+    },
+    "doctor.title": {
+      "comment": "Developer panel verifying rule targets on this machine",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doctor"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doctor"
+          }
+        }
+      }
+    },
+    "evidence.bindMount": {
+      "comment": "Attribution evidence label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bind mount source in the project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "绑定挂载源位于项目内"
+          }
+        }
+      }
+    },
+    "evidence.composeLabel": {
+      "comment": "Attribution evidence label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attributed via Docker Compose labels"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通过 Compose 标签归属"
+          }
+        }
+      }
+    },
+    "evidence.encodedPath": {
+      "comment": "Attribution evidence label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Directory name encodes the project path"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目录名编码了项目路径"
+          }
+        }
+      }
+    },
+    "evidence.pathInsideProject": {
+      "comment": "Attribution evidence label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Located inside the project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "位于项目目录内"
+          }
+        }
+      }
+    },
+    "evidence.processCwd": {
+      "comment": "Attribution evidence label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Process working directory in the project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "进程工作目录位于项目内"
+          }
+        }
+      }
+    },
+    "fda.banner": {
+      "comment": "Persistent degraded-mode banner (SPEC §5.8)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Results may be incomplete: Full Disk Access has not been granted."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "结果可能不完整:未授予完全磁盘访问。"
+          }
+        }
+      }
+    },
+    "fda.banner.action": {
+      "comment": "Banner action opening System Settings",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grant…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "去授权…"
+          }
+        }
+      }
+    },
+    "footer.helpFeedback": {
+      "comment": "Sidebar footer link",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Help & Feedback"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "帮助与反馈"
+          }
+        }
+      }
+    },
+    "footer.lastScan %@": {
+      "comment": "Sidebar footer; %@ is a relative date",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last scan %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上次扫描 %@"
+          }
+        }
+      }
+    },
+    "footer.notScanned": {
+      "comment": "Sidebar footer before the first scan",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not scanned yet"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未扫描"
+          }
+        }
+      }
+    },
+    "footer.totalReclaimed %@": {
+      "comment": "Sidebar footer; %@ is a byte count",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclaimed %@ so far"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "累计已释放 %@"
+          }
+        }
+      }
+    },
+    "inspector.cwd": {
+      "comment": "Process inspector field label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Working directory"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "工作目录"
+          }
+        }
+      }
+    },
+    "inspector.executable": {
+      "comment": "Process inspector field label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Executable"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可执行文件"
+          }
+        }
+      }
+    },
+    "inspector.memory": {
+      "comment": "Process inspector field label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memory"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "内存"
+          }
+        }
+      }
+    },
+    "inspector.pid": {
+      "comment": "Process inspector field label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PID"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PID"
+          }
+        }
+      }
+    },
+    "inspector.ports": {
+      "comment": "Process inspector field label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ports"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "端口"
+          }
+        }
+      }
+    },
+    "inspector.project": {
+      "comment": "Process inspector field label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目"
+          }
+        }
+      }
+    },
+    "inspector.running": {
+      "comment": "Process inspector status",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Running"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在运行"
+          }
+        }
+      }
+    },
+    "inspector.stopImpact.body": {
+      "comment": "Process inspector impact box body",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The service stops listening on its ports. Restart it from your project when needed."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "服务将停止监听端口,需要时可在项目中重新启动。"
+          }
+        }
+      }
+    },
+    "inspector.stopImpact.title": {
+      "comment": "Process inspector impact box title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After stopping"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止后影响"
+          }
+        }
+      }
+    },
+    "inspector.uptime": {
+      "comment": "Process inspector field label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uptime"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行时长"
+          }
+        }
+      }
+    },
+    "kind.artifact": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build artifacts"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "构建产物"
+          }
+        }
+      }
+    },
+    "kind.cache": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caches"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缓存"
+          }
+        }
+      }
+    },
+    "kind.config": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Configuration"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "配置"
+          }
+        }
+      }
+    },
+    "kind.credential": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Credentials"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "凭证"
+          }
+        }
+      }
+    },
+    "kind.history": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "History"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "历史"
+          }
+        }
+      }
+    },
+    "kind.log": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Logs"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日志"
+          }
+        }
+      }
+    },
+    "kind.state": {
+      "comment": "Resource kind group header",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "State"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "状态"
+          }
+        }
+      }
+    },
+    "menu.checkForUpdates": {
+      "comment": "App menu item (Sparkle)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check for Updates…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查更新…"
+          }
+        }
+      }
+    },
+    "menu.developer": {
+      "comment": "Menu bar title for developer utilities",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Developer"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开发者"
+          }
+        }
+      }
+    },
+    "menu.search": {
+      "comment": "Menu item focusing the search field",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜索"
+          }
+        }
+      }
+    },
+    "onboarding.back": {
+      "comment": "Onboarding navigation",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上一步"
+          }
+        }
+      }
+    },
+    "onboarding.continue": {
+      "comment": "Onboarding navigation",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "继续"
+          }
+        }
+      }
+    },
+    "onboarding.fda.denied": {
+      "comment": "FDA status line",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not granted yet. Add Mothball in System Settings, then come back."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未授予。请在系统设置中添加 Mothball,然后返回。"
+          }
+        }
+      }
+    },
+    "onboarding.fda.granted": {
+      "comment": "FDA status line",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full Disk Access is granted."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已授予完全磁盘访问。"
+          }
+        }
+      }
+    },
+    "onboarding.fda.indeterminate": {
+      "comment": "FDA status line",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not determine status on this machine."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法在本机判断授权状态。"
+          }
+        }
+      }
+    },
+    "onboarding.fda.open": {
+      "comment": "Button opening the FDA pane",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open System Settings"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开系统设置"
+          }
+        }
+      }
+    },
+    "onboarding.later": {
+      "comment": "Onboarding secondary action, page 2",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set Up Later"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "稍后设置"
+          }
+        }
+      }
+    },
+    "onboarding.permissions.fda": {
+      "comment": "Permission row title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full Disk Access"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完全磁盘访问"
+          }
+        }
+      }
+    },
+    "onboarding.permissions.fda.detail": {
+      "comment": "Permission row detail",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optional — only for protected development directories"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可选,仅用于受系统保护的开发目录"
+          }
+        }
+      }
+    },
+    "onboarding.permissions.fdaNote": {
+      "comment": "Onboarding page 2 footnote",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full Disk Access is only used to scan the directories you choose. File contents are never uploaded."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完全磁盘访问只用于扫描你选择的开发目录,不会上传文件内容。"
+          }
+        }
+      }
+    },
+    "onboarding.permissions.granted": {
+      "comment": "Permission row status",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allowed"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已允许"
+          }
+        }
+      }
+    },
+    "onboarding.permissions.intro": {
+      "comment": "Onboarding page 2 intro",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mothball only reads what you authorize and analyzes everything locally. Each permission can be granted later."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mothball 默认只读取你授权的目录,并在本机完成所有分析。每项权限都可以稍后再开启。"
+          }
+        }
+      }
+    },
+    "onboarding.permissions.roots": {
+      "comment": "Permission row title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project directories"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目目录"
+          }
+        }
+      }
+    },
+    "onboarding.permissions.roots.choose": {
+      "comment": "Permission row action",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择目录…"
+          }
+        }
+      }
+    },
+    "onboarding.permissions.roots.count %lld": {
+      "comment": "Permission row status; %lld is a count",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld chosen"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已选 %lld 个"
+          }
+        }
+      }
+    },
+    "onboarding.permissions.roots.detail": {
+      "comment": "Permission row detail",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose the development directories to scan; adjustable anytime"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择要扫描的开发目录,可随时调整"
+          }
+        }
+      }
+    },
+    "onboarding.permissions.runtime": {
+      "comment": "Permission row title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Process & port detection"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "进程和端口检测"
+          }
+        }
+      }
+    },
+    "onboarding.permissions.runtime.detail": {
+      "comment": "Permission row detail",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processes and listening ports visible to your user"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当前用户可见的进程与监听端口"
+          }
+        }
+      }
+    },
+    "onboarding.permissions.title": {
+      "comment": "Onboarding page 2 title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permissions & Privacy"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "权限与隐私"
+          }
+        }
+      }
+    },
+    "onboarding.start": {
+      "comment": "Onboarding primary action, page 1",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get Started"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开始使用"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.feature.caches": {
+      "comment": "Onboarding feature bullet",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clean regenerable development caches"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理可重新生成的开发缓存"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.feature.local": {
+      "comment": "Onboarding feature bullet",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All analysis happens on this Mac"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有分析均在本机完成"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.feature.ports": {
+      "comment": "Onboarding feature bullet",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find processes holding onto ports"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "发现占用端口的进程"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.feature.stop": {
+      "comment": "Onboarding feature bullet",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop containers and local services"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止容器与本地服务"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.privacy": {
+      "comment": "Onboarding privacy statement",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open source (Apache-2.0). Everything runs locally on your Mac; nothing is ever uploaded. Mothball never asks for administrator privileges."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开源(Apache-2.0)。一切都在你的 Mac 上本地运行,不上传任何数据;永不请求管理员权限。"
+          }
+        }
+      }
+    },
+    "onboarding.welcome.tagline": {
+      "comment": "Onboarding welcome tagline",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reclaim the disk space your dev tools leave behind — organized by project."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "把开发工具留下的磁盘空间收回来——按项目聚合。"
+          }
+        }
+      }
+    },
+    "projectDetail.clean %@": {
+      "comment": "Project sheet primary action; %@ is a byte count",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clean %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清理 %@"
+          }
+        }
+      }
+    },
+    "projectDetail.lastActive %@": {
+      "comment": "Project sheet header; %@ is a relative date",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last active %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最后活跃 %@"
+          }
+        }
+      }
+    },
+    "projects.itemCount %lld": {
+      "comment": "Item count on a project card",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld items"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 项"
+          }
+        }
+      }
+    },
+    "projects.noRoots.action": {
+      "comment": "Empty state action opening settings",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose Directories…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择目录…"
+          }
+        }
+      }
+    },
+    "projects.noRoots.description": {
+      "comment": "Projects view empty state description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your code directories in Settings so Mothball can discover projects and attribute resources to them."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在「设置」中添加代码目录,Mothball 才能发现项目并把资源归属到项目。"
+          }
+        }
+      }
+    },
+    "projects.noRoots.title": {
+      "comment": "Projects view empty state title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No code roots configured"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未配置代码根目录"
+          }
+        }
+      }
+    },
+    "projects.selectedCount %lld": {
+      "comment": "Project card selection count",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld selected"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已选 %lld 项"
+          }
+        }
+      }
+    },
+    "projects.unattributed": {
+      "comment": "The catch-all group for resources not attributed to any project",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unattributed / Global"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未归属 / 全局"
+          }
+        }
+      }
+    },
+    "projects.unattributed.detail": {
+      "comment": "Subtitle of the unattributed group",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tool data that does not belong to any discovered project"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不属于任何已发现项目的工具数据"
           }
         }
       }
@@ -750,23 +2398,6 @@
         }
       }
     },
-    "row.unignore": {
-      "comment": "Context menu: remove from ignore list",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stop Ignoring"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "取消忽略"
-          }
-        }
-      }
-    },
     "row.ignored": {
       "comment": "Inline marker for ignored rows",
       "localizations": {
@@ -780,6 +2411,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "已忽略"
+          }
+        }
+      }
+    },
+    "row.protected.help": {
+      "comment": "Tooltip on the lock icon of protected rows",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protected: shown for awareness only. Mothball never deletes this."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "受保护:仅展示占用,Mothball 绝不删除。"
           }
         }
       }
@@ -801,19 +2449,325 @@
         }
       }
     },
-    "settings.section.cleanup": {
-      "comment": "Settings section",
+    "row.unignore": {
+      "comment": "Context menu: remove from ignore list",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cleanup"
+            "value": "Stop Ignoring"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "清理"
+            "value": "取消忽略"
+          }
+        }
+      }
+    },
+    "runtime.column.actions": {
+      "comment": "Table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actions"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "操作"
+          }
+        }
+      }
+    },
+    "runtime.column.memory": {
+      "comment": "Table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memory"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "内存"
+          }
+        }
+      }
+    },
+    "runtime.column.name": {
+      "comment": "Table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Process"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "进程"
+          }
+        }
+      }
+    },
+    "runtime.column.port": {
+      "comment": "Table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Port"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "端口"
+          }
+        }
+      }
+    },
+    "runtime.column.project": {
+      "comment": "Table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project / Directory"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 / 目录"
+          }
+        }
+      }
+    },
+    "runtime.column.uptime": {
+      "comment": "Table column",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Started"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "启动于"
+          }
+        }
+      }
+    },
+    "runtime.empty.description": {
+      "comment": "Runtime view empty state description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processes appear here when they listen on a TCP port or run inside one of your projects."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当进程监听 TCP 端口或运行在你的项目目录中时,会显示在这里。"
+          }
+        }
+      }
+    },
+    "runtime.empty.title": {
+      "comment": "Runtime view empty state",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No running services found"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未发现运行中的服务"
+          }
+        }
+      }
+    },
+    "runtime.forceKill.button": {
+      "comment": "Force kill button (SIGKILL)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Force Quit"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "强制结束"
+          }
+        }
+      }
+    },
+    "runtime.forceKill.message %@ %lld": {
+      "comment": "Force kill dialog message",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ (PID %2$lld) is still running 5 seconds after the stop request. Force quitting may lose unsaved work in that process."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@(PID %2$lld)在停止请求 5 秒后仍在运行。强制结束可能丢失该进程未保存的数据。"
+          }
+        }
+      }
+    },
+    "runtime.forceKill.title": {
+      "comment": "Dialog title when SIGTERM grace period expires",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Process did not stop"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "进程未停止"
+          }
+        }
+      }
+    },
+    "runtime.refresh": {
+      "comment": "Runtime view refresh button",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refresh"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刷新"
+          }
+        }
+      }
+    },
+    "runtime.stale.message": {
+      "comment": "PID reuse alert message",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That process ID now belongs to a different process, so nothing was signaled. The list has been refreshed."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "该进程 ID 已被其他进程复用,因此未发送任何信号。列表已刷新。"
+          }
+        }
+      }
+    },
+    "runtime.stale.title": {
+      "comment": "Alert when PID reuse detected",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "List out of date"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "列表已过期"
+          }
+        }
+      }
+    },
+    "runtime.stop": {
+      "comment": "Per-row stop button (SIGTERM)",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止"
+          }
+        }
+      }
+    },
+    "search.prompt": {
+      "comment": "Search field placeholder",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search ports, processes, or projects"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜索端口、进程或项目"
+          }
+        }
+      }
+    },
+    "settings.codeRoots.add": {
+      "comment": "Settings button opening a folder picker",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add directory…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加目录…"
+          }
+        }
+      }
+    },
+    "settings.codeRoots.detail": {
+      "comment": "Settings footer",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projects are discovered inside these directories (up to 6 levels deep). Rescan after changing."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在这些目录内发现项目(最深 6 层)。修改后请重新扫描。"
           }
         }
       }
@@ -869,19 +2823,104 @@
         }
       }
     },
-    "settings.section.audit": {
-      "comment": "Settings section",
+    "settings.doctor.detail": {
+      "comment": "Settings footer",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Audit log"
+            "value": "Doctor shows every rule target's on-disk reality — the workbench for verifying draft rules."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "审计日志"
+            "value": "Doctor 面板逐条展示规则在本机的真实情况,是核实 draft 规则的工作台。"
+          }
+        }
+      }
+    },
+    "settings.exclusions.add": {
+      "comment": "Settings action",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Exclusion…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加排除目录…"
+          }
+        }
+      }
+    },
+    "settings.exclusions.detail": {
+      "comment": "Settings footer",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projects inside excluded directories are not discovered."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "排除目录内不会发现项目。"
+          }
+        }
+      }
+    },
+    "settings.language": {
+      "comment": "Settings picker label",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Language"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "界面语言"
+          }
+        }
+      }
+    },
+    "settings.language.detail": {
+      "comment": "Settings footer",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takes effect immediately. Numbers and dates follow the system region."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "切换即时生效;数字与日期格式跟随系统地区设置。"
+          }
+        }
+      }
+    },
+    "settings.language.system": {
+      "comment": "Language picker option",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System Default"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "跟随系统"
           }
         }
       }
@@ -903,104 +2942,36 @@
         }
       }
     },
-    "settings.section.ignored": {
+    "settings.privacy.note": {
+      "comment": "Settings footer",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All analysis happens locally. The audit log records every operation and never leaves this Mac."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有分析在本机完成;审计日志记录每次操作,不会离开这台电脑。"
+          }
+        }
+      }
+    },
+    "settings.section.advanced": {
       "comment": "Settings section",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ignored paths"
+            "value": "Advanced"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "已忽略的路径"
-          }
-        }
-      }
-    },
-    "projects.noRoots.title": {
-      "comment": "Projects view empty state title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No code roots configured"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "尚未配置代码根目录"
-          }
-        }
-      }
-    },
-    "projects.noRoots.description": {
-      "comment": "Projects view empty state description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add your code directories in Settings so Mothball can discover projects and attribute resources to them."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "在「设置」中添加代码目录,Mothball 才能发现项目并把资源归属到项目。"
-          }
-        }
-      }
-    },
-    "projects.unattributed": {
-      "comment": "The catch-all group for resources not attributed to any project",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unattributed / Global"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "未归属 / 全局"
-          }
-        }
-      }
-    },
-    "projects.unattributed.detail": {
-      "comment": "Subtitle of the unattributed group",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tool data that does not belong to any discovered project"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "不属于任何已发现项目的工具数据"
-          }
-        }
-      }
-    },
-    "projects.itemCount %lld": {
-      "comment": "Item count on a project card",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld items"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld 项"
+            "value": "高级"
           }
         }
       }
@@ -1022,1229 +2993,380 @@
         }
       }
     },
-    "settings.codeRoots.add": {
-      "comment": "Settings button opening a folder picker",
+    "settings.section.exclusions": {
+      "comment": "Settings section",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Add directory…"
+            "value": "Excluded Directories"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "添加目录…"
+            "value": "排除目录"
           }
         }
       }
     },
-    "settings.codeRoots.detail": {
-      "comment": "Settings footer",
+    "settings.section.general": {
+      "comment": "Settings section",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Projects are discovered inside these directories (up to 6 levels deep). Rescan after changing."
+            "value": "General"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "在这些目录内发现项目(最深 6 层)。修改后请重新扫描。"
+            "value": "常规"
           }
         }
       }
     },
-    "kind.cache": {
-      "comment": "Resource kind group header",
+    "settings.section.ignored": {
+      "comment": "Settings section",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Caches"
+            "value": "Ignored paths"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "缓存"
+            "value": "已忽略的路径"
           }
         }
       }
     },
-    "kind.log": {
-      "comment": "Resource kind group header",
+    "settings.section.language": {
+      "comment": "Settings section",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Logs"
+            "value": "Language & Region"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "日志"
+            "value": "语言与地区"
           }
         }
       }
     },
-    "kind.history": {
-      "comment": "Resource kind group header",
+    "settings.section.privacy": {
+      "comment": "Settings section",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "History"
+            "value": "Privacy & Updates"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "历史"
+            "value": "隐私与更新"
           }
         }
       }
     },
-    "kind.config": {
-      "comment": "Resource kind group header",
+    "sidebar.activeResources": {
+      "comment": "Sidebar item: running processes and containers",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Configuration"
+            "value": "Active Resources"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "配置"
+            "value": "活动资源"
           }
         }
       }
     },
-    "kind.credential": {
-      "comment": "Resource kind group header",
+    "sidebar.overview": {
+      "comment": "Sidebar item: dashboard",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Credentials"
+            "value": "Overview"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "凭证"
+            "value": "概览"
           }
         }
       }
     },
-    "kind.artifact": {
-      "comment": "Resource kind group header",
+    "sidebar.settings": {
+      "comment": "Sidebar item: app settings",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Build artifacts"
+            "value": "Settings"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "构建产物"
+            "value": "设置"
           }
         }
       }
     },
-    "kind.state": {
-      "comment": "Resource kind group header",
+    "sidebar.storage": {
+      "comment": "Sidebar item: reclaimable disk space",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "State"
+            "value": "Storage"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "状态"
+            "value": "磁盘空间"
           }
         }
       }
     },
-    "evidence.pathInsideProject": {
-      "comment": "Attribution evidence label",
+    "storage.selection %lld %@": {
+      "comment": "Selection bar; count, byte count",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Located inside the project"
+            "value": "%lld selected · %@ reclaimable"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "位于项目目录内"
+            "value": "已选择 %lld 项 · 预计释放 %@"
           }
         }
       }
     },
-    "evidence.processCwd": {
-      "comment": "Attribution evidence label",
+    "storage.selection.clear": {
+      "comment": "Selection bar secondary action",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Process working directory in the project"
+            "value": "Deselect All"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "进程工作目录位于项目内"
+            "value": "取消选择"
           }
         }
       }
     },
-    "evidence.composeLabel": {
-      "comment": "Attribution evidence label",
+    "storage.selection.review": {
+      "comment": "Selection bar primary action; opens the mandatory preview",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Attributed via Docker Compose labels"
+            "value": "Review & Clean…"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "通过 Compose 标签归属"
+            "value": "查看影响并清理…"
           }
         }
       }
     },
-    "evidence.encodedPath": {
-      "comment": "Attribution evidence label",
+    "storage.summary %@ %lld": {
+      "comment": "Projects tab summary; byte count, project count",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Directory name encodes the project path"
+            "value": "Reclaimable %@ · %lld projects"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "目录名编码了项目路径"
+            "value": "可释放 %@ · %lld 个项目"
           }
         }
       }
     },
-    "evidence.bindMount": {
-      "comment": "Attribution evidence label",
+    "storage.tab.docker": {
+      "comment": "Storage tab",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bind mount source in the project"
+            "value": "Docker"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "绑定挂载源位于项目内"
+            "value": "Docker 存储"
           }
         }
       }
     },
-    "runtime.empty.title": {
-      "comment": "Runtime view empty state",
+    "storage.tab.projects": {
+      "comment": "Storage tab",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No running services found"
+            "value": "Project Artifacts"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "未发现运行中的服务"
+            "value": "项目产物"
           }
         }
       }
     },
-    "runtime.empty.description": {
-      "comment": "Runtime view empty state description",
+    "storage.tab.toolCaches": {
+      "comment": "Storage tab",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Processes appear here when they listen on a TCP port or run inside one of your projects."
+            "value": "Tool Caches"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "当进程监听 TCP 端口或运行在你的项目目录中时,会显示在这里。"
+            "value": "工具缓存"
           }
         }
       }
     },
-    "runtime.refresh": {
-      "comment": "Runtime view refresh button",
+    "toolbar.scan": {
+      "comment": "Toolbar button starting a manual scan",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Refresh"
+            "value": "Scan"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "刷新"
+            "value": "扫描"
           }
         }
       }
     },
-    "runtime.column.port": {
-      "comment": "Table column",
+    "toolbar.scanning": {
+      "comment": "Toolbar state while a scan runs",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Port"
+            "value": "Scanning…"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "端口"
+            "value": "正在扫描…"
           }
         }
       }
     },
-    "runtime.column.name": {
-      "comment": "Table column",
+    "tools.empty.description": {
+      "comment": "Empty state description in Tools view",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Process"
+            "value": "Click Scan in the toolbar to measure what your dev tools are using."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "进程"
+            "value": "点击工具栏中的「扫描」,查看各开发工具的磁盘占用。"
           }
         }
       }
     },
-    "runtime.column.project": {
-      "comment": "Table column",
+    "tools.empty.title": {
+      "comment": "Empty state title in Tools view",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Project / Directory"
+            "value": "No scan results"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "项目 / 目录"
+            "value": "暂无扫描结果"
           }
         }
       }
     },
-    "runtime.column.memory": {
-      "comment": "Table column",
+    "tools.error.title": {
+      "comment": "Error state title in Tools view",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Memory"
+            "value": "Rules failed to load"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "内存"
+            "value": "规则加载失败"
           }
         }
       }
     },
-    "runtime.column.uptime": {
-      "comment": "Table column",
+    "tools.total": {
+      "comment": "Footer row label: sum of all tool footprints",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Started"
+            "value": "Total"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "启动于"
-          }
-        }
-      }
-    },
-    "runtime.column.actions": {
-      "comment": "Table column",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Actions"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "操作"
-          }
-        }
-      }
-    },
-    "runtime.stop": {
-      "comment": "Per-row stop button (SIGTERM)",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stop"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "停止"
-          }
-        }
-      }
-    },
-    "runtime.forceKill.title": {
-      "comment": "Dialog title when SIGTERM grace period expires",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Process did not stop"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "进程未停止"
-          }
-        }
-      }
-    },
-    "runtime.forceKill.button": {
-      "comment": "Force kill button (SIGKILL)",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Force Quit"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "强制结束"
-          }
-        }
-      }
-    },
-    "runtime.forceKill.message %@ %lld": {
-      "comment": "Force kill dialog message",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ (PID %2$lld) is still running 5 seconds after the stop request. Force quitting may lose unsaved work in that process."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@(PID %2$lld)在停止请求 5 秒后仍在运行。强制结束可能丢失该进程未保存的数据。"
-          }
-        }
-      }
-    },
-    "runtime.stale.title": {
-      "comment": "Alert when PID reuse detected",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "List out of date"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "列表已过期"
-          }
-        }
-      }
-    },
-    "runtime.stale.message": {
-      "comment": "PID reuse alert message",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "That process ID now belongs to a different process, so nothing was signaled. The list has been refreshed."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "该进程 ID 已被其他进程复用,因此未发送任何信号。列表已刷新。"
-          }
-        }
-      }
-    },
-    "docker.noBinary.title": {
-      "comment": "Empty state when no docker binary exists",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Docker CLI not found"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "未找到 Docker CLI"
-          }
-        }
-      }
-    },
-    "docker.noBinary.message": {
-      "comment": "Empty state description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Install Docker Desktop, OrbStack or Colima to manage container resources. Mothball looks in the standard install locations."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "安装 Docker Desktop、OrbStack 或 Colima 后即可管理容器资源。Mothball 会在标准安装位置查找。"
-          }
-        }
-      }
-    },
-    "docker.daemonDown.title": {
-      "comment": "Empty state when the daemon is unreachable",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Docker engine is not running"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Docker 引擎未运行"
-          }
-        }
-      }
-    },
-    "docker.daemonDown.message": {
-      "comment": "Empty state description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start Docker Desktop, OrbStack or Colima and refresh. This is informational — nothing is wrong."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "启动 Docker Desktop、OrbStack 或 Colima 后点击刷新。这只是提示,并非错误。"
-          }
-        }
-      }
-    },
-    "docker.podman.notice": {
-      "comment": "Informational row when podman exists",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Podman detected — managing Podman resources is not supported yet."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "检测到 Podman——暂不支持管理 Podman 资源。"
-          }
-        }
-      }
-    },
-    "docker.section.running": {
-      "comment": "Section header",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Running containers"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "运行中的容器"
-          }
-        }
-      }
-    },
-    "docker.section.stopped": {
-      "comment": "Section header",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stopped containers"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "已停止的容器"
-          }
-        }
-      }
-    },
-    "docker.section.dangling": {
-      "comment": "Section header",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dangling images"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "悬空镜像"
-          }
-        }
-      }
-    },
-    "docker.section.taggedUnused": {
-      "comment": "Section header",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tagged images with no containers"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "无容器引用的镜像"
-          }
-        }
-      }
-    },
-    "docker.taggedUnused.footer": {
-      "comment": "Section footer",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Re-pulling or rebuilding these costs time and bandwidth, so each removal asks for confirmation."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "重新拉取或构建这些镜像需要时间和带宽,因此每次删除都会单独确认。"
-          }
-        }
-      }
-    },
-    "docker.section.volumes": {
-      "comment": "Section header",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Volumes"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "卷"
-          }
-        }
-      }
-    },
-    "docker.volumes.footer": {
-      "comment": "Section footer",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Volume contents can hold irreplaceable data (databases!). Volumes are shown for awareness, never join batch cleanup, and deleting one requires a strong confirmation."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "卷内可能存有不可替代的数据(比如数据库)。卷仅作展示,绝不进入批量清理;单独删除需强确认。"
-          }
-        }
-      }
-    },
-    "docker.section.buildCache": {
-      "comment": "Section header",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Build cache"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "构建缓存"
-          }
-        }
-      }
-    },
-    "docker.action.stop": {
-      "comment": "Row action",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stop"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "停止"
-          }
-        }
-      }
-    },
-    "docker.action.remove": {
-      "comment": "Row action",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remove"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "删除"
-          }
-        }
-      }
-    },
-    "docker.action.removeVolume": {
-      "comment": "Row action for volumes (leads to strong confirm)",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete…"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "删除…"
-          }
-        }
-      }
-    },
-    "docker.action.removeAllDangling %lld": {
-      "comment": "Batch action for dangling images",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remove all (%lld)"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "全部删除(%lld)"
-          }
-        }
-      }
-    },
-    "docker.action.prune": {
-      "comment": "Build cache prune action",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prune"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "清理"
-          }
-        }
-      }
-    },
-    "docker.volume.confirm.title": {
-      "comment": "Volume strong-confirm title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete this volume permanently?"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "永久删除此卷?"
-          }
-        }
-      }
-    },
-    "docker.volume.confirm.button %@": {
-      "comment": "Volume strong-confirm destructive button",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Delete volume \"%@\""
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "删除卷「%@」"
-          }
-        }
-      }
-    },
-    "docker.volume.confirm.message %@": {
-      "comment": "Volume strong-confirm message",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Everything stored in \"%@\" will be lost permanently. This cannot be undone — volumes do not go to the Trash. Make sure nothing you need lives inside."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「%@」中存储的全部数据将永久丢失,且无法撤销——卷不会进入废纸篓。请确认其中没有你需要的数据。"
-          }
-        }
-      }
-    },
-    "docker.image.confirm.title": {
-      "comment": "Tagged image confirm title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remove this image?"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "删除此镜像?"
-          }
-        }
-      }
-    },
-    "docker.image.confirm.button": {
-      "comment": "Tagged image confirm button",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remove Image"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "删除镜像"
-          }
-        }
-      }
-    },
-    "docker.image.confirm.message %@": {
-      "comment": "Tagged image confirm message",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Getting \"%@\" back means pulling or rebuilding it."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "找回「%@」需要重新拉取或构建。"
-          }
-        }
-      }
-    },
-    "docker.error.title": {
-      "comment": "Error alert title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Docker operation failed"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Docker 操作失败"
-          }
-        }
-      }
-    },
-    "menu.checkForUpdates": {
-      "comment": "App menu item (Sparkle)",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Check for Updates…"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "检查更新…"
-          }
-        }
-      }
-    },
-    "onboarding.back": {
-      "comment": "Onboarding navigation",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Back"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "上一步"
-          }
-        }
-      }
-    },
-    "onboarding.skip": {
-      "comment": "Onboarding: skip code roots (global scan only)",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skip"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "跳过"
-          }
-        }
-      }
-    },
-    "onboarding.continue": {
-      "comment": "Onboarding navigation",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Continue"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "继续"
-          }
-        }
-      }
-    },
-    "onboarding.finish": {
-      "comment": "Onboarding final button",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start First Scan"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "开始首次扫描"
-          }
-        }
-      }
-    },
-    "onboarding.welcome.tagline": {
-      "comment": "Onboarding welcome tagline",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reclaim the disk space your dev tools leave behind — organized by project."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "把开发工具留下的磁盘空间收回来——按项目聚合。"
-          }
-        }
-      }
-    },
-    "onboarding.welcome.privacy": {
-      "comment": "Onboarding privacy statement",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open source (Apache-2.0). Everything runs locally on your Mac; nothing is ever uploaded. Mothball never asks for administrator privileges."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "开源(Apache-2.0)。一切都在你的 Mac 上本地运行,不上传任何数据;永不请求管理员权限。"
-          }
-        }
-      }
-    },
-    "onboarding.roots.title": {
-      "comment": "Onboarding roots step title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Where does your code live?"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "你的代码放在哪里?"
-          }
-        }
-      }
-    },
-    "onboarding.roots.detail": {
-      "comment": "Onboarding roots step description",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mothball discovers projects inside these directories and groups resources by project. You can skip this and only scan tool-level data."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mothball 会在这些目录中发现项目,并按项目聚合资源。也可以跳过,只扫描工具级数据。"
-          }
-        }
-      }
-    },
-    "onboarding.fda.title": {
-      "comment": "Onboarding FDA step title",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Full Disk Access"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "完全磁盘访问"
-          }
-        }
-      }
-    },
-    "onboarding.fda.why": {
-      "comment": "Onboarding FDA explanation",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Some tool data lives in locations macOS protects (TCC). With Full Disk Access, scans see everything; without it, results may be incomplete — Mothball will show a persistent notice so nothing looks silently wrong."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "部分工具数据位于 macOS 保护的位置(TCC)。授予完全磁盘访问后扫描才能看到全部;不授予也能用,但结果可能不完整——Mothball 会持续显示提示,不会让数据凭空变少。"
-          }
-        }
-      }
-    },
-    "onboarding.fda.open": {
-      "comment": "Button opening the FDA pane",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open System Settings"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "打开系统设置"
-          }
-        }
-      }
-    },
-    "onboarding.fda.granted": {
-      "comment": "FDA status line",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Full Disk Access is granted."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "已授予完全磁盘访问。"
-          }
-        }
-      }
-    },
-    "onboarding.fda.denied": {
-      "comment": "FDA status line",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Not granted yet. Add Mothball in System Settings, then come back."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "尚未授予。请在系统设置中添加 Mothball,然后返回。"
-          }
-        }
-      }
-    },
-    "onboarding.fda.indeterminate": {
-      "comment": "FDA status line",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Could not determine status on this machine."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "无法在本机判断授权状态。"
-          }
-        }
-      }
-    },
-    "onboarding.fda.optional": {
-      "comment": "FDA footnote",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You can grant or revoke this at any time in System Settings → Privacy & Security → Full Disk Access."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "随时可在「系统设置 → 隐私与安全性 → 完全磁盘访问」中授予或撤销。"
-          }
-        }
-      }
-    },
-    "fda.banner": {
-      "comment": "Persistent degraded-mode banner (SPEC §5.8)",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Results may be incomplete: Full Disk Access has not been granted."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "结果可能不完整:未授予完全磁盘访问。"
-          }
-        }
-      }
-    },
-    "fda.banner.action": {
-      "comment": "Banner action opening System Settings",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grant…"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "去授权…"
+            "value": "合计"
           }
         }
       }
     }
-  }
+  },
+  "version": "1.0"
 }
