@@ -228,6 +228,10 @@ App-layer fixes:
 - Rescans never re-ran default selection/risk rebuild/notifications: reactions keyed on `hasScanned`, which only changes on the first scan. New monotonic `scanGeneration` drives them on every scan.
 - The async git-probe completion re-ran `defaultSelect`, silently resetting any selection the user made while the probe ran. Now a tighten-only `tightenSelection` drops newly-S2 items and touches nothing else.
 - Cleaned items stayed in every list until the next scan happened to run (nothing pruned `scan.items` after a run and cleanup never triggered a rescan; reported from real use on the AI Tools page). A finished run now removes its trashed/deleted paths from the scan results immediately; the next scan still re-verifies from disk.
+- Full post-action refresh audit prompted by that report, fixing the same class everywhere:
+  - The `isRefreshing` guard in RuntimeModel/ContainerModel/BrewModel silently dropped refreshes requested mid-refresh, so concurrent actions (the dangling-image batch, parallel process stops, parallel brew actions) could end on a snapshot taken mid-batch. Refreshes are now coalesced: a request during a running refresh queues exactly one trailing re-run.
+  - Ending a session refreshed the process/container tables only via the sheet's Done button — Esc or clicking outside at the results page skipped it entirely, and the tables/menu bar stayed stale while the results page was open. AppShell now refreshes both the moment the run reaches `.finished` (the Done-path refresh remains and coalesces away).
+  - Adding a protection rule locked matching rows but left already-selected paths in the selection bar (enforcement was never at risk — the preview and gate both filter — but the count/bytes were misleading). Selections are now tightened the moment the rules change.
 
 Cleanup ergonomics (SPEC §4.4 note):
 - `gitDirty` downgraded S2→S1: uncommitted changes are the steady state of active development and build artifacts are not part of git state, so dirty repos no longer start deselected everywhere (that was most of the "have to re-check everything" pain). `projectInUse` stays S2.

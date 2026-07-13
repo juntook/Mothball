@@ -18,6 +18,10 @@ final class ContainerModel {
     var imagePendingRemoval: ContainerResource?
 
     private let auditLog = AuditLog()
+    /// Refresh requested while one was in flight — replayed on completion so
+    /// concurrent actions (e.g. the dangling-image batch) never end on a
+    /// snapshot taken mid-batch.
+    private var queuedRefreshProjects: [Project]?
 
     private var client: DockerClient? {
         guard let binary = diagnostics?.binaryPath, diagnostics?.daemonReachable == true else { return nil }
@@ -25,7 +29,10 @@ final class ContainerModel {
     }
 
     func refresh(projects: [Project]) {
-        guard !isRefreshing else { return }
+        guard !isRefreshing else {
+            queuedRefreshProjects = projects
+            return
+        }
         isRefreshing = true
         Task {
             let (diag, found) = await Task.detached(priority: .userInitiated) { () -> (DockerEnvironment.Diagnostics, [ContainerResource]) in
@@ -38,6 +45,10 @@ final class ContainerModel {
             diagnostics = diag
             resources = found
             isRefreshing = false
+            if let queued = queuedRefreshProjects {
+                queuedRefreshProjects = nil
+                refresh(projects: queued)
+            }
         }
     }
 

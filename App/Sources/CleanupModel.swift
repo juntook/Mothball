@@ -70,6 +70,13 @@ final class CleanupModel {
         }
     }
 
+    /// Tighten-only: when protection rules change, paths that just became
+    /// protected leave the selection immediately instead of lingering in the
+    /// selection bar until the preview filters them (SPEC §5.12).
+    func dropProtectedSelections() {
+        selectedPaths = selectedPaths.filter { !protectedPathCheck($0) }
+    }
+
     /// Group-level convenience: selects or clears every selectable regenerable
     /// item in `items`. user_data stays strictly per-item opt-in (SPEC §4.3).
     func setSelection(_ selected: Bool, items: [ResourceItem]) {

@@ -18,6 +18,9 @@ final class BrewModel {
     var actionError: String?
 
     private let auditLog = AuditLog()
+    /// Refresh requested while one was in flight — replayed on completion so
+    /// parallel service actions never lose their trailing refresh.
+    private var refreshQueued = false
 
     private enum ListOutcome: Sendable {
         case notInstalled
@@ -26,7 +29,10 @@ final class BrewModel {
     }
 
     func refresh() {
-        guard !isRefreshing else { return }
+        guard !isRefreshing else {
+            refreshQueued = true
+            return
+        }
         isRefreshing = true
         Task {
             let outcome = await Task.detached(priority: .userInitiated) { () -> ListOutcome in
@@ -54,6 +60,10 @@ final class BrewModel {
                 loadError = message
             }
             isRefreshing = false
+            if refreshQueued {
+                refreshQueued = false
+                refresh()
+            }
         }
     }
 

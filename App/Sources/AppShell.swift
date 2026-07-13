@@ -114,6 +114,17 @@ struct AppShell: View {
             }.map(\.item.path))
             scan.removeItems(paths: cleaned)
         }
+        .onChange(of: sessionModel.phase) { _, phase in
+            // Same immediacy for session ends: stopped processes/containers
+            // leave the tables the moment the run finishes, not only when the
+            // user happens to close the sheet via its Done button.
+            guard phase == .finished else { return }
+            runtime.refresh(projects: scan.projects)
+            containers.refresh(projects: scan.projects)
+        }
+        .onChange(of: protection.rules) { _, _ in
+            cleanup.dropProtectedSelections()
+        }
         .onChange(of: runtime.services) { _, _ in
             rebuildRisk()
             notifications.maybeNotifyLongRunning(services: runtime.services, loc: loc)

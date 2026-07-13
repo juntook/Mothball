@@ -24,9 +24,15 @@ final class RuntimeModel {
     private let auditLog = AuditLog()
     /// pid → (cumulative CPU nanos, sample time) from the previous refresh.
     private var cpuSamples: [Int32: (nanos: UInt64, at: Date)] = [:]
+    /// Refresh requested while one was in flight — replayed on completion so
+    /// an action finishing mid-refresh never loses its trailing refresh.
+    private var queuedRefreshProjects: [Project]?
 
     func refresh(projects: [Project]) {
-        guard !isRefreshing else { return }
+        guard !isRefreshing else {
+            queuedRefreshProjects = projects
+            return
+        }
         isRefreshing = true
         Task {
             let found = await Task.detached(priority: .userInitiated) {
@@ -35,6 +41,10 @@ final class RuntimeModel {
             updateCPUSamples(found)
             services = found
             isRefreshing = false
+            if let queued = queuedRefreshProjects {
+                queuedRefreshProjects = nil
+                refresh(projects: queued)
+            }
         }
     }
 
