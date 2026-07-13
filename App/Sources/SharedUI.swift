@@ -314,6 +314,71 @@ struct MetricCard: View {
     }
 }
 
+/// Header checkbox that selects or clears every selectable regenerable item
+/// in a group at once. A partially selected group shows as off; toggling on
+/// completes it. user_data is never included (SPEC §4.3).
+struct GroupSelectToggle: View {
+    @Environment(LocalizationModel.self) private var loc
+    @Environment(CleanupModel.self) private var cleanup
+    let items: [ResourceItem]
+
+    private var selectable: [ResourceItem] {
+        items.filter { $0.safety == .regenerable && cleanup.isSelectable($0) }
+    }
+
+    var body: some View {
+        if !selectable.isEmpty {
+            Toggle(isOn: Binding(
+                get: { selectable.allSatisfy { cleanup.selectedPaths.contains($0.path) } },
+                set: { cleanup.setSelection($0, items: selectable) }
+            )) {
+                EmptyView()
+            }
+            .toggleStyle(.checkbox)
+            .labelsHidden()
+            .help(Text("storage.groupSelect.help", bundle: loc.appBundle))
+        }
+    }
+}
+
+/// Bottom selection bar shared by the storage and AI-tools pages: shows the
+/// running selection and routes into the mandatory §5.6 preview — the only
+/// path to execution.
+struct CleanupSelectionBar: View {
+    @Environment(LocalizationModel.self) private var loc
+    @Environment(ScanModel.self) private var scan
+    @Environment(CleanupModel.self) private var cleanup
+
+    var body: some View {
+        let items = scan.items.filter { cleanup.selectedPaths.contains($0.path) }
+        if !items.isEmpty {
+            let bytes = items.compactMap(\.sizeBytes).reduce(0, +)
+            HStack(spacing: 12) {
+                Text("storage.selection \(items.count) \(Text(bytes, format: .byteCount(style: .file)))", bundle: loc.appBundle)
+                    .font(.callout)
+                Spacer()
+                Button {
+                    cleanup.selectedPaths = []
+                } label: {
+                    Text("storage.selection.clear", bundle: loc.appBundle)
+                }
+                Button {
+                    cleanup.beginPreview(items: scan.items)
+                } label: {
+                    Text("storage.selection.review", bundle: loc.appBundle)
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(scan.isScanning)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .prototypeCard(cornerRadius: 14)
+            .padding(.horizontal, 16)
+            .padding(.bottom, 12)
+        }
+    }
+}
+
 /// A resource row with tier-appropriate selection affordance:
 /// regenerable — checkbox, checked by default; user_data — checkbox, unchecked;
 /// protected — no checkbox at all (SPEC §4.3).

@@ -8,6 +8,7 @@ enum SidebarSection: String, CaseIterable, Identifiable {
     case overview
     case activeResources
     case storage
+    case aiTools
     case sessions
     case history
     case settings

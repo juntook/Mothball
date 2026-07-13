@@ -119,6 +119,15 @@ public struct DiskScanner: Sendable {
         return result
     }
 
+    /// Prefix whitelist for the deletion gate (SPEC §5.6 rule 2): every path
+    /// the enabled rules currently expand to, global targets and per-project
+    /// artifacts alike. Recomputed from the rules at execution time so the
+    /// executor's containment check never depends on scan or UI state.
+    public func allowedDeletionPrefixes(rules: [Rule], projects: [Project]) -> [String] {
+        discoverGlobalItems(rules: rules).map(\.path)
+            + discoverProjectItems(rules: rules, projects: projects).map(\.path)
+    }
+
     /// Full progressive scan: global targets (encoded buckets exploded and
     /// attributed) plus per-project artifacts.
     public func scanAll(rules: [Rule], projects: [Project]) -> AsyncStream<Event> {

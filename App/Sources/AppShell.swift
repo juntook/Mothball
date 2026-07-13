@@ -92,16 +92,17 @@ struct AppShell: View {
         .onChange(of: scan.isScanning) { _, _ in
             fdaStatus = FullDiskAccess.check()
         }
-        .onChange(of: scan.hasScanned) { _, scanned in
-            if scanned {
+        .onChange(of: scan.scanGeneration) { _, _ in
+            guard scan.hasScanned else { return }
+            rebuildRisk()
+            cleanup.defaultSelect(items: scan.items, assessments: risk.itemAssessments)
+            risk.probeGitStatus(projects: scan.projects) {
                 rebuildRisk()
-                cleanup.defaultSelect(items: scan.items, assessments: risk.itemAssessments)
-                risk.probeGitStatus(projects: scan.projects) {
-                    rebuildRisk()
-                    cleanup.defaultSelect(items: scan.items, assessments: risk.itemAssessments)
-                }
-                notifications.maybeNotifyReclaimable(totalBytes: scan.totalBytes, loc: loc)
+                // Late risk results only ever tighten: never reset choices
+                // the user made while the probe was running.
+                cleanup.tightenSelection(assessments: risk.itemAssessments)
             }
+            notifications.maybeNotifyReclaimable(totalBytes: scan.totalBytes, loc: loc)
         }
         .onChange(of: runtime.services) { _, _ in
             rebuildRisk()
@@ -150,6 +151,7 @@ struct AppShell: View {
                 sidebarRow(.overview, color: .blue, icon: "gauge.with.dots.needle.33percent", titleKey: "sidebar.overview", count: nil)
                 sidebarRow(.activeResources, color: .green, icon: "bolt.fill", titleKey: "sidebar.activeResources", count: runningResourceCount)
                 sidebarRow(.storage, color: .orange, icon: "internaldrive.fill", titleKey: "sidebar.storage", count: nil)
+                sidebarRow(.aiTools, color: .indigo, icon: "sparkles", titleKey: "sidebar.aiTools", count: nil)
                 sidebarRow(.sessions, color: .purple, icon: "rectangle.stack.badge.play.fill", titleKey: "sidebar.sessions", count: sessionModel.sessions.count)
                 sidebarRow(.history, color: .teal, icon: "clock.arrow.circlepath", titleKey: "sidebar.history", count: nil)
                 sidebarRow(.settings, color: .gray, icon: "gearshape.fill", titleKey: "sidebar.settings", count: nil)
@@ -305,6 +307,8 @@ struct AppShell: View {
             ActiveResourcesView()
         case .storage:
             StorageView()
+        case .aiTools:
+            AIToolsView()
         case .sessions:
             SessionsView()
         case .history:

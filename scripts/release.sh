@@ -28,10 +28,11 @@ cp .build/arm64-apple-macosx/release/MothballApp "$APP/Contents/MacOS/MothballAp
 cp App/Info.plist "$APP/Contents/Info.plist"
 
 # Sparkle feed configuration (only meaningful in the bundled app).
+# Update validation relies on the Apple code signature of the download
+# (gen-appcast.py never emits an EdDSA signature) — do NOT set SUPublicEDKey
+# here: an app that carries the key requires sparkle:edSignature in the
+# appcast, and every update would fail to validate.
 /usr/libexec/PlistBuddy -c "Add :SUFeedURL string https://github.com/juntook/Mothball/releases/latest/download/appcast.xml" "$APP/Contents/Info.plist" || true
-if [[ -n "${SPARKLE_ED_KEY:-}" ]]; then
-    /usr/libexec/PlistBuddy -c "Add :SUPublicEDKey string $SPARKLE_ED_KEY" "$APP/Contents/Info.plist" || true
-fi
 
 # App icon.
 cp App/AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"

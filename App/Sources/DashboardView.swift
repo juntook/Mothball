@@ -184,8 +184,12 @@ struct DashboardView: View {
                 iconColor: .blue,
                 title: Text(verbatim: name),
                 subtitle: Text("dashboard.attention.reclaimable \(Text(item.sizeBytes ?? 0, format: .byteCount(style: .file)))", bundle: loc.appBundle),
-                action: { [isAttributed = item.attribution != nil] in
-                    shell.openStorage(tab: isAttributed ? .projects : .toolCaches)
+                action: { [isAttributed = item.attribution != nil, isAI = scan.aiRuleIDs.contains(item.ruleID)] in
+                    if isAI {
+                        shell.open(.aiTools)
+                    } else {
+                        shell.openStorage(tab: isAttributed ? .projects : .toolCaches)
+                    }
                 }
             ))
         }
@@ -306,7 +310,11 @@ struct DashboardView: View {
                     title: (item.path as NSString).lastPathComponent,
                     subtitle: (item.path as NSString).abbreviatingWithTildeInPath
                 ) {
-                    shell.openStorage(tab: item.attribution == nil ? .toolCaches : .projects)
+                    if scan.aiRuleIDs.contains(item.ruleID) {
+                        shell.open(.aiTools)
+                    } else {
+                        shell.openStorage(tab: item.attribution == nil ? .toolCaches : .projects)
+                    }
                 }
             }
         }

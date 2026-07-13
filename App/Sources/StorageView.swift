@@ -10,6 +10,7 @@ struct StorageView: View {
     @Environment(ScanModel.self) private var scan
     @Environment(CleanupModel.self) private var cleanup
     @Environment(ContainerModel.self) private var containers
+    @Environment(RiskModel.self) private var risk
 
     /// Project presented in the cleanup-detail sheet; an empty path is the
     /// unattributed bucket.
@@ -24,15 +25,27 @@ struct StorageView: View {
     var body: some View {
         @Bindable var shell = shell
         return VStack(spacing: 0) {
-            Picker(selection: $shell.storageTab) {
-                Text("storage.tab.projects", bundle: loc.appBundle).tag(StorageTab.projects)
-                Text("storage.tab.toolCaches", bundle: loc.appBundle).tag(StorageTab.toolCaches)
-                Text("storage.tab.docker", bundle: loc.appBundle).tag(StorageTab.docker)
-            } label: {
-                EmptyView()
+            HStack(spacing: 12) {
+                Picker(selection: $shell.storageTab) {
+                    Text("storage.tab.projects", bundle: loc.appBundle).tag(StorageTab.projects)
+                    Text("storage.tab.toolCaches", bundle: loc.appBundle).tag(StorageTab.toolCaches)
+                    Text("storage.tab.docker", bundle: loc.appBundle).tag(StorageTab.docker)
+                } label: {
+                    EmptyView()
+                }
+                .pickerStyle(.segmented)
+                .labelsHidden()
+
+                if shell.storageTab != .docker {
+                    Button {
+                        cleanup.selectLowRisk(items: storageItems, assessments: risk.itemAssessments)
+                    } label: {
+                        Text("storage.selectLowRisk", bundle: loc.appBundle)
+                    }
+                    .disabled(scan.items.isEmpty)
+                    .help(Text("storage.selectLowRisk.help", bundle: loc.appBundle))
+                }
             }
-            .pickerStyle(.segmented)
-            .labelsHidden()
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
 
@@ -40,7 +53,9 @@ struct StorageView: View {
         }
         .navigationTitle(Text("sidebar.storage", bundle: loc.appBundle))
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            selectionBar
+            if shell.storageTab != .docker {
+                CleanupSelectionBar()
+            }
         }
         .sheet(item: $presentedProject, onDismiss: {
             if previewAfterSheetDismiss {
@@ -180,6 +195,7 @@ struct StorageView: View {
                             }
                         } header: {
                             HStack {
+                                GroupSelectToggle(items: group.items)
                                 Text(verbatim: group.rule.name)
                                 if group.rule.status == .draft {
                                     DraftBadge()
@@ -203,10 +219,18 @@ struct StorageView: View {
         }
     }
 
+    /// Items this page can select in bulk — AI tools have their own section.
+    private var storageItems: [ResourceItem] {
+        let aiRuleIDs = scan.aiRuleIDs
+        return scan.items.filter { !aiRuleIDs.contains($0.ruleID) }
+    }
+
     private var filteredRuleGroups: [(rule: Rule, items: [ResourceItem], totalBytes: Int64)] {
-        guard !shell.searchText.isEmpty else { return scan.itemsByRule }
+        // AI tools live in their own top-level section (SPEC §5.17).
+        let groups = scan.itemsByRule.filter { !$0.rule.isAITool }
+        guard !shell.searchText.isEmpty else { return groups }
         let needle = shell.searchText
-        return scan.itemsByRule.compactMap { group in
+        return groups.compactMap { group in
             if group.rule.name.localizedCaseInsensitiveContains(needle) { return group }
             let items = group.items.filter { $0.path.localizedCaseInsensitiveContains(needle) }
             guard !items.isEmpty else { return nil }
@@ -226,41 +250,6 @@ struct StorageView: View {
         }
     }
 
-    // MARK: Selection bar (SPEC §5.7)
-
-    private var selectedItems: [ResourceItem] {
-        scan.items.filter { cleanup.selectedPaths.contains($0.path) }
-    }
-
-    @ViewBuilder
-    private var selectionBar: some View {
-        let items = selectedItems
-        if !items.isEmpty && shell.storageTab != .docker {
-            let bytes = items.compactMap(\.sizeBytes).reduce(0, +)
-            HStack(spacing: 12) {
-                Text("storage.selection \(items.count) \(Text(bytes, format: .byteCount(style: .file)))", bundle: loc.appBundle)
-                    .font(.callout)
-                Spacer()
-                Button {
-                    cleanup.selectedPaths = []
-                } label: {
-                    Text("storage.selection.clear", bundle: loc.appBundle)
-                }
-                Button {
-                    cleanup.beginPreview(items: scan.items)
-                } label: {
-                    Text("storage.selection.review", bundle: loc.appBundle)
-                }
-                .buttonStyle(.borderedProminent)
-                .disabled(scan.isScanning)
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .prototypeCard(cornerRadius: 14)
-            .padding(.horizontal, 16)
-            .padding(.bottom, 12)
-        }
-    }
 }
 
 struct ProjectCard: View {
@@ -356,7 +345,10 @@ struct ProjectCleanupSheet: View {
                             }
                         }
                     } header: {
-                        KindLabel(kind: group.kind)
+                        HStack {
+                            GroupSelectToggle(items: group.items)
+                            KindLabel(kind: group.kind)
+                        }
                     }
                 }
             }

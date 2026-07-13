@@ -210,6 +210,42 @@ Needs human verification:
 - Docker-missing empty state mentions Podman ("detected, not yet manageable") when only Podman is installed.
 - Already covered and re-verified: no Docker CLI / daemon down (informational cards, standard install locations listed), no Homebrew, no code roots (guided to settings), FDA denied (persistent banner), empty scan, no listening ports, no sessions, empty history, notifications unavailable outside a bundle.
 
+## M12 — Hardening + cleanup ergonomics + AI Tools section — DONE (2026-07-13)
+
+Shipped (motivated by a full-codebase review):
+
+Release/CI defects:
+- **v0.1.0 shipped with only 6 of 24 rules**: M9 added 18 rules to `rules/tools/` without running `scripts/sync-rules.sh`, so the bundled copy (what the app actually loads) never got them. Synced; `sync-rules.sh --check` in CI would have caught it, but CI was red for an unrelated reason so the signal drowned.
+- CI ran on macos-14 with an Xcode 15.4 selection (Swift 5.10) — the Swift 6 manifest could not even parse, so the build job had been failing since day one while the macos-15 release workflow was green. Both CI jobs now run on macos-15.
+- `huggingface` rule targeted all of `~/.cache/huggingface` as regenerable — which contains the HF login token, violating the credentials-are-protected rule. Narrowed to `~/.cache/huggingface/hub`; token paths added as an explicit `protected` target.
+
+Safety-layer fixes (gate tests first, per CLAUDE.md):
+- **Gate rule 2 restored to independence**: the app passed `scan.items` paths as the gate's allowed prefixes, making containment a tautology (preview items are a subset of scan items). New `DiskScanner.allowedDeletionPrefixes(rules:projects:)` re-expands prefixes from the enabled rules at execution time; `CleanupModel.execute` now takes rules+projects and can no longer be fed raw paths.
+- `AuditLog.append` could replace the whole log with a single line if an existing file failed to open (the fallback whole-file write was meant for first-write only). Now create-if-missing + append handle only; an open failure is an error, never a truncation. Invariant pinned by test.
+- `ServiceStopper.stop` busy-waited against libproc for the full grace period when its task was cancelled (`try? Task.sleep` swallowed the cancellation). Cancellation now exits the poll loop immediately (test measures promptness).
+
+App-layer fixes:
+- Rescans never re-ran default selection/risk rebuild/notifications: reactions keyed on `hasScanned`, which only changes on the first scan. New monotonic `scanGeneration` drives them on every scan.
+- The async git-probe completion re-ran `defaultSelect`, silently resetting any selection the user made while the probe ran. Now a tighten-only `tightenSelection` drops newly-S2 items and touches nothing else.
+
+Cleanup ergonomics (SPEC §4.4 note):
+- `gitDirty` downgraded S2→S1: uncommitted changes are the steady state of active development and build artifacts are not part of git state, so dirty repos no longer start deselected everywhere (that was most of the "have to re-check everything" pain). `projectInUse` stays S2.
+- Group select-all checkboxes on tool-cache and project-kind group headers (regenerable only); "Select Low-Risk" button on Storage and AI Tools adds every sub-S2 regenerable item without dropping manual picks; selection bar extracted to a shared `CleanupSelectionBar`.
+
+AI Tools section (SPEC §5.17, sidebar ⌘6):
+- One card per AI tool (ai-cli/ai-app categories + ollama/huggingface): regenerable caches with group select, user_data grouped by attributed project (dashed-bucket decoding already existed), protected rows display-only. Doctor entry in the toolbar (AI layouts drift fast; all rules are draft). AI rules are removed from Storage→Tool Caches (mutually exclusive listings); dashboard deep links route AI items to the new section.
+
+Docs/scripts:
+- SPEC §6.2/§6.3 and rules/BACKLOG.md caught up with the 24-rule reality (both still described the 6-rule seed library).
+- Removed the `SPARKLE_ED_KEY` branch from release.sh: gen-appcast.py never emits `sparkle:edSignature`, so setting the key would have broken every future update. notarize.sh closing hint now points at gen-appcast.py (the tool CI actually uses) instead of Sparkle's generate_appcast with a different URL scheme.
+- 122 tests green (3 new).
+
+Needs human verification:
+- AI Tools page visually (en/zh-Hans): card grouping, per-project session buckets, group select, ⌘6.
+- "Select Low-Risk" + group checkboxes against a real scan; confirm user_data never auto-selects.
+- A rescan (⌘R) after deleting something re-applies default selection and refreshes badges.
+- Upgrade path: install v0.1.0, let Sparkle offer v0.1.1, confirm the update applies (first real Sparkle round-trip).
+
 ## Release pipeline — CI signing + notarization (2026-07-12)
 
 - `.github/workflows/release-build.yml`: workflow_dispatch + v* tags. Imports the Developer ID .p12 from `MAC_CSC_LINK`/`MAC_CSC_KEY_PASSWORD` into a throwaway keychain, parses the team id from the identity, runs `scripts/release.sh` (hardened runtime on because a real identity is present), notarizes with `APPLE_ID`/`APPLE_APP_SPECIFIC_PASSWORD`, staples, Gatekeeper-asserts, generates a Sparkle appcast (`scripts/gen-appcast.py` — Apple-code-signature validation, no EdDSA needed since SUPublicEDKey is unset), uploads artifacts, and publishes a GitHub Release on tags.

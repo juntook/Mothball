@@ -44,11 +44,11 @@ struct RiskEngineTests {
         #expect(assessment.reasons == [.projectInUse])
     }
 
-    @Test("regenerable in a git-dirty project is S2")
-    func gitDirtyTightensToS2() {
+    @Test("regenerable in a git-dirty project is S1 — active, but not in use")
+    func gitDirtyIsS1() {
         let engine = RiskEngine(dirtyProjectPaths: ["/Users/test/dev/app"])
         let assessment = engine.assess(item(safety: .regenerable, project: "/Users/test/dev/app"))
-        #expect(assessment.tier == .s2)
+        #expect(assessment.tier == .s1)
         #expect(assessment.reasons == [.gitDirty])
     }
 

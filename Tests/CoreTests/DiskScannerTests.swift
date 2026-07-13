@@ -54,6 +54,25 @@ struct DiskScannerTests {
         #expect(history?.ruleStatus == .draft)
     }
 
+    @Test("Deletion prefixes are expanded from the rules alone — never from scanned items")
+    func deletionPrefixesFromRules() {
+        let fs = FakeFileSystem(home: "/Users/test", entries: [
+            "/Users/test/.npm/_cacache": true,
+            "/Users/test/.claude/projects": true,
+            "/Users/test/dev/app/node_modules": true,
+            "/Users/test/dev/app/package.json": false,
+            "/Users/test/Documents/taxes": true,
+        ])
+        let projects = [Project(name: "app", path: "/Users/test/dev/app")]
+        let prefixes = Set(DiskScanner(fs: fs).allowedDeletionPrefixes(rules: rules, projects: projects))
+        #expect(prefixes.contains("/Users/test/.npm/_cacache"))
+        #expect(prefixes.contains("/Users/test/.claude/projects"))
+        #expect(prefixes.contains("/Users/test/dev/app/node_modules"))
+        // A path outside every rule expansion must not be whitelisted, even
+        // though a (hypothetically corrupted) scan could have listed it.
+        #expect(!prefixes.contains { "/Users/test/Documents/taxes".hasPrefix($0) })
+    }
+
     @Test("Scan stream emits discovered before sized, then finishes")
     func streamOrdering() async {
         var discovered: Set<String> = []

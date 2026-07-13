@@ -57,13 +57,17 @@ public final class AuditLog: @unchecked Sendable {
                     at: logURL.deletingLastPathComponent(),
                     withIntermediateDirectories: true
                 )
-                if let handle = try? FileHandle(forWritingTo: logURL) {
-                    defer { try? handle.close() }
-                    try handle.seekToEnd()
-                    try handle.write(contentsOf: line)
-                } else {
-                    try line.write(to: logURL)
+                // Strictly append-only: create the file if missing, then open
+                // for appending. An existing log that cannot be opened is an
+                // error — never fall back to a whole-file write, which would
+                // replace the history with a single line.
+                if !fm.fileExists(atPath: logURL.path) {
+                    fm.createFile(atPath: logURL.path, contents: nil)
                 }
+                let handle = try FileHandle(forWritingTo: logURL)
+                defer { try? handle.close() }
+                try handle.seekToEnd()
+                try handle.write(contentsOf: line)
             } catch {
                 // The audit log must never take the app down; last resort is stderr.
                 FileHandle.standardError.write(Data("audit-log write failed: \(error)\n".utf8))

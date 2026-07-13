@@ -86,6 +86,134 @@
         }
       }
     },
+    "ai.doctor": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verify in Doctor"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在 Doctor 中核实"
+          }
+        }
+      }
+    },
+    "ai.doctor.help": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI tool layouts change quickly — verify rule targets against this machine."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 工具的目录布局变化很快——用 Doctor 在本机核实规则目标。"
+          }
+        }
+      }
+    },
+    "ai.empty.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run a scan to find caches, session history, and models left behind by AI coding tools."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行扫描以发现 AI 编程工具留下的缓存、会话历史与模型。"
+          }
+        }
+      }
+    },
+    "ai.empty.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No AI tool resources found"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未发现 AI 工具资源"
+          }
+        }
+      }
+    },
+    "ai.section.caches": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caches"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缓存"
+          }
+        }
+      }
+    },
+    "ai.section.data": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessions & data"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "会话与数据"
+          }
+        }
+      }
+    },
+    "ai.section.protected": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protected"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "受保护"
+          }
+        }
+      }
+    },
+    "ai.summary %@ %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ across %2$lld AI tools"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "共 %1$@ · %2$lld 个 AI 工具"
+          }
+        }
+      }
+    },
     "badge.unverified": {
       "comment": "Badge on rules whose paths come from public docs, not verified on-machine",
       "localizations": {
@@ -5237,6 +5365,22 @@
         }
       }
     },
+    "sidebar.aiTools": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Tools"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 工具"
+          }
+        }
+      }
+    },
     "sidebar.history": {
       "comment": "Sidebar item",
       "localizations": {
@@ -5318,6 +5462,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "磁盘空间"
+          }
+        }
+      }
+    },
+    "storage.groupSelect.help": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select or clear every regenerable item in this group"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全选/清除该组的全部可再生项目"
+          }
+        }
+      }
+    },
+    "storage.selectLowRisk": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select Low-Risk"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全选低风险项"
+          }
+        }
+      }
+    },
+    "storage.selectLowRisk.help": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add every low-risk regenerable item to the selection. Session history and other user data always stay opt-in."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将所有低风险的可再生项目加入选择。会话历史等用户数据始终需要逐项勾选。"
           }
         }
       }

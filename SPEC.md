@@ -128,8 +128,8 @@ DevSession    一个开发会话(项目 + 进程/端口/容器/服务集合,§5.
 | 评级 | 名称 | 判定(示例) | UI |
 |------|------|------------|-----|
 | S0 | 安全 | regenerable 且无活跃信号(近 30 天未用、无运行中进程占用、Git 干净) | 绿色角标,默认勾选 |
-| S1 | 低风险 | regenerable 但有活跃信号(近期使用过、重建成本较高) | 黄色角标,默认勾选可配置 |
-| S2 | 谨慎 | regenerable 但正被使用(运行中进程 cwd 命中、容器 bind mount、Git 有未提交变更) | 橙色角标,**默认不勾选** |
+| S1 | 低风险 | regenerable 但有活跃信号(近期使用过、Git 有未提交变更、重建成本较高) | 黄色角标,默认勾选可配置 |
+| S2 | 谨慎 | regenerable 但正被使用(运行中进程 cwd 命中、容器 bind mount) | 橙色角标,**默认不勾选** |
 | S3 | 高风险 | 一切 user_data 与 protected | 红/灰角标,遵循 §4.3 行为 |
 
 映射规则:`user_data`/`protected` 恒为 S3;`regenerable` 依信号落在 S0–S2。信号计算全部本地、可解释(评级角标悬停显示原因)。
@@ -238,9 +238,10 @@ DevSession    一个开发会话(项目 + 进程/端口/容器/服务集合,§5.
 |--------|--------|------|--------|
 | 概览 | ⌘1 | 问候语 + 指标卡(运行中资源/活动端口/开发内存占用/可释放空间)+ "需要关注"列表 + 当前会话卡(M10 起) | M7 |
 | 活动资源 | ⌘2 | 标签页:进程 / 容器(M7);端口(M8);后台服务(M9) | M7 起 |
-| 磁盘空间 | ⌘3 | 标签页:项目产物 / 工具缓存 / Docker 存储 | M7 |
+| 磁盘空间 | ⌘3 | 标签页:项目产物 / 工具缓存 / Docker 存储(AI 工具拆分至独立栏目,§5.17) | M7 |
 | 开发会话 | ⌘4 | 当前会话 / 模板 | M10 |
 | 历史记录 | ⌘5 | 操作历史 / 失败记录 / 诊断导出 | M11 |
+| AI 工具 | ⌘6 | 每个 AI 工具一张卡:缓存 / 会话与数据(按项目分组)/ 受保护(§5.17) | M12 |
 | 设置 | ⌘, | §5.8 之外的全部偏好(独立 Settings 场景亦可达) | M7 |
 
 - **侧栏底部**固定:上次扫描时间、累计已释放空间、版本号、帮助与反馈入口。
@@ -309,6 +310,19 @@ DevSession    一个开发会话(项目 + 进程/端口/容器/服务集合,§5.
 - 诊断导出:打包审计日志 + 规则清单 + 环境诊断(脱敏路径)为 zip。
 - 保留策略:默认 90 天,可配置。
 
+### 5.17 AI 工具栏目(M12)
+
+产品差异化核心的一级入口:把 AI 编程工具的资源从通用工具缓存中拆出,按工具成卡呈现。
+
+- **收录范围**:类别 `ai-cli`/`ai-app` 的全部规则,加上模型运行时(`ollama`、`huggingface`)。这些规则不再出现在磁盘空间-工具缓存标签页(两处互斥,避免重复计数)。
+- **卡片结构**(每工具一张,按占用降序):
+  1. **缓存**——`regenerable` 项,组头提供全选框,可进入批量清理;
+  2. **会话与数据**——`user_data` 项,按归属项目分组展示(归属来自 §5.3 证据链,dashed-absolute 桶解码),排序占用降序、未归属殿后;仍严格遵循 §4.3(默认不勾选、逐项确认、只进废纸篓);
+  3. **受保护**——凭证/配置,只读展示,无删除入口。
+- 工具栏提供 Doctor 入口:AI 工具目录布局变化快、规则多为 `draft`,就近核实促进 draft→verified。
+- 选中项走与磁盘空间页相同的吸底批量操作栏与强制预览(§5.6 是唯一执行路径)。
+- 分级与删除语义完全复用 §4.3/§4.4/§5.6,本节只定义信息架构,不新增任何执行能力。
+
 ---
 
 ## 6. 种子规则库
@@ -317,17 +331,22 @@ DevSession    一个开发会话(项目 + 进程/端口/容器/服务集合,§5.
 
 规则 schema 由 `rules/schema/rule.schema.json`(draft-07)定义并经 CI 强制校验;字段结构见 schema 本身与 §5.1。`rules/` 目录保持零代码依赖、自包含(schema + 数据 + 文档),未来可原样拆为独立仓库。
 
-### 6.2 已收录规则(`rules/tools/*.json`)
+### 6.2 已收录规则(`rules/tools/*.json`,M9 起共 24 条)
 
-`claude-code`、`codex`、`codebuddy-cli`、`workbuddy`、`npm`、`node-modules`。安全分级要点:AI CLI 的会话历史/todo 一律 `user_data`,凭证与配置 `protected`,缓存/日志 `regenerable`(§4.3)。
+- **AI 工具**:`claude-code`、`codex`、`codebuddy-cli`、`workbuddy`、`ollama`、`huggingface`
+- **包管理器**:`npm`、`node-modules`、`pnpm`、`yarn`、`pip`、`uv`、`cargo`、`homebrew`
+- **构建工具与 IDE**:`xcode`、`go`、`gradle`、`cocoapods`、`playwright`
+- **项目级产物**:`frontend-artifacts`、`python-artifacts`、`rust-artifacts`、`jvm-artifacts`、`swift-artifacts`
+
+安全分级要点:AI CLI 的会话历史/todo 一律 `user_data`,凭证与配置 `protected`,缓存/日志 `regenerable`(§4.3);Ollama 模型与 Xcode Archives 虽可重建但代价高,保守标 `user_data`。
 
 ### 6.3 收录 backlog(`rules/BACKLOG.md`,按预期收益排序)
 
-1. Hugging Face 模型缓存 `~/.cache/huggingface`(动辄几十 GB,收益最高)
-2. Playwright 浏览器 `~/Library/Caches/ms-playwright`
-3. Xcode DerivedData 与旧模拟器运行时(M9 前后随"Xcode 存储"标签页评估)
-4. pip / uv / cargo registry / Go build cache / Gradle / Maven
-5. pnpm store、yarn cache、Bun、Corepack、npx 临时包
+1. Gemini CLI / Cursor / VS Code(扩展与工作区缓存)
+2. JetBrains 系(缓存/日志/旧版本残留)
+3. Docker Desktop 应用自身缓存(区别于引擎资源,§5.5)
+4. Maven 全局仓库 `~/.m2/repository`、Go module 缓存 `~/go/pkg/mod`(删除语义需评估)
+5. Bun、Corepack、npx 临时包
 6. 前端框架产物:`.next` `.nuxt` `.svelte-kit` `.vite` `.turbo` `dist` `build` `coverage`(扩充 node-modules 同族规则)
 7. Python 项目产物:`.venv` `__pycache__` `.pytest_cache` `.mypy_cache` `.ruff_cache`
 8. Gemini CLI(`~/.gemini`)、Cursor、VS Code 的 Cache/CachedData/workspaceStorage

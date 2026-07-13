@@ -156,8 +156,7 @@ struct CleanupSheet: View {
     }
 
     private func runExecution() {
-        let prefixes = scan.items.map(\.path)
-        cleanup.execute(allowedPrefixes: prefixes)
+        cleanup.execute(rules: scan.rules, projects: scan.projects)
     }
 
     // MARK: Results

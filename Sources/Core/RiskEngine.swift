@@ -96,8 +96,11 @@ public struct RiskEngine: Sendable {
         if inUseProjectPaths.contains(projectPath) {
             return RiskAssessment(tier: .s2, reasons: [.projectInUse])
         }
+        // Uncommitted changes are the steady state of active development and
+        // build artifacts are not part of git state, so dirty alone flags the
+        // project as active (S1) rather than in use (S2, SPEC §4.4).
         if dirtyProjectPaths.contains(projectPath) {
-            return RiskAssessment(tier: .s2, reasons: [.gitDirty])
+            return RiskAssessment(tier: .s1, reasons: [.gitDirty])
         }
         if let lastActive = lastActiveByProject[projectPath],
            now.timeIntervalSince(lastActive) < recentActivityWindow {

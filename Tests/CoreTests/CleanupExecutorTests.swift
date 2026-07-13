@@ -149,6 +149,33 @@ struct CleanupExecutorTests {
     }
 }
 
+@Suite("Audit log")
+struct AuditLogTests {
+    @Test("Append is strictly append-only — an unopenable existing log stays byte-intact")
+    func appendNeverOverwrites() throws {
+        let dir = FileManager.default.temporaryDirectory
+            .appendingPathComponent("mothball-audit-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: dir) }
+        let logPath = dir.appendingPathComponent("ops.jsonl").path
+
+        let log = AuditLog(logPath: logPath)
+        log.append(AuditLog.Record(ruleID: "r", targetID: "t", path: "/tmp/mothball/a", bytes: 1, method: "trash", result: "ok"))
+        log.append(AuditLog.Record(ruleID: "r", targetID: "t", path: "/tmp/mothball/b", bytes: 2, method: "trash", result: "ok"))
+        #expect(log.readAll().count == 2)
+        let before = try Data(contentsOf: URL(fileURLWithPath: logPath))
+
+        // An existing log that cannot be opened for appending must never be
+        // replaced by a fresh single-line file (append-only guarantee).
+        try FileManager.default.setAttributes([.posixPermissions: 0o444], ofItemAtPath: logPath)
+        defer { try? FileManager.default.setAttributes([.posixPermissions: 0o644], ofItemAtPath: logPath) }
+        log.append(AuditLog.Record(ruleID: "r", targetID: "t", path: "/tmp/mothball/c", bytes: 3, method: "trash", result: "ok"))
+
+        let after = try Data(contentsOf: URL(fileURLWithPath: logPath))
+        #expect(after == before)
+    }
+}
+
 @Suite("Ignore list")
 struct IgnoreListTests {
     @Test("Round-trips paths through the store")

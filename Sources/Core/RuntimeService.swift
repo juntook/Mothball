@@ -108,7 +108,13 @@ public struct ServiceStopper: Sendable {
 
         let deadline = ContinuousClock.now + gracePeriod
         while ContinuousClock.now < deadline {
-            try? await Task.sleep(for: pollInterval)
+            do {
+                try await Task.sleep(for: pollInterval)
+            } catch {
+                // Cancelled — stop polling immediately rather than spinning
+                // against libproc until the deadline.
+                return .stillRunning
+            }
             switch verify(service) {
             case .gone: return .terminated
             case .reused: return .terminated // original died; pid recycled
@@ -126,7 +132,11 @@ public struct ServiceStopper: Sendable {
         case .match: break
         }
         guard provider.sendSignal(SIGKILL, to: service.pid) else { return .signalFailed }
-        try? await Task.sleep(for: pollInterval)
+        do {
+            try await Task.sleep(for: pollInterval)
+        } catch {
+            return .stillRunning // cancelled before the post-kill re-check
+        }
         switch verify(service) {
         case .gone, .reused: return .terminated
         case .match: return .stillRunning

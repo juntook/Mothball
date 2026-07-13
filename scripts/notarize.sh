@@ -22,5 +22,6 @@ echo "==> Gatekeeper assessment"
 spctl --assess --type open --context context:primary-signature -v "$DMG" || true
 
 echo "==> Done. Upload $DMG to the GitHub release."
-echo "    Then regenerate the Sparkle appcast:"
-echo "    generate_appcast --download-url-prefix https://github.com/juntook/Mothball/releases/download/v<version>/ dist/"
+echo "    Then regenerate the Sparkle appcast (same tool CI uses):"
+echo "    python3 scripts/gen-appcast.py <dmg> <short-version> <build> <download-url> > dist/appcast.xml"
+echo "    and upload appcast.xml to the release; the app reads it from releases/latest/download/appcast.xml."

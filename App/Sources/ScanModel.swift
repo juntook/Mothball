@@ -17,6 +17,10 @@ final class ScanModel {
     private(set) var loadError: String?
     private(set) var hasScanned = false
     private(set) var lastScanDate: Date?
+    /// Increments once per completed scan. Reactions to scan results must key
+    /// on this, not `hasScanned`, which never flips back and so only ever
+    /// changes on the first scan.
+    private(set) var scanGeneration = 0
 
     private var scanTask: Task<Void, Never>?
 
@@ -84,6 +88,7 @@ final class ScanModel {
             isScanning = false
             hasScanned = true
             lastScanDate = Date()
+            scanGeneration += 1
         }
     }
 

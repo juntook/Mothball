@@ -155,4 +155,19 @@ struct ServiceStopperTests {
         let result = await stopper(provider).stop(service())
         #expect(result == .signalFailed)
     }
+
+    @Test("Cancellation exits the grace loop promptly instead of spinning until the deadline")
+    func cancellationExitsGraceLoop() async {
+        let provider = FakeProcessProvider()
+        provider.processes[100] = ProcessSnapshot(pid: 100, name: "node", startDate: Date(timeIntervalSince1970: 1_000_000))
+
+        let sut = stopper(provider, grace: .seconds(3))
+        let clock = ContinuousClock()
+        let start = clock.now
+        let task = Task { await sut.stop(service()) }
+        task.cancel()
+        let result = await task.value
+        #expect(result == .stillRunning)
+        #expect(clock.now - start < .seconds(1))
+    }
 }

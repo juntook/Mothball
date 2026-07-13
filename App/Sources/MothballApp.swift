@@ -90,6 +90,12 @@ struct MothballApp: App {
                     Text("sidebar.history", bundle: loc.appBundle)
                 }
                 .keyboardShortcut("5", modifiers: .command)
+                Button {
+                    shell.open(.aiTools)
+                } label: {
+                    Text("sidebar.aiTools", bundle: loc.appBundle)
+                }
+                .keyboardShortcut("6", modifiers: .command)
                 Divider()
                 Button {
                     scanModel.scan()

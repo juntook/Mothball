@@ -60,6 +60,37 @@ final class CleanupModel {
         )
     }
 
+    /// Tighten-only follow-up (SPEC §4.4): drops items whose late-arriving
+    /// assessment reached S2+ from the selection, leaving every other choice —
+    /// including the user's manual ones — untouched.
+    func tightenSelection(assessments: [String: RiskAssessment]) {
+        selectedPaths = selectedPaths.filter { path in
+            guard let assessment = assessments[path] else { return true }
+            return assessment.tier < .s2
+        }
+    }
+
+    /// Group-level convenience: selects or clears every selectable regenerable
+    /// item in `items`. user_data stays strictly per-item opt-in (SPEC §4.3).
+    func setSelection(_ selected: Bool, items: [ResourceItem]) {
+        for item in items where item.safety == .regenerable && isSelectable(item) {
+            if selected {
+                selectedPaths.insert(item.path)
+            } else {
+                selectedPaths.remove(item.path)
+            }
+        }
+    }
+
+    /// Adds every low-risk (below S2) regenerable item to the selection
+    /// without dropping anything the user already picked.
+    func selectLowRisk(items: [ResourceItem], assessments: [String: RiskAssessment]) {
+        for item in items where item.safety == .regenerable && isSelectable(item) {
+            if let assessment = assessments[item.path], assessment.tier >= .s2 { continue }
+            selectedPaths.insert(item.path)
+        }
+    }
+
     func isSelectable(_ item: ResourceItem) -> Bool {
         item.safety != .protected && !ignoredPaths.contains(item.path) && !protectedPathCheck(item.path)
     }
@@ -111,20 +142,27 @@ final class CleanupModel {
 
     // MARK: Execution
 
-    func execute(allowedPrefixes: [String]) {
+    func execute(rules: [Rule], projects: [Project]) {
         guard phase == .previewing, canExecute else { return }
         phase = .running
 
         let items = previewItems
         let method: CleanupMethod = directDeleteEnabled ? .delete : .trash
-        let gate = DeletionGate(
-            allowedPrefixes: allowedPrefixes,
-            homeDirectoryPath: RealFileSystem().homeDirectoryPath,
-            directDeleteEnabled: directDeleteEnabled
-        )
-        let executor = CleanupExecutor(gate: gate, auditLog: AuditLog())
+        let directDelete = directDeleteEnabled
 
         Task {
+            // The gate's rule-2 whitelist is re-expanded from the enabled
+            // rules at execution time (SPEC §5.6) — never taken from scanned
+            // items, so the containment check stays independent of UI state.
+            let prefixes = await Task.detached(priority: .userInitiated) {
+                DiskScanner().allowedDeletionPrefixes(rules: rules, projects: projects)
+            }.value
+            let gate = DeletionGate(
+                allowedPrefixes: prefixes,
+                homeDirectoryPath: RealFileSystem().homeDirectoryPath,
+                directDeleteEnabled: directDelete
+            )
+            let executor = CleanupExecutor(gate: gate, auditLog: AuditLog())
             let result = await executor.execute(items: items, method: method)
             self.runResult = result
             self.phase = .finished
