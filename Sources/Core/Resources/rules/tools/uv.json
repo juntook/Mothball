@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "uv",
+  "name": "uv",
+  "vendor": "Astral",
+  "category": "package-manager",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyBinaries": [
+      "uv"
+    ]
+  },
+  "targets": [
+    {
+      "id": "cache",
+      "scope": "global",
+      "paths": [
+        "~/.cache/uv",
+        "~/Library/Caches/uv"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Package and build cache",
+      "regenerateHint": "uv cache clean; repopulated on demand"
+    }
+  ]
+}

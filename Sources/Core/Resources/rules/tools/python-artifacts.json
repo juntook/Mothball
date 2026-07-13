@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "python-artifacts",
+  "name": "Python project artifacts",
+  "vendor": "generic",
+  "category": "build-tool",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyBinaries": [
+      "python3"
+    ]
+  },
+  "targets": [
+    {
+      "id": "venv-and-caches",
+      "scope": "project",
+      "projectGlobs": [
+        ".venv",
+        "venv",
+        ".pytest_cache",
+        ".mypy_cache",
+        ".ruff_cache",
+        ".tox"
+      ],
+      "guardFiles": [
+        "pyproject.toml",
+        "requirements.txt",
+        "Pipfile",
+        "setup.py"
+      ],
+      "kind": "artifact",
+      "safety": "regenerable",
+      "description": "Virtual environments and tool caches inside a Python project",
+      "regenerateHint": "Recreated by uv/pip/poetry and the tools themselves"
+    }
+  ]
+}

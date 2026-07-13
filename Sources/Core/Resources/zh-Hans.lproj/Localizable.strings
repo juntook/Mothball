@@ -36,6 +36,7 @@
 "rule.homebrew.downloads.hint" = "brew cleanup;按需重新下载";
 "rule.huggingface.hub-cache.description" = "已下载的模型与数据集缓存";
 "rule.huggingface.hub-cache.hint" = "模型按需重新下载(可能达数十 GB)";
+"rule.huggingface.tokens.description" = "Hugging Face 访问令牌";
 "rule.jvm-artifacts.build-output.description" = "JVM 项目内的 Gradle/Maven 构建产物";
 "rule.jvm-artifacts.build-output.hint" = "gradle build / mvn package 时重建";
 "rule.node-modules.node-modules.description" = "项目已安装的依赖";

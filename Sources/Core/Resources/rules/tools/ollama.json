@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "ollama",
+  "name": "Ollama",
+  "vendor": "Ollama",
+  "category": "runtime",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyPaths": [
+      "~/.ollama"
+    ]
+  },
+  "targets": [
+    {
+      "id": "models",
+      "scope": "global",
+      "paths": [
+        "~/.ollama/models"
+      ],
+      "kind": "artifact",
+      "safety": "user_data",
+      "description": "Downloaded local models; large and slow to re-pull",
+      "regenerateHint": "ollama pull re-downloads each model"
+    }
+  ],
+  "notes": "Models are technically re-downloadable but large; kept at user_data so they never enter one-click cleanup."
+}

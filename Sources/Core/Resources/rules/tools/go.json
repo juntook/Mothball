@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "go",
+  "name": "Go",
+  "vendor": "Google",
+  "category": "build-tool",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyBinaries": [
+      "go"
+    ]
+  },
+  "targets": [
+    {
+      "id": "build-cache",
+      "scope": "global",
+      "paths": [
+        "~/Library/Caches/go-build"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Compiler build cache",
+      "regenerateHint": "go clean -cache; rebuilt on the next build"
+    }
+  ]
+}

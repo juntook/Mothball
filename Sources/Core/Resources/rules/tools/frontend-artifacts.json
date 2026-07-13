@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "frontend-artifacts",
+  "name": "Frontend build artifacts",
+  "vendor": "generic",
+  "category": "build-tool",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyBinaries": [
+      "node"
+    ]
+  },
+  "targets": [
+    {
+      "id": "build-output",
+      "scope": "project",
+      "projectGlobs": [
+        ".next",
+        ".nuxt",
+        ".svelte-kit",
+        ".vite",
+        ".turbo",
+        ".parcel-cache",
+        "dist",
+        "build",
+        "coverage"
+      ],
+      "guardFiles": [
+        "package.json"
+      ],
+      "kind": "artifact",
+      "safety": "regenerable",
+      "description": "Framework build output and caches inside a JS project",
+      "regenerateHint": "Rebuilt by your dev/build command"
+    }
+  ]
+}

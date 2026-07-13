@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "xcode",
+  "name": "Xcode",
+  "vendor": "Apple",
+  "category": "ide",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyPaths": [
+      "~/Library/Developer/Xcode"
+    ]
+  },
+  "targets": [
+    {
+      "id": "derived-data",
+      "scope": "global",
+      "paths": [
+        "~/Library/Developer/Xcode/DerivedData"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Build intermediates, indexes, and module caches",
+      "regenerateHint": "Rebuilt by Xcode on the next build"
+    },
+    {
+      "id": "device-support",
+      "scope": "global",
+      "paths": [
+        "~/Library/Developer/Xcode/iOS DeviceSupport",
+        "~/Library/Developer/Xcode/watchOS DeviceSupport",
+        "~/Library/Developer/Xcode/tvOS DeviceSupport"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Debug symbols copied from connected devices",
+      "regenerateHint": "Re-copied when the device connects again"
+    },
+    {
+      "id": "simulator-caches",
+      "scope": "global",
+      "paths": [
+        "~/Library/Developer/CoreSimulator/Caches"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Simulator runtime caches",
+      "regenerateHint": "Recreated by the simulator"
+    },
+    {
+      "id": "spm-cache",
+      "scope": "global",
+      "paths": [
+        "~/Library/Caches/org.swift.swiftpm"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Swift Package Manager download cache",
+      "regenerateHint": "Packages re-download on the next resolve"
+    },
+    {
+      "id": "archives",
+      "scope": "global",
+      "paths": [
+        "~/Library/Developer/Xcode/Archives"
+      ],
+      "kind": "artifact",
+      "safety": "user_data",
+      "description": "App archives with debug symbols; releases may depend on them"
+    }
+  ],
+  "notes": "Paths from public documentation; verify per Xcode version via Doctor."
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "pnpm",
+  "name": "pnpm",
+  "vendor": "pnpm",
+  "category": "package-manager",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyBinaries": [
+      "pnpm"
+    ]
+  },
+  "targets": [
+    {
+      "id": "store",
+      "scope": "global",
+      "paths": [
+        "~/Library/pnpm/store",
+        "~/.pnpm-store"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Content-addressable package store",
+      "regenerateHint": "Repopulated by pnpm install; pnpm store prune trims it"
+    }
+  ]
+}

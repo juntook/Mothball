@@ -8,7 +8,7 @@ on:
 jobs:
   rules:
     name: Validate rule library
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - name: Schema + semantic validation
@@ -20,11 +20,11 @@ jobs:
 
   build-test:
     name: Build & test (arm64)
-    runs-on: macos-14
+    # macos-15 ships Xcode 16 / Swift 6; the package manifest requires
+    # swift-tools-version 6.0, which macos-14's toolchains cannot parse.
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_15.4.app || true
       - name: Swift version
         run: swift --version
       - name: Build

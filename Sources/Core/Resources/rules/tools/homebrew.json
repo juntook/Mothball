@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "homebrew",
+  "name": "Homebrew",
+  "vendor": "Homebrew",
+  "category": "package-manager",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyBinaries": [
+      "brew"
+    ]
+  },
+  "targets": [
+    {
+      "id": "downloads",
+      "scope": "global",
+      "paths": [
+        "~/Library/Caches/Homebrew"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Bottle and formula download cache",
+      "regenerateHint": "brew cleanup; re-downloaded on demand"
+    }
+  ]
+}

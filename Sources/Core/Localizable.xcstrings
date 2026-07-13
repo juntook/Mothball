@@ -515,6 +515,23 @@
         }
       }
     },
+    "rule.huggingface.tokens.description": {
+      "comment": "Rule library copy (SPEC 8.5(5))",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face access tokens"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hugging Face 访问令牌"
+          }
+        }
+      }
+    },
     "rule.jvm-artifacts.build-output.description": {
       "comment": "Rule library copy (SPEC 8.5(5))",
       "localizations": {

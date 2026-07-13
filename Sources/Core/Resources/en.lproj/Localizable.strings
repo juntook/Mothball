@@ -36,6 +36,7 @@
 "rule.homebrew.downloads.hint" = "brew cleanup; re-downloaded on demand";
 "rule.huggingface.hub-cache.description" = "Downloaded models and datasets cache";
 "rule.huggingface.hub-cache.hint" = "Models re-download on demand (can be tens of GB)";
+"rule.huggingface.tokens.description" = "Hugging Face access tokens";
 "rule.jvm-artifacts.build-output.description" = "Gradle/Maven build output inside a JVM project";
 "rule.jvm-artifacts.build-output.hint" = "Rebuilt by gradle build / mvn package";
 "rule.node-modules.node-modules.description" = "rule.node-modules.node-modules.description";

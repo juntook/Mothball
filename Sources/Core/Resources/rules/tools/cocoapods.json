@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "cocoapods",
+  "name": "CocoaPods",
+  "vendor": "CocoaPods",
+  "category": "package-manager",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyBinaries": [
+      "pod"
+    ]
+  },
+  "targets": [
+    {
+      "id": "cache",
+      "scope": "global",
+      "paths": [
+        "~/Library/Caches/CocoaPods"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Pod download cache",
+      "regenerateHint": "pod cache clean --all; repopulated on install"
+    }
+  ]
+}

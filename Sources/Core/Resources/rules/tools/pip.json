@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "pip",
+  "name": "pip",
+  "vendor": "PyPA",
+  "category": "package-manager",
+  "platforms": [
+    "macos"
+  ],
+  "status": "draft",
+  "detection": {
+    "anyBinaries": [
+      "pip3",
+      "pip"
+    ]
+  },
+  "targets": [
+    {
+      "id": "cache",
+      "scope": "global",
+      "paths": [
+        "~/Library/Caches/pip"
+      ],
+      "kind": "cache",
+      "safety": "regenerable",
+      "description": "Wheel and HTTP download cache",
+      "regenerateHint": "pip cache purge; repopulated on install"
+    }
+  ]
+}
