@@ -104,6 +104,16 @@ struct AppShell: View {
             }
             notifications.maybeNotifyReclaimable(totalBytes: scan.totalBytes, loc: loc)
         }
+        .onChange(of: cleanup.phase) { _, phase in
+            // A finished run removes its cleaned paths from the scan results
+            // immediately — the lists must not keep showing trashed items
+            // until the next scan happens to run.
+            guard phase == .finished, let result = cleanup.runResult else { return }
+            let cleaned = Set(result.results.filter {
+                $0.outcome == .trashed || $0.outcome == .deleted
+            }.map(\.item.path))
+            scan.removeItems(paths: cleaned)
+        }
         .onChange(of: runtime.services) { _, _ in
             rebuildRisk()
             notifications.maybeNotifyLongRunning(services: runtime.services, loc: loc)

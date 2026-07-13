@@ -92,6 +92,13 @@ final class ScanModel {
         }
     }
 
+    /// Drops successfully cleaned paths so every list reflects a cleanup the
+    /// moment it finishes; the next scan re-verifies against the disk.
+    func removeItems(paths: Set<String>) {
+        guard !paths.isEmpty else { return }
+        items.removeAll { paths.contains($0.path) }
+    }
+
     // MARK: Derived views
 
     var itemsByRule: [(rule: Rule, items: [ResourceItem], totalBytes: Int64)] {

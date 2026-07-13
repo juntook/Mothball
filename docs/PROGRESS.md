@@ -227,6 +227,7 @@ Safety-layer fixes (gate tests first, per CLAUDE.md):
 App-layer fixes:
 - Rescans never re-ran default selection/risk rebuild/notifications: reactions keyed on `hasScanned`, which only changes on the first scan. New monotonic `scanGeneration` drives them on every scan.
 - The async git-probe completion re-ran `defaultSelect`, silently resetting any selection the user made while the probe ran. Now a tighten-only `tightenSelection` drops newly-S2 items and touches nothing else.
+- Cleaned items stayed in every list until the next scan happened to run (nothing pruned `scan.items` after a run and cleanup never triggered a rescan; reported from real use on the AI Tools page). A finished run now removes its trashed/deleted paths from the scan results immediately; the next scan still re-verifies from disk.
 
 Cleanup ergonomics (SPEC §4.4 note):
 - `gitDirty` downgraded S2→S1: uncommitted changes are the steady state of active development and build artifacts are not part of git state, so dirty repos no longer start deselected everywhere (that was most of the "have to re-check everything" pain). `projectInUse` stays S2.
